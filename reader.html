@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">STARBORD</a>
+    <div class="spacer"></div>
+  </div>
+</header>
+
+<main class="reader-container">
+  <div class="reader-toolbar">
+    <h2 id="chapterTitle">Lecture</h2>
+    <button class="reader-close" onclick="goBack()">✕</button>
+  </div>
+
+  <div class="reader-inner" id="pagesContainer"></div>
+</main>
+
+<!-- Bandeau chapitre suivant -->
+<div id="nextChapterContainer" class="next-chapter-banner">
+  <a id="nextChapterBtn" href="#">Chapitre suivant →</a>
+</div>
+
+<script>
+  // Parse URL params
+  const params = new URLSearchParams(window.location.search);
+  const comicId = params.get('comic') || params.get('id') || null;
+  const chapitreId = params.get('chapitre') || params.get('chapter') || null;
+  const pagesContainer = document.getElementById('pagesContainer');
+
+  // Exemple de structure de données
+  const comicsData = {
+    bd1: {
+      title: "Les Chroniques d'Auréa",
+      chapters: {
+        1: ["asset/stories/p1.jpg", "asset/stories/p2.jpg", "asset/stories/p3.jpg", "asset/stories/p4.jpg"],
+        2: ["asset/stories/p1.jpg", "asset/stories/p2.jpg", "asset/stories/p3.jpg", "asset/stories/p4.jpg"],
+        3: ["asset/stories/p1.jpg", "asset/stories/p2.jpg", "asset/stories/p3.jpg", "asset/stories/p4.jpg"],
+        4: ["asset/stories/p1.jpg", "asset/stories/p2.jpg", "asset/stories/p3.jpg", "asset/stories/p4.jpg"],
+    }
+    },
+    bd2: {
+      title: "NanoBreak",
+      chapters: {
+        1: ["asset/stories/p1.jpg", "asset/stories/p2.jpg", "asset/stories/p3.jpg", "asset/stories/p4.jpg"],
+        2: ["asset/stories/p1.jpg", "asset/stories/p2.jpg", "asset/stories/p3.jpg", "asset/stories/p4.jpg"],
+        3: ["asset/stories/p1.jpg", "asset/stories/p2.jpg", "asset/stories/p3.jpg", "asset/stories/p4.jpg"],
+        4: ["asset/stories/p1.jpg", "asset/stories/p2.jpg", "asset/stories/p3.jpg", "asset/stories/p4.jpg"],
+      }
+    }
+  };
+
+  // Affichage des pages
+  if (comicId && chapitreId && comicsData[comicId] && comicsData[comicId].chapters[chapitreId]) {
+    const pages = comicsData[comicId].chapters[chapitreId];
+    pages.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.className = 'page-img';
+      pagesContainer.appendChild(img);
+    });
+  } else {
+    pagesContainer.innerHTML = "<p>Aucune page disponible pour ce chapitre.</p>";
+  }
+
+  // debug
+  console.log('comicId=', comicId, 'chapitreId=', chapitreId);
+
+  // Fonction goBack
+  function goBack() {
+    try {
+      const ref = document.referrer || '';
+      if (ref.includes('chapitre') || ref.includes('chapters') || ref.includes('chapitre.html')) {
+        history.back();
+        setTimeout(() => {
+          if (document.location.href.indexOf('reader/reader.html') !== -1) fallbackRedirect();
+        }, 300);
+        return;
+      }
+    } catch(e){}
+    fallbackRedirect();
+  }
+
+  function fallbackRedirect() {
+    if (comicId) {
+      window.location.href = '../chapitre.html?comic=' + encodeURIComponent(comicId);
+    } else {
+      window.location.href = '../index.html';
+    }
+  }
+
+  // Titre
+  const titleEl = document.getElementById('chapterTitle');
+  if (titleEl) {
+    if (chapitreId) titleEl.textContent = 'Chapitre ' + chapitreId;
+    else if (comicId) titleEl.textContent = 'Lecture — ' + comicId;
+  }
+
+  // Nombre total de chapitres
+  const totalChapters = comicsData[comicId] ? Object.keys(comicsData[comicId].chapters).length : 0;
+
+  function showNextChapterButton() {
+    if (!chapitreId || !totalChapters) return;
+    const current = parseInt(chapitreId, 10);
+    if (current < totalChapters) {
+      const nextContainer = document.getElementById("nextChapterContainer");
+      const nextBtn = document.getElementById("nextChapterBtn");
+      if (nextContainer && nextBtn) {
+        nextBtn.href = `reader.html?comic=${comicId}&chapitre=${current + 1}`;
+        nextContainer.classList.add("show");
+      }
+    }
+  }
+
+  // Détection fin scroll
+  pagesContainer.addEventListener("scroll", () => {
+    if (pagesContainer.scrollTop + pagesContainer.clientHeight >= pagesContainer.scrollHeight - 10) {
+      showNextChapterButton();
+    } else {
+      const nextContainer = document.getElementById("nextChapterContainer");
+      if (nextContainer) nextContainer.classList.remove("show");
+    }
+  });
+</script>
+
+</body>
+</html>

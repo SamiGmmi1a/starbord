@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STARBORD — Catalogue</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+<a href="index.html" class="logo">STARBORD</a>
+      <div class="spacer"></div>
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="Rechercher un titre, auteur..." aria-label="Recherche">
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+<section class="hero">
+  <img src="asset/img/banner.png" alt="Bannière Hero STARBORD" class="hero-img">
+  <div class="hero-overlay">
+    <h1>Bienvenue sur STARBORD</h1>
+    <p>Découvrez vos bandes dessinées favorites en digital</p>
+  </div>
+</section>
+
+
+  <!-- MAIN -->
+  <main class="container">
+
+<main class="container">
+  <section>
+    <div id="grid" class="catalog"></div>
+  </section>
+</main>
+
+
+  </main>
+
+  <!-- FOOTER -->
+ <footer class="site-footer">
+  <div class="footer-inner">
+    <div class="logo small">STARBORD</div>
+    <div class="legal">
+      © 2025 STARBORD — 
+      <a href="#">Mentions légales</a> • 
+      <a href="#">Confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+
+
+  <!-- SCRIPT : génération catalogue -->
+  <script>
+    const comics = [
+      { id: 'bd1', title: "Les Chroniques d'Auréa", author: "L. Mirval", chapters: 14, cover: "asset/img/STB1.png" },
+      { id: 'bd2', title: "NanoBreak", author: "S. Darnell", chapters: 18, cover: "asset/img/STB2.png" },
+      { id: 'bd3', title: "Forêt Rouge", author: "Camille T.", chapters: 12, cover: "asset/img/STB3.png" },
+      { id: 'bd4', title: "Nocturne City", author: "A. Kiro", chapters: 9, cover: "asset/img/STB1.png" },
+      { id: 'bd5', title: "Mémoires Brisées", author: "R. Lemoine", chapters: 11, cover: "asset/img/STB2.png" },
+      { id: 'bd6', title: "Cosmos Drift", author: "Y. Han", chapters: 6, cover: "asset/img/STB3.png" }
+    ];
+
+    const grid = document.getElementById('grid');
+
+    function makeCard(c) {
+      const a = document.createElement('a');
+      a.className = 'card-link';
+      a.href = `chapitre.html?comic=${encodeURIComponent(c.id)}`;
+      a.setAttribute('title', `Ouvrir ${c.title}`);
+
+      const card = document.createElement('article');
+      card.className = 'card';
+
+      const img = document.createElement('img');
+      img.className = 'cover-img';
+      img.src = c.cover;
+      img.alt = `Couverture ${c.title}`;
+      img.width = 155;
+      img.height = 180;
+      img.loading = 'lazy';
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.innerHTML = `
+        <h3>${c.title}</h3>
+        <p class="muted">${c.author} • ${c.chapters} chap.</p>
+      `;
+
+      const actions = document.createElement('div');
+      actions.className = 'actions';
+
+      const star = document.createElement('button');
+      star.className = 'fav';
+      star.innerHTML = '☆';
+      star.title = 'Ajouter aux favoris';
+      star.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        star.classList.toggle('active');
+        star.innerHTML = star.classList.contains('active') ? '★' : '☆';
+      });
+
+      actions.appendChild(star);
+
+      card.appendChild(img);
+      card.appendChild(meta);
+      card.appendChild(actions);
+      a.appendChild(card);
+
+      return a;
+    }
+
+    function renderGrid(list) {
+      grid.innerHTML = '';
+      list.forEach(c => grid.appendChild(makeCard(c)));
+    }
+
+    renderGrid(comics);
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      const filtered = comics.filter(c =>
+        (c.title + ' ' + c.author).toLowerCase().includes(q)
+      );
+      renderGrid(filtered);
+    });
+  </script>
+
+</body>
+</html>
