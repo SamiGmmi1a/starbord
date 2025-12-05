@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STARBORD — Catalogue</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/assets/style/style.css">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
 
   <!-- Hero Banner -->
 <section class="hero">
-  <img src="asset/img/banner.png" alt="Bannière Hero STARBORD" class="hero-img">
+  <img src="/assets/img/banner.png" alt="Bannière Hero STARBORD" class="hero-img">
   <div class="hero-overlay">
     <h1>Bienvenue sur STARBORD</h1>
     <p>Découvrez vos bandes dessinées favorites en digital</p>
@@ -59,12 +59,12 @@
   <!-- SCRIPT : génération catalogue -->
   <script>
     const comics = [
-      { id: 'bd1', title: "Les Chroniques d'Auréa", author: "L. Mirval", chapters: 14, cover: "STB1.png" },
-      { id: 'bd2', title: "NanoBreak", author: "S. Darnell", chapters: 18, cover: "STB2.png" },
-      { id: 'bd3', title: "Forêt Rouge", author: "Camille T.", chapters: 12, cover: "STB3.png" },
-      { id: 'bd4', title: "Nocturne City", author: "A. Kiro", chapters: 9, cover: "STB1.png" },
-      { id: 'bd5', title: "Mémoires Brisées", author: "R. Lemoine", chapters: 11, cover: "STB2.png" },
-      { id: 'bd6', title: "Cosmos Drift", author: "Y. Han", chapters: 6, cover: "STB3.png" }
+      { id: 'bd1', title: "Les Chroniques d'Auréa", author: "L. Mirval", chapters: 14, cover: "/assets/img/STB1.png" },
+      { id: 'bd2', title: "NanoBreak", author: "S. Darnell", chapters: 18, cover: "/assets/img/STB2.png" },
+      { id: 'bd3', title: "Forêt Rouge", author: "Camille T.", chapters: 12, cover: "/assets/img/STB3.png" },
+      { id: 'bd4', title: "Nocturne City", author: "A. Kiro", chapters: 9, cover: "/assets/img/STB1.png" },
+      { id: 'bd5', title: "Mémoires Brisées", author: "R. Lemoine", chapters: 11, cover: "/assets/img/STB2.png" },
+      { id: 'bd6', title: "Cosmos Drift", author: "Y. Han", chapters: 6, cover: "/assets/img/STB3.png" }
     ];
 
     const grid = document.getElementById('grid');
