@@ -130,6 +130,58 @@
       if (nextContainer) nextContainer.classList.remove("show");
     }
   });
+
+  /* --- PROTECTION CONTRE COPIE / SCREENSHOT --- */
+
+// Désactiver clic droit
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// Bloquer certaines touches clavier
+document.addEventListener('keydown', e => {
+  // Print Screen
+  if (e.key === 'PrintScreen') {
+    e.preventDefault();
+    alert("La capture d'écran est désactivée.");
+  }
+
+  // Ctrl + S / Ctrl + C / Ctrl + P / Ctrl + U
+  if (e.ctrlKey && ['s','c','p','u'].includes(e.key.toLowerCase())) {
+    e.preventDefault();
+  }
+});
+
+document.addEventListener("visibilitychange", () => {
+  const reader = document.querySelector(".reader-container");
+
+  if (document.hidden) {
+    reader.style.filter = "blur(20px)";
+  } else {
+    reader.style.filter = "none";
+  }
+});
+
+document.addEventListener('touchstart', e => {
+  if (e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+
+
+function addWatermark() {
+  const wm = document.createElement('div');
+  wm.textContent = "STARBORD • Accès personnel";
+  wm.style.position = "fixed";
+  wm.style.top = "50%";
+  wm.style.left = "50%";
+  wm.style.transform = "translate(-50%, -50%) rotate(-30deg)";
+  wm.style.opacity = "0.15";
+  wm.style.fontSize = "48px";
+  wm.style.pointerEvents = "none";
+  wm.style.zIndex = "9999";
+  document.body.appendChild(wm);
+}
+
+addWatermark();
+
+
 </script>
 
 </body>

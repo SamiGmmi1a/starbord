@@ -492,3 +492,20 @@ main.container {
 .next-chapter-banner a:hover {
   text-decoration: underline;
 }
+
+
+/* Désactive sélection et interactions */
+.reader-container, 
+.reader-container img {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  pointer-events: auto;
+}
+
+/* Empêche le drag des images */
+img {
+  -webkit-user-drag: none;
+}
+
+
