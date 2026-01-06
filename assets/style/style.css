@@ -536,3 +536,54 @@ img {
 }
 
 
+/* Shop CTA Section */
+
+/* SHOP CTA */
+.shop-cta {
+  margin: 64px 0;
+  padding: 48px 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(0,0,0,0.85),
+    rgba(0,0,0,0.6)
+  );
+  border-radius: 20px;
+}
+
+.shop-cta-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.shop-cta-text {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+  max-width: 520px;
+}
+
+/* Bouton */
+.shop-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shop-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
