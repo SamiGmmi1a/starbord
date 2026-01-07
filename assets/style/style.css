@@ -539,51 +539,116 @@ img {
 /* Shop CTA Section */
 
 /* SHOP CTA */
+/* SHOP CTA */
 .shop-cta {
-  margin: 64px 0;
-  padding: 48px 20px;
+  margin: 48px 16px;
+  padding: clamp(24px, 5vw, 48px);
   background: linear-gradient(
     135deg,
-    rgba(0,0,0,0.85),
-    rgba(0,0,0,0.6)
+    rgba(0,0,0,0.9),
+    rgba(0,0,0,0.65)
   );
-  border-radius: 20px;
+  border-radius: 24px;
 }
 
+/* Conteneur */
 .shop-cta-inner {
-  max-width: 900px;
-  margin: 0 auto;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* IMAGE */
+.shop-cta-image {
+  background: #fff;
+  padding: 6px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.shop-cta-image img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+}
+
+/* TEXTE */
+.shop-cta-content {
+  color: #fff;
+  text-align: center;
 }
 
 .shop-cta-text {
-  color: #fff;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1.4;
-  max-width: 520px;
+  font-size: clamp(16px, 4vw, 22px);
+  line-height: 1.5;
+  margin-bottom: 24px;
 }
 
-/* Bouton */
+/* BOUTON */
 .shop-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 32px;
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 14px 24px;
   background: #fff;
   color: #000;
   font-weight: 600;
   font-size: 16px;
   text-decoration: none;
   border-radius: 999px;
-  white-space: nowrap;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .shop-cta-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
+
+
+/* Medium screens */
+@media (min-width: 768px) {
+  .shop-cta {
+    margin: 64px auto;
+  }
+
+  .shop-cta-inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .shop-cta-image {
+    margin: 0;
+    max-width: none;
+    flex: 1;
+  }
+
+  .shop-cta-content {
+    flex: 1.1;
+    text-align: left;
+  }
+
+  .shop-cta-btn {
+    margin: 0;
+    width: fit-content;
+  }
+}
+
+/* Large screens */
+
+@media (min-width: 1200px) {
+  .shop-cta-inner {
+    gap: 64px;
+  }
+
+  .shop-cta-text {
+    max-width: 520px;
+  }
 }
