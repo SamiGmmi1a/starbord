@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STARBORD — Catalogue</title>
   <link rel="stylesheet" href="/assets/style/style.css">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
 </head>
 
 <body>
@@ -30,8 +31,7 @@
     <div class="hero-text">
       <h1>STARBORD</h1>
       <p>Des bandes dessinées conçues pour inspirer à rêver grand.</p>
-      <a href="#" class="hero-btn">Découvrir</a>
-    </div>
+      <a href="#shop" class="hero-btn">Découvrir</a>    </div>
   </div>
 </section>
 
@@ -46,25 +46,51 @@
   </section>
 </main>
 
-
-
-<section class="starbord-section">
-  <div class="starbord-container">
-    
-    <div class="starbord-image">
-      <img src="/assets/img/CTA.jpg" alt="Starbord illustration">
-    </div>
-
-    <div class="starbord-content">
-      <h1>STARBORD</h1>
-      <p>Des bandes dessinées conçues pour inspirer à rêver grand.</p>
-      <a href="https://starbord.shop" target="_blank" class="starbord-btn">
-        Découvrir
-      </a>
-    </div>
-
+<section class="shop-section" id="shop">
+  <div class="shop-header">
+    <h2>Nos illustrations</h2>
+    <p>Inspirer au quotidien</p>
   </div>
-</section>
+
+  <div class="shop-grid">
+    <!-- Card 1 -->
+    <div class="shop-card">
+      <img src="/assets/img/product1.jpg" alt="Illustration 1">
+      <h3 class="shop-card-title">Illustration 1</h3>
+      <a href="https://starbord.shop" target="_blank" class="shop-btn">Acheter</a>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="shop-card">
+      <img src="/assets/img/product2.jpg" alt="Illustration 2">
+      <h3 class="shop-card-title">Illustration 2</h3>
+      <a href="https://starbord.shop" target="_blank" class="shop-btn">Acheter</a>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="shop-card">
+      <img src="/assets/img/product3.jpg" alt="Illustration 3">
+      <h3 class="shop-card-title">Illustration 3</h3>
+      <a href="https://starbord.shop" target="_blank" class="shop-btn">Acheter</a>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="shop-card">
+      <img src="/assets/img/product4.jpg" alt="Illustration 4">
+      <h3 class="shop-card-title">Illustration 4</h3>
+      <a href="https://starbord.shop" target="_blank" class="shop-btn">Acheter</a>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="shop-card">
+      <img src="/assets/img/product5.jpg" alt="Illustration 5">
+      <h3 class="shop-card-title">Illustration 5</h3>
+      <a href="https://starbord.shop" target="_blank" class="shop-btn">Acheter</a>
+    </div>
+
+    <!-- Card 6 -->
+    <
+
 
 
 
@@ -88,12 +114,8 @@
   <!-- SCRIPT : génération catalogue -->
   <script>
     const comics = [
-      { id: 'bd1', title: "Les Chroniques d'Auréa", author: "L. Mirval", chapters: 14, cover: "/assets/img/STB1.png" },
-      { id: 'bd2', title: "NanoBreak", author: "S. Darnell", chapters: 18, cover: "/assets/img/STB2.png" },
-      { id: 'bd3', title: "Forêt Rouge", author: "Camille T.", chapters: 12, cover: "/assets/img/STB3.png" },
-      { id: 'bd4', title: "Nocturne City", author: "A. Kiro", chapters: 9, cover: "/assets/img/STB1.png" },
-      { id: 'bd5', title: "Mémoires Brisées", author: "R. Lemoine", chapters: 11, cover: "/assets/img/STB2.png" },
-      { id: 'bd6', title: "Cosmos Drift", author: "Y. Han", chapters: 6, cover: "/assets/img/STB3.png" }
+      { id: 'bd1', title: "Détenu 278", author: "FÉNIX", chapters: 1, cover: "/assets/img/detenu278-cover.jpg" },
+      { id: 'bd2', title: "Figé dans l'acier", author: "FÉNIX", chapters: 1, cover: "/assets/img/fige_dans_l'acier-cover.jpg" },
     ];
 
     const grid = document.getElementById('grid');

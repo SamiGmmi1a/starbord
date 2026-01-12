@@ -1,5 +1,10 @@
 /* style.css - dark theme, responsive */
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 /* Variables */
 :root{
   --bg:#0f1116;
@@ -38,18 +43,16 @@ main.container {
   width: 100%;
 }
 
-
 @media (min-width:720px){
   .container{ padding:20px; }
 }
-
 @media (min-width:1100px){
   .container{ padding:24px; } /* bordures équilibrées */
 }
-
 @media (min-width:1400px){
   .container{ padding:28px; }
 }
+
 
 /* Header */
 .site-header {
@@ -178,6 +181,10 @@ main.container {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 
 
 /* ---- GRID FIX ---- */
@@ -276,56 +283,119 @@ main.container {
 }
 .fav.active{color:gold}
 
-/* Reader layout */
-.reader-container{
-  max-width:1100px;
-  margin:12px auto;
-  padding:0 16px; /* alignement corrigé */
+/* Reader layout 
+
+
+/* ==============================
+   CONTENEUR PRINCIPAL
+   ============================== */
+.reader-container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 12px;
 }
 
-.reader-toolbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:10px;
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-  border-radius:8px;
-  margin-bottom:8px;
+/* ==============================
+   TOOLBAR DISCRÈTE
+   ============================== */
+.reader-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(10,10,14,0.85),
+    rgba(10,10,14,0.35),
+    transparent
+  );
+
+  backdrop-filter: blur(6px);
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 4px;
 }
 
-.reader-inner{height:78vh;overflow:auto}
+/* ==============================
+   ZONE DE LECTURE
+   ============================== */
+.reader-inner {
+  height: auto;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 
-.page{display:flex;justify-content:center}
-.page-img{max-width:900px;width:100%;height:auto;border-radius:8px}
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 
-/* Watermark */
-.reader-watermark{
-  position:fixed;
-  pointer-events:none;
-  user-select:none;
-  z-index:9998;
-  color:rgba(255,255,255,0.12);
-  font-weight:700;
-  transform:rotate(-18deg);
-  font-size:36px;
-  white-space:nowrap;
-  text-shadow:0 0 10px rgba(0,0,0,0.6);
-  display:none;
+  padding-bottom: 40px;
 }
 
+/* ==============================
+   PAGES / PLANCHES
+   ============================== */
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-img {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+
+  display: block;
+  object-fit: contain;
+
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+/* ==============================
+   WATERMARK ULTRA DISCRET
+   ============================== */
+.reader-watermark {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: 9998;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 700;
+  letter-spacing: 4px;
+
+  color: rgba(255,255,255,0.06);
+  transform: rotate(-20deg);
+  text-shadow: 0 0 12px rgba(0,0,0,0.8);
+}
+
+/* ==============================
+   FOOTER (HORS LECTURE)
+   ============================== */
 .site-footer {
-  background: #0b0e14; /* légèrement plus clair que le corps */
+  background: #0b0e14;
   border-top: 1px solid rgba(255,255,255,0.05);
-  padding: 16px 12px;
+  padding: 12px;
 }
 
 .footer-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  max-width: var(--max-width);
+  gap: 6px;
+  max-width: 1100px;
   margin: 0 auto;
+  opacity: 0.75;
 }
 
 
@@ -369,156 +439,156 @@ main.container {
 }
 
 
+/* ==============================
+   LAYOUT CHAPITRES (DESKTOP)
+   ============================== */
+.chapter-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 40%) 1fr;
+  overflow: hidden;
+}
+
+/* ==============================
+   COLONNE GAUCHE – IMAGE FIXE
+   ============================== */
+.chapter-cover {
+  position: relative;
+  background: #000;
+}
+
+.chapter-cover img {
+  width: 100%;
+  height: 100vh;
+  object-fit: contain; /* aucune coupe */
+  display: block;
+}
 
 
-/* Chapter list */
+
+/* ==============================
+   COLONNE DROITE – LISTE CHAPITRES
+   ============================== */
+.chapter-panel {
+  height: 100vh;
+  overflow-y: auto;
+  padding: 24px 20px 40px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(10,10,14,0.98),
+    rgba(10,10,14,0.95)
+  );
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.chapter-panel h2 {
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+
 
 .chapter-list {
   list-style: none;
   padding: 0;
-  margin-top: 20px;
+  margin-top: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .chapter-list li {
   background: var(--card);
-  padding: 14px;
-  border-radius: var(--radius);
-  margin-bottom: 10px;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.chapter-list li a {
-  display: block;
-  color: var(--text);
-  font-size: 16px;
-  font-weight: 600;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.2s, transform 0.2s;
 }
 
 .chapter-list li:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-1px);
 }
 
-
-/* Close chapter button */
-
-/* Bouton de fermeture (en haut à droite) */
-.close-chapter {
-  position: absolute;
-  top: auto;
-  right: 12px;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--muted);
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: var(--radius);
-  transition: 0.2s;
-  z-index: 20; /* pour être au-dessus du header */
-}
-
-.close-chapter:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-}
-
-/* Version PC : légèrement décalée */
-@media (min-width: 900px) {
-  .close-chapter {
-    top: 20px;
-    right: 24px;
-    font-size: 30px;
-  }
-}
-
-/* Reader close button */
-.reader-close {
-  position: absolute;
-  right: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 28px;
-  color: #bbb;
-  font-weight: 700;
-  transition: 0.2s;
-}
-
-.reader-close:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.08);
-  border-radius: 6px;
-}
-
-/* Version PC */
-@media (min-width: 900px) {
-  .reader-close {
-    right: 40px;
-    font-size: 30px;
-  }
-}
-
-
-/*image pour chaque chapitre*/
+/* Carte chapitre */
 .chapter-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-  transition: transform 0.2s;
-}
-
-.chapter-item:hover {
-  transform: scale(1.02);
+  gap: 12px;
 }
 
 .chapter-thumb {
-  width: 60px;
-  height: 80px;
-  object-fit: cover;
+  width: 56px;
+  height: 76px;
   border-radius: 6px;
+  object-fit: cover;
   flex-shrink: 0;
 }
 
 .chapter-link {
   color: var(--text);
   font-weight: 600;
+  font-size: 15px;
+  line-height: 1.3;
   text-decoration: none;
 }
 
 
-/* Next chapter button */
-/* Bandeau flottant pour le chapitre suivant */
-.next-chapter-banner {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(15, 17, 22, 0.95);
-  padding: 12px 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  z-index: 9999;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0;
-  pointer-events: none;
+/* Reader close button */ .reader-close { position: absolute; right: 20px; background: none; border: none; cursor: pointer; font-size: 28px; color: #bbb; font-weight: 700; transition: 0.2s; } .reader-close:hover { color: #fff; background: rgba(255,255,255,0.08); border-radius: 6px; }
+
+
+
+/* ==============================
+   RESPONSIVE MOBILE – CHAPITRES
+   ============================== */
+@media (max-width: 900px) {
+
+  /* Revenir à un flux normal */
+  .chapter-layout {
+    display: block;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Image en premier */
+  .chapter-cover {
+    position: relative;
+  }
+
+  .chapter-cover img {
+    width: 100%;
+    height: 100vh;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Liste sous l'image */
+  .chapter-panel {
+    height: auto;
+    overflow: visible;
+    padding: 16px 14px 32px;
+  }
+
+  .chapter-panel h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  /* Cartes chapitres légèrement plus grandes pour le tactile */
+  .chapter-list li {
+    padding: 12px;
+  }
+
+  .chapter-thumb {
+    width: 64px;
+    height: 88px;
+  }
 }
 
-.next-chapter-banner.show {
-  opacity: 1;
-  pointer-events: auto;
-}
 
-.next-chapter-banner a {
-  color: #9b6bff;
-  font-weight: 700;
-  font-size: 16px;
-  text-decoration: none;
-}
-
-.next-chapter-banner a:hover {
-  text-decoration: underline;
-}
 
 
 /* Désactive sélection et interactions */
@@ -536,80 +606,95 @@ img {
 }
 
 
-/* Shop CTA Section */
 
-.shop {
-  padding: 80px 10%;
-  background: #f8f8f8;
-  text-align: center;
-}
+/* ==============================
+   STARBORD SHOP CARD
+   ============================== */
 
-.shop h2 {
-  font-size: 2.5rem;
-  margin-bottom: 50px;
-}
 
+   /* ==============================
+   GRID LAYOUT
+   ============================== */
 .shop-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(4, 1fr); /* desktop : 4 colonnes */
+  gap: 20px;
 }
 
-.product-card {
-  background: white;
+/* ==============================
+   SHOP CARD
+   ============================== */
+.shop-card {
   border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-}
-
-.product-card img {
-  width: 100%;
-  border-radius: 8px;
-}
-
-.product-card h3 {
-  margin: 15px 0 5px;
-}
-
-.product-card p {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.price {
-  display: block;
-  font-weight: bold;
-  margin: 15px 0;
-}
-
-.buy-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background: black;
-  color: white;
-  border-radius: 25px;
-  text-decoration: none;
-}
-
-.starbord-section {
-  padding: 60px 20px;
-}
-
-.starbord-container {
-  max-width: 1100px;
-  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
   display: flex;
-  gap: 40px;
+  flex-direction: column;
   align-items: center;
-  border-radius: 24px;
-  padding: 30px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.shop-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.shop-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.shop-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.shop-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #fff;
+  color: #11141a;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.shop-btn:hover {
+  background: #5100ff;
+  color: #fff;
+}
+
+
+
+/* ==============================
+   RESPONSIVE : 2 COLONNES
+   ============================== */
+@media (max-width: 1024px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
+  }
+}
+
+@media (max-width: 768px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur petit écran */
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur mobile */
+  }
+}
+
+
+
 
 /* IMAGE */
 .starbord-image {
@@ -673,5 +758,40 @@ img {
 
   .starbord-content {
     text-align: center;
+  }
+}
+
+#comicTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* petit espace entre titre et auteur */
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+/* Nom de l’œuvre : plus gros, impact visuel */
+#comicTitle .comic-title-name {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff; /* ou var(--text) */
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5); /* léger relief pour pop */
+}
+
+/* Nom de l'artiste : plus discret, italique */
+#comicTitle .comic-title-author {
+  font-size: 16px;
+  font-weight: 500;
+  font-style: italic;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.2;
+}
+
+@media (max-width: 900px) {
+  #comicTitle .comic-title-name {
+    font-size: 20px;
+  }
+  #comicTitle .comic-title-author {
+    font-size: 14px;
   }
 }

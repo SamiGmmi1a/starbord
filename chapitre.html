@@ -1,73 +1,78 @@
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chapitres</title>
-  <link rel="stylesheet" href="/assets/style/style.css">
-</head>
-<body>
+  <!doctype html>
+  <html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapitres</title>
+    <link rel="stylesheet" href="/assets/style/style.css">
+      <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+  </head>
+  <body>
 
-<header class="site-header">
-  <div class="header-inner">
-<a href="index.html" class="reader-close" onclick="goBack()">✕</a>
-<a href="index.html" class="logo">STARBORD</a>
-    <div class="spacer"></div>
-  </div>  
-</header>
+  <header class="site-header">
+    <div class="header-inner">
+  <a href="index.html" class="reader-close" onclick="goBack()">✕</a>
+  <a href="index.html" class="logo">STARBORD</a>
+      <div class="spacer"></div>
+    </div>  
+  </header>
 
-<main class="container" style="padding-top:80px">
-    
+      
+  <div class="chapter-layout">
 
-  <div id="info"></div>
-  <h2>Chapitres</h2>
-  <div id="chaptersContainer"></div>
-  <ul id="chaptersList" class="chapter-list"></ul>
+    <!-- Colonne gauche : image fixe -->
+  <aside class="chapter-cover">
+    <img id="comicCover" src="" alt="Couverture du manga">
+  </aside>
 
-</main>
+    <!-- Colonne droite : chapitres -->
+    <section class="chapter-panel">
+      <h2 id="comicTitle"></h2>
 
-  <!-- FOOTER -->
- <footer class="site-footer">
-  <div class="footer-inner">
-    <div class="logo small">STARBORD</div>
-    <div class="legal">
-      © 2025 STARBORD — 
-      <a href="#">Mentions légales</a> • 
-      <a href="#">Confidentialité</a>
-    </div>
+      <div id="info"></div>
+
+      <ul id="chaptersList" class="chapter-list"></ul>
+    </section>
+
   </div>
-</footer>
+  
 
-<script>
+  </main>
+
+    <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="logo small">STARBORD</div>
+      <div class="legal">
+        © 2025 STARBORD — 
+        <a href="#">Mentions légales</a> • 
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
   // Données des comics avec couverture principale et nombre de chapitres
   const comics = {
     "bd1": { 
-      title: "Les Chroniques d'Auréa", 
-      cover:"/assets/img/STB1.png", 
-      chapters: 14,
+      title: "Détenu 278", 
+      artiste: "FÉNIX",
+      cover:"/assets/img/detenu278-cover.jpg", 
+      chapters: 1,
       thumbs: [
-        "/assets/img/STB1.png", "/assets/img/STB1.png", "/assets/img/STB1.png",
-        "/assets/img/STB1.png", "/assets/img/STB1.png", "/assets/img/STB1.png",
-        "/assets/img/STB1.png", "/assets/img/STB1.png", "/assets/img/STB1.png"
+        "/assets/img/detenu278-cover.jpg",
       ]
     },
     "bd2": { 
-      title: "NanoBreak", 
-      cover:"/assets/img/STB2.png", 
-      chapters: 18,
+      title: "Figé dans l'acier",
+      artiste: "FÉNIX",
+      cover:"/assets/img/fige_dans_l'acier-cover.jpg", 
+      chapters: 1,
       thumbs: [
-        "/assets/img/STB2.png", "/assets/img/STB2.png", "/assets/img/STB2.png",
-        "/assets/img/STB2.png", "/assets/img/STB2.png", "/assets/img/STB2.png",
-        "/assets/img/STB2.png", "/assets/img/STB2.png", "/assets/img/STB2.png"
+        "/assets/img/fige_dans_l'acier-cover.jpg",
       ]
     },
-    "bd3": { 
-      title: "Forêt Rouge", 
-      cover:"asset/img/STB3.png", 
-      chapters: 12,
-      thumbs: Array.from({length:12}, (_, i)=>`/assets/img/STB3.png`)
-    }
-    // Ajoute les autres comics ici si nécessaire
+    // Ajoute les autres comics ici
   };
 
   // Récupérer l'ID de la BD depuis l'URL
@@ -75,34 +80,48 @@
   const id = params.get("comic");
   const bd = comics[id];
 
-  // Affichage de l'info principale (couverture + titre)
-  const info = document.getElementById("info");
-  if (bd && info) {
-    info.innerHTML = `
-      <img src="${bd.cover}" style="width:200px;border-radius:8px">
-      <h1>${bd.title}</h1>
-    `;
-  }
+  // Vérifier que le comic existe
+if (bd) {
+  // Mettre à jour la couverture
+  const coverImg = document.getElementById("comicCover");
+  coverImg.src = bd.cover;
+  coverImg.alt = bd.title;
 
-  // Affichage de la liste des chapitres avec miniatures
+  // Mettre à jour le titre dynamique
+  const titleEl = document.getElementById("comicTitle");
+titleEl.innerHTML = `
+  <span class="comic-title-name">${bd.title}</span>
+  <span class="comic-title-author">par ${bd.artiste}</span>
+`;
+
+
+  // Affichage de la liste des chapitres
   const container = document.getElementById("chaptersList");
-  if (bd && container) {
-    for (let i = 1; i <= bd.chapters; i++) {
-      const li = document.createElement("li");
-      const thumb = bd.thumbs[i-1] || bd.cover; // fallback si miniature manquante
-      li.innerHTML = `
-        <div class="chapter-item">
-          <img src="${thumb}" class="chapter-thumb" alt="Chapitre ${i}">
-          <a href="reader.html?comic=${id}&chapitre=${i}" class="chapter-link">Chapitre ${i}</a>
-        </div>
-      `;
-      container.appendChild(li);
-    }
-  } else if (!bd) {
-    container.innerHTML = "<p>Introuvable.</p>";
+  for (let i = 1; i <= bd.chapters; i++) {
+    const li = document.createElement("li");
+    const thumb = bd.thumbs[i-1] || bd.cover;
+    li.innerHTML = `
+      <div class="chapter-item">
+        <img src="${thumb}" class="chapter-thumb" alt="Chapitre ${i}">
+        <a href="reader.html?comic=${id}&chapitre=${i}" class="chapter-link">Chapitre ${i}</a>
+      </div>
+    `;
+    container.appendChild(li);
   }
+} else {
+  document.getElementById("chaptersList").innerHTML = "<p>Introuvable.</p>";
+  const coverImg = document.getElementById("comicCover");
+  coverImg.src = "/assets/img/default-cover.jpg";
+  coverImg.alt = "Introuvable";
+
+  // Titre fallback
+  const titleEl = document.getElementById("comicTitle");
+  titleEl.textContent = "Œuvre introuvable";
+}
+
 </script>
 
 
-</body>
-</html>
+
+  </body>
+  </html>
