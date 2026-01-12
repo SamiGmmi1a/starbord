@@ -57,19 +57,19 @@
     "bd1": { 
       title: "Détenu 278", 
       artiste: "FÉNIX",
-      cover:"/assets/img/detenu278-cover.jpg", 
+      cover:"/assets/img/cover/detenu278-cover.jpeg", 
       chapters: 1,
       thumbs: [
-        "/assets/img/detenu278-cover.jpg",
+        "/assets/img/cover/detenu278-cover.jpeg",
       ]
     },
     "bd2": { 
       title: "Figé dans l'acier",
       artiste: "FÉNIX",
-      cover:"/assets/img/fige_dans_l'acier-cover.jpg", 
+      cover:"/assets/img/cover/fige_dans_l'acier-cover.jpeg", 
       chapters: 1,
       thumbs: [
-        "/assets/img/fige_dans_l'acier-cover.jpg",
+        "/assets/img/cover/fige_dans_l'acier-cover.jpeg",
       ]
     },
     // Ajoute les autres comics ici
@@ -111,7 +111,7 @@ titleEl.innerHTML = `
 } else {
   document.getElementById("chaptersList").innerHTML = "<p>Introuvable.</p>";
   const coverImg = document.getElementById("comicCover");
-  coverImg.src = "/assets/img/default-cover.jpg";
+  coverImg.src = "/assets/img/cover/default-cover.jpeg";
   coverImg.alt = "Introuvable";
 
   // Titre fallback
