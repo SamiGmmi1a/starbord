@@ -6,6 +6,8 @@
   <title>STARBORD — Catalogue</title>
   <link rel="stylesheet" href="/assets/style/style.css">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -21,9 +23,21 @@
     </div>
   </header>
 
-  <!-- Hero Banner -->
+  <!-- HERO banner -->
 <section class="hero">
-  <img src="/assets/img/STB1.png" alt="Bannière Hero STARBORD" class="hero-img">
+
+  <picture class="hero-picture">
+    <!-- Image mobile -->
+    <source 
+      media="(max-width: 768px)" 
+      srcset="/assets/img/Hero-STB-mobile.png">
+
+    <!-- Image desktop -->
+    <img 
+      src="/assets/img/Hero-STB-PC.png" 
+      alt="Hero STARBORD"
+      class="hero-img">
+  </picture>
 
   <div class="hero-gradient"></div>
 
@@ -31,77 +45,103 @@
     <div class="hero-text">
       <h1>STARBORD</h1>
       <p>Des bandes dessinées conçues pour inspirer à rêver grand.</p>
-      <a href="#shop" class="hero-btn">Découvrir</a>    </div>
+      <a href="#shop" class="hero-btn">Découvrir</a>
+    </div>
   </div>
+
 </section>
+
 
 
 
   <!-- MAIN -->
   <main class="container">
 
-<main class="container">
-  <section>
-    <div id="grid" class="catalog"></div>
-  </section>
-</main>
+  <section class="catalog-section">
 
-<section class="shop-section" id="shop">
-  <div class="shop-header">
-    <h2>Nos illustrations</h2>
-    <p>Inspirer au quotidien</p>
-  </div>
+    <header class="catalog-header">
+      <h2 class="catalog-title">Nos nouveautés</h2>
+      <p class="catalog-subtitle">
+        Des histoires pour inspirer à rêver grand
+      </p>
+    </header>
+
+    <div id="grid" class="catalog"></div>
+
+  </section>
+
+
+
+  <section class="shop-section" id="shop">
+    <div class="shop-header">
+      <h2>Nos illustrations</h2>
+      <p>Inspirer au quotidien</p>
+    </div>
 
   <div class="shop-grid">
     <!-- Card 1 -->
-    <div class="shop-card">
+    <div class="shop-card">     
+       <h3 class="shop-card-title">Atomic Maid</h3>
       <img src="/assets/img/produits/atomic_maid.jpg" alt="Atomic Maid">
-      <h3 class="shop-card-title">Atomic Maid</h3>
         <div class="shop-price">20,00 €</div>
-      <a href="https://starbord.shop" target="_blank" class="shop-btn">Acheter</a>
+      <a href="https://starbord.shop/products/tenace?variant=55400992637252" target="_blank" class="shop-btn">Je choisis</a>
     </div>
 
     <!-- Card 2 -->
     <div class="shop-card">
-      <img src="/assets/img/produits/bloody_maid.jpg" alt="Bloody Maid">
       <h3 class="shop-card-title">Bloody Maid</h3>
+      <img src="/assets/img/produits/bloody_maid.jpg" alt="Bloody Maid">
         <div class="shop-price">20,00 €</div>
-      <a href="https://starbord.shop" target="_blank" class="shop-btn">Acheter</a>
+      <a href="https://starbord.shop/products/vaincre?variant=55400980480324" target="_blank" class="shop-btn">Je choisis</a>
     </div>
 
     <!-- Card 3 -->
     <div class="shop-card">
-      <img src="/assets/img/produits/detenu_278.jpg" alt="Détenu 278">
       <h3 class="shop-card-title">Détenu 278</h3>
+      <img src="/assets/img/produits/detenu_278.jpg" alt="Détenu 278">
         <div class="shop-price">20,00 €</div>
-      <a href="https://starbord.shop" target="_blank" class="shop-btn">Acheter</a>
+      <a href="https://starbord.shop/products/detenu-278?variant=56241279467844" target="_blank" class="shop-btn">Je choisis</a>
     </div>
 
     <!-- Card 4 -->
     <div class="shop-card">
-      <img src="/assets/img/produits/fige_dans_l'acier.jpg" alt="Figé dans l'acier">
       <h3 class="shop-card-title">Figé dans l'acier</h3>
+      <img src="/assets/img/produits/fige_dans_l'acier.jpg" alt="Figé dans l'acier">
         <div class="shop-price">20,00 €</div>
-      <a href="https://starbord.shop" target="_blank" class="shop-btn">Acheter</a>
+      <a href="https://starbord.shop/products/fige-dans-lacier?variant=56241295884612" target="_blank" class="shop-btn">Je choisis</a>
     </div>
 
     <!-- Card 5 -->
     <div class="shop-card">
-      <img src="/assets/img/produits/pensez_grand.jpg" alt="Pensez Grand">
       <h3 class="shop-card-title">Pensez Grand</h3>
+      <img src="/assets/img/produits/pensez_grand.jpg" alt="Pensez Grand">
         <div class="shop-price">20,00 €</div>
-      <a href="https://starbord.shop" target="_blank" class="shop-btn">Acheter</a>
+      <a href="https://starbord.shop/products/relever-un-defi-chaque-jour?variant=55683308749124" target="_blank" class="shop-btn">Je choisis</a>
     </div>
 
     <!-- Card 6 -->
     <div class="shop-card">
-      <img src="/assets/img/produits/pensez_grand.jpg" alt="Pensez Grand">
-      <h3 class="shop-card-title">Pensez Grand</h3>
+      <h3 class="shop-card-title">Fonce !</h3>
+      <img src="/assets/img/produits/fonce.jpg" alt="Fonce">
         <div class="shop-price">20,00 €</div>
-      <a href="https://starbord.shop" target="_blank" class="shop-btn">Acheter</a>
+      <a href="https://starbord.shop/products/fonce-et-crois-en-toi-2?variant=55400979202372" target="_blank" class="shop-btn">Je choisis</a>
     </div>
 
+    <!-- Card 7 -->
+    <div class="shop-card">
+      <h3 class="shop-card-title">Rêve, Vise, Fonce !</h3>
+      <img src="/assets/img/produits/reve_vise_fonce.jpg" alt="Fonce">
+        <div class="shop-price">20,00 €</div>
+      <a href="https://starbord.shop/products/reve-vise-fonce?variant=55451843952964" target="_blank" class="shop-btn">Je choisis</a>
+    </div>
 
+    <!-- Card 7 -->
+    <div class="shop-card">
+      <h3 class="shop-card-title">Fonce ! Et crois en toi</h3>
+      <img src="/assets/img/produits/fonce_crois_en_toi.jpg" alt="Fonce">
+        <div class="shop-price">20,00 €</div>
+      <a href="https://starbord.shop/products/fonce-et-crois-en-toi-1?variant=55400941846852" target="_blank" class="shop-btn">Je choisis</a>
+    </div>
 
 
   </main>
