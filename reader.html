@@ -6,6 +6,8 @@
 <title>Lecture</title>
 <link rel="stylesheet" href="/assets/style/style.css">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+  <script src="/assets/js/auth.js"></script>
+
 </head>
 
 <body>
@@ -30,6 +32,8 @@
 <div id="nextChapterContainer" class="next-chapter-banner">
   <a id="nextChapterBtn" href="#">Chapitre suivant →</a>
 </div>
+
+
 
 <script>
   // Parse URL params
@@ -64,17 +68,50 @@
   };
 
   // Affichage des pages
-  if (comicId && chapitreId && comicsData[comicId] && comicsData[comicId].chapters[chapitreId]) {
-    const pages = comicsData[comicId].chapters[chapitreId];
-    pages.forEach(src => {
+// 🔒 Gestion Freemium
+const FREE_PAGES_LIMIT = 5;
+
+if (comicId && chapitreId && comicsData[comicId] && comicsData[comicId].chapters[chapitreId]) {
+  const pages = comicsData[comicId].chapters[chapitreId];
+  const isLogged = Auth.isLoggedIn(); // Vérifie token
+
+  pages.forEach((src, index) => {
+
+    // ✅ Pages gratuites
+    if (index < FREE_PAGES_LIMIT) {
       const img = document.createElement('img');
       img.src = src;
       img.className = 'page-img';
       pagesContainer.appendChild(img);
-    });
-  } else {
-    pagesContainer.innerHTML = "<p>Aucune page disponible pour ce chapitre.</p>";
-  }
+    }
+
+    // 🔒 Pages premium
+    else {
+      if (isLogged) {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'page-img';
+        pagesContainer.appendChild(img);
+      } else {
+        const lock = document.createElement('div');
+        lock.className = 'premium-lock';
+        lock.innerHTML = `
+          <p>🔒 Connecte-toi pour lire la suite</p>
+          <a href="login.html" class="login-btn">Se connecter</a>
+        `;
+        pagesContainer.appendChild(lock);
+
+        return; // Stop après le message premium
+      }
+    }
+
+  });
+
+} else {
+  pagesContainer.innerHTML = "<p>Aucune page disponible pour ce chapitre.</p>";
+}
+
+
 
   // debug
   console.log('comicId=', comicId, 'chapitreId=', chapitreId);
