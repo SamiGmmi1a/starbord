@@ -24,9 +24,9 @@
           <input v-model="email" type="email" placeholder="Email">
         </div>
 
-        <div class="input-group">
-          <input v-model="password" type="password" placeholder="Mot de passe">
-        </div>
+       <div class="input-group">
+        <input v-model="accessCode" type="text" placeholder="Code d’accès">
+      </div>
 
         <button class="login-main-btn" @click="login">Se connecter</button>
         <p class="login-message">{{ message }}</p>
@@ -38,25 +38,30 @@
 
 <script>
 Vue.createApp({
-  data() {
-    return {
-      email: "",
-      password: "",
-      message: ""
-    }
-  },
-  methods: {
-    login() {
-      if (this.email && this.password) {
-        const fakeToken = "token_" + Math.random().toString(36).substring(2);
-        Auth.login(this.email, fakeToken);
-        this.message = "Connexion réussie !";
-        setTimeout(() => window.location.href = "index.html", 1000);
-      } else {
-        this.message = "Remplis les champs";
-      }
-    }
+ data() {
+  return {
+    email: "",
+    accessCode: "",
+    message: ""
   }
+},
+
+
+login() {
+  if (!this.email || !this.accessCode) {
+    this.message = "Remplis tous les champs";
+    return;
+  }
+
+  const ok = Auth.login(this.email, this.accessCode);
+
+  if (ok) {
+    this.message = "Accès autorisé ✔";
+    setTimeout(() => window.location.href = "index.html", 1000);
+  } else {
+    this.message = "Code invalide pour cet email";
+  }
+}
 }).mount("#app");
 </script>
 
