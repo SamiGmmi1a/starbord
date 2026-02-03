@@ -105,6 +105,51 @@ main.container {
   min-width: 0;   /* important pour que width:100% fonctionne correctement dans flex */
 }
 
+/* Bouton connexion dans le header */
+.login-btn {
+  white-space: nowrap;
+  padding: 7px 16px;
+  margin-left: 10px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+
+  color: #a9c7ff;
+  background: rgba(80, 140, 255, 0.08);
+  border: 1px solid rgba(120, 170, 255, 0.25);
+
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
+}
+
+/* Effet futuriste au survol */
+.login-btn:hover {
+  color: #ffffff;
+  background: rgba(80, 140, 255, 0.18);
+  border-color: rgba(150, 190, 255, 0.6);
+  box-shadow: 0 0 12px rgba(80,140,255,0.35);
+}
+
+
+
+@media (max-width: 600px) {
+  .login-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .search {
+    flex: 1 1 100%;
+    order: 3;
+  }
+
+  .login-btn {
+    order: 2;
+  }
+}
+
+
 
 /* Hero section */
 
