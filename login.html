@@ -7,17 +7,34 @@
 <script src="https://unpkg.com/vue@3"></script>
 <script src="/assets/js/auth.js"></script>
 </head>
-<body>
 
-<div id="app" class="login-box">
-  <h2>Connexion / Inscription</h2>
 
-  <input v-model="email" placeholder="Email">
-  <input v-model="password" type="password" placeholder="Mot de passe">
+<body class="login-page">
 
-  <button @click="login">Se connecter</button>
-  <p>{{ message }}</p>
-</div>
+  <div class="login-wrapper">
+    <div id="app" class="login-card">
+
+      <div class="login-header">
+        <h2>STARBORD</h2>
+        <p>Connectez vous pour accéder aux chapitres complets</p>
+      </div>
+
+      <div class="login-form">
+        <div class="input-group">
+          <input v-model="email" type="email" placeholder="Email">
+        </div>
+
+        <div class="input-group">
+          <input v-model="password" type="password" placeholder="Mot de passe">
+        </div>
+
+        <button class="login-main-btn" @click="login">Se connecter</button>
+        <p class="login-message">{{ message }}</p>
+      </div>
+
+    </div>
+  </div>
+
 
 <script>
 Vue.createApp({
