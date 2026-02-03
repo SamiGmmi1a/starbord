@@ -73,43 +73,46 @@ const FREE_PAGES_LIMIT = 5;
 
 if (comicId && chapitreId && comicsData[comicId] && comicsData[comicId].chapters[chapitreId]) {
   const pages = comicsData[comicId].chapters[chapitreId];
-  const isLogged = Auth.isLoggedIn(); // Vérifie token
+  const isLogged = Auth.isLoggedIn();
 
-  pages.forEach((src, index) => {
+  for (let index = 0; index < pages.length; index++) {
 
-    // ✅ Pages gratuites
+    // ✅ Pages gratuites visibles par tous
     if (index < FREE_PAGES_LIMIT) {
       const img = document.createElement('img');
-      img.src = src;
+      img.src = pages[index];
       img.className = 'page-img';
       pagesContainer.appendChild(img);
     }
 
-    // 🔒 Pages premium
+    // 🔒 Dès qu’on atteint une page premium
     else {
       if (isLogged) {
+        // Utilisateur connecté → on continue d’afficher normalement
         const img = document.createElement('img');
-        img.src = src;
+        img.src = pages[index];
         img.className = 'page-img';
         pagesContainer.appendChild(img);
       } else {
-        const lock = document.createElement('div');
-        lock.className = 'premium-lock';
-        lock.innerHTML = `
-          <p>🔒 Connecte-toi pour lire la suite</p>
-          <a href="login.html" class="login-btn">Se connecter</a>
+        // ❌ Utilisateur non connecté → on arrête TOUT ici
+        const cta = document.createElement('div');
+        cta.className = 'premium-cta';
+        cta.innerHTML = `
+          <h3>🔒 La suite est réservée aux membres</h3>
+          <p>Crée un compte gratuit pour débloquer toutes les pages.</p>
+          <a href="login.html" class="login-btn">Se connecter / S'inscrire</a>
         `;
-        pagesContainer.appendChild(lock);
+        pagesContainer.appendChild(cta);
 
-        return; // Stop après le message premium
+        break; // ⛔ STOP → on ne charge AUCUNE autre image
       }
     }
-
-  });
+  }
 
 } else {
   pagesContainer.innerHTML = "<p>Aucune page disponible pour ce chapitre.</p>";
 }
+
 
 
 
