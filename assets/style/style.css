@@ -1110,3 +1110,22 @@ img {
   color: #9bbcff;
   min-height: 18px;
 }
+
+
+.login-back {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 6px 12px;
+  font-size: 12px;
+  text-decoration: none;
+  color: #9bbcff;
+  background: rgba(80,140,255,0.08);
+  border: 1px solid rgba(120,170,255,0.2);
+  border-radius: 999px;
+  transition: 0.2s ease;
+}
+
+.login-back:hover {
+  background: rgba(80,140,255,0.18);
+  border-color: rgba(140,180,255,0.4);
+}
