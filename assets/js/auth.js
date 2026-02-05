@@ -1,12 +1,16 @@
 const VALID_CODES = [
-  "STB-458901",
-  "STB-992301",
-  "STB-771101"
+  { code: "STB-458901", email: "user1@example.com" },
+  { code: "STB-992301", email: "user2@example.com" },
+  { code: "STB-771101", email: "user3@example.com" }
 ];
 
 const Auth = {
   login(email, code) {
-    if (VALID_CODES.includes(code)) {
+    const validEntry = VALID_CODES.find(entry => 
+      entry.code === code && entry.email === email
+    );
+
+    if (validEntry) {
       const token = "token_" + Math.random().toString(36).substring(2);
 
       localStorage.setItem("userId", email);
