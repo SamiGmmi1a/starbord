@@ -1,17 +1,12 @@
-// Codes d’accès autorisés
 const VALID_CODES = [
   "STB-458901",
   "STB-992301",
   "STB-771101"
 ];
 
-// Authentification
 const Auth = {
   login(email, code) {
-
-    // Vérifie que le code existe dans la liste
     if (VALID_CODES.includes(code)) {
-
       const token = "token_" + Math.random().toString(36).substring(2);
 
       localStorage.setItem("userId", email);
@@ -20,7 +15,6 @@ const Auth = {
 
       return true;
     }
-
     return false;
   },
 
@@ -32,5 +26,9 @@ const Auth = {
 
   isLoggedIn() {
     return !!localStorage.getItem("authToken");
+  },
+
+  getUserId() {
+    return localStorage.getItem("userId");
   }
 };
