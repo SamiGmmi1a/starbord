@@ -24,23 +24,23 @@
         </div>
 
 
-      <div class="login-header">
+      <div class="login-header">  
         <h2>STARBORD</h2>
         <p>Connextez vous pour avoir accès aux chapitres complets</p>
       </div>
 
       <div class="login-form">
         <div class="input-group">
-          <input v-model="email" type="email" placeholder="Email">
-      </div>     
+          <input v-model="email" type="email" placeholder="Adresse email">
+        </div>
 
-      <div class="input-group">
-        <input v-model="accessCode" type="text" placeholder="Code d’accès (STB-XXXX01)">
+        <div class="input-group">
+          <input v-model="accessCode" type="text" placeholder="Code d'accès (STB-XXXX01)">
+        </div>
+
+        <button class="login-main-btn" @click="login">Se connecter</button>
+        <p class="login-message">{{ message }}</p>
       </div>
-
-      <button class="login-main-btn" @click="login">Se connecter</button>
-    <p class="login-message">{{ message }}</p>
-</div>
 
 
 
@@ -56,24 +56,23 @@ Vue.createApp({
       }
     },
 
-  methods: {
+    methods: {
+      login() {
+        if (!this.email || !this.accessCode) {
+          this.message = "Remplis tous les champs";
+          return;
+        }
 
-    login() {
-  if (!this.email || !this.accessCode) {
-    this.message = "Remplis tous les champs";
-    return;
-  }
+        const ok = Auth.login(this.email, this.accessCode);
 
-  const ok = Auth.login(this.email, this.accessCode);
-
-  if (ok) {
-    this.message = "Accès autorisé ✔";
-    setTimeout(() => window.location.href = "index.html", 800);
-  } else {
-    this.message = "Code d’accès invalide";
-  }
-}
-  }
+        if (ok) {
+          this.message = "Accès autorisé ✔";
+          setTimeout(() => window.location.href = "index.html", 800);
+        } else {
+          this.message = "Email ou code d'accès invalide";
+        }
+      }
+    }
 }).mount("#app");
 </script>
 

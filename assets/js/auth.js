@@ -1,10 +1,16 @@
 const VALID_CODES = [
-  { code: "STB-458901", email: "user1@example.com" },
+  { code: "STB-458901", email: "samighorzi2a@gmail.com" },
   { code: "STB-992301", email: "user2@example.com" },
   { code: "STB-771101", email: "user3@example.com" }
 ];
 
 const Auth = {
+  // Récupère l'email associé à un code
+  getEmailByCode(code) {
+    const validEntry = VALID_CODES.find(entry => entry.code === code);
+    return validEntry ? validEntry.email : null;
+  },
+
   login(email, code) {
     const validEntry = VALID_CODES.find(entry => 
       entry.code === code && entry.email === email
