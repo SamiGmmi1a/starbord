@@ -1032,6 +1032,12 @@ img {
   position: relative;
 }
 
+@media (max-width: 480px) {
+  .login-card {
+    padding: 50px 28px;
+  }
+}
+
 /* LUEUR SUBTILE */
 .login-card::before {
   content: "";
@@ -1055,9 +1061,26 @@ img {
   color: #8f9bbf;
 }
 
+@media (max-width: 480px) {
+  .login-header h2 {
+    font-size: 26px;
+  }
+
+  .login-header p {
+    font-size: 15px;
+    margin-top: 10px;
+  }
+}
+
 /* FORMULAIRE */
 .login-form {
   margin-top: 30px;
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    margin-top: 40px;
+  }
 }
 
 /* INPUTS */
@@ -1082,6 +1105,18 @@ img {
   background: rgba(255,255,255,0.06);
 }
 
+@media (max-width: 480px) {
+  .input-group {
+    margin-bottom: 22px;
+  }
+
+  .input-group input {
+    padding: 16px 16px;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+}
+
 /* BOUTON PRINCIPAL */
 .login-main-btn {
   width: 100%;
@@ -1102,6 +1137,15 @@ img {
   box-shadow: 0 8px 22px rgba(80,140,255,0.35);
 }
 
+@media (max-width: 480px) {
+  .login-main-btn {
+    padding: 18px;
+    font-size: 16px;
+    margin-top: 16px;
+    border-radius: 12px;
+  }
+}
+
 /* MESSAGE */
 .login-message {
   margin-top: 15px;
@@ -1109,6 +1153,13 @@ img {
   text-align: center;
   color: #9bbcff;
   min-height: 18px;
+}
+
+@media (max-width: 480px) {
+  .login-message {
+    font-size: 14px;
+    margin-top: 20px;
+  }
 }
 
 
@@ -1128,4 +1179,12 @@ img {
 .login-back:hover {
   background: rgba(80,140,255,0.18);
   border-color: rgba(140,180,255,0.4);
+}
+
+@media (max-width: 480px) {
+  .login-back {
+    padding: 8px 14px;
+    font-size: 13px;
+    margin-bottom: 25px;
+  }
 }
