@@ -63,11 +63,16 @@
 
   <div class="hero-gradient"></div>
 
-  <div class="carousel-indicators">
-    <button class="indicator active" aria-label="Slide 1"></button>
-    <button class="indicator" aria-label="Slide 2"></button>
-    <button class="indicator" aria-label="Slide 3"></button>
+  <div class="carousel-text">
+    <div class="text-content active">
+      <div class="text-title">STARBORD</div>
+      <div class="text-subtitle">inspirer à rêver grand à travers des illustrations incroyables</div>
+    </div>
   </div>
+
+  <button class="scroll-to-shop" aria-label="Descendre vers la boutique" title="Descendre vers la boutique">
+    DÉCOUVRIR
+  </button>
 
   <div class="hero-content">
     <div class="hero-text">
@@ -103,7 +108,7 @@
   <section class="shop-section" id="shop">
     <div class="shop-header">
       <h2>Nos illustrations</h2>
-      <p>Inspirer au quotidien</p>
+      <p>Derrière chaque illustration, une histoire à raconter</p>
     </div>
 
   <div class="shop-grid">
@@ -265,40 +270,69 @@
     let currentSlide = 0;
     const slides = document.querySelectorAll('.carousel-slide');
     const indicators = document.querySelectorAll('.carousel-indicators .indicator');
+    const textContent = document.querySelector('.text-content');
     const totalSlides = slides.length;
 
-    // Initialiser : mettre la première slide en active
-    slides[0].classList.add('active');
-
-    function showSlide(index) {
-      // Enlever les classes des slides
+    function showSlide(newIndex) {
+      const oldIndex = currentSlide;
+      
+      // Enlever toutes les classes des slides
       slides.forEach(slide => {
         slide.classList.remove('active');
         slide.classList.remove('prev');
       });
       
-      // Enlever la classe active des indicateurs
-      indicators.forEach(ind => ind.classList.remove('active'));
+      // Enlever la classe active des indicateurs (si présents)
+      if (indicators.length > 0) {
+        indicators.forEach(ind => ind.classList.remove('active'));
+        slides[newIndex].classList.add('active');
+        indicators[newIndex].classList.add('active');
+      } else {
+        // Si pas d'indicateurs visibles, ajouter juste la classe active au slide
+        slides[newIndex].classList.add('active');
+      }
 
-      // Ajouter la classe active au slide et indicateur actuels
-      slides[index].classList.add('active');
-      indicators[index].classList.add('active');
+      // Marquer la slide précédente pour l'animation de sortie
+      if (oldIndex !== newIndex) {
+        slides[oldIndex].classList.add('prev');
+      }
+
+      // Gérer la visibilité du texte (seulement sur le premier slide)
+      if (newIndex === 0) {
+        textContent.classList.add('active');
+      } else {
+        textContent.classList.remove('active');
+      }
+      
+      // Mettre à jour l'index courant
+      currentSlide = newIndex;
     }
 
     function nextSlide() {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      showSlide(currentSlide);
+      const newIndex = (currentSlide + 1) % totalSlides;
+      showSlide(newIndex);
     }
+
+    // Initialiser le premier slide
+    showSlide(0);
 
     // Auto-play : change de slide toutes les 5 secondes
     setInterval(nextSlide, 5000);
 
-    // Clic sur les indicateurs
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => {
-        currentSlide = index;
-        showSlide(currentSlide);
+    // Clic sur les indicateurs (si présents)
+    if (indicators.length > 0) {
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+          showSlide(index);
+        });
       });
+    }
+
+    // Bouton scroll vers la boutique
+    const scrollBtn = document.querySelector('.scroll-to-shop');
+    scrollBtn.addEventListener('click', () => {
+      const shopSection = document.querySelector('#shop');
+      shopSection.scrollIntoView({ behavior: 'smooth' });
     });
   </script>
 
