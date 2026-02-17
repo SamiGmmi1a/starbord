@@ -106,9 +106,6 @@ export default {
   transition: var(--transition);
 }
 
-.logo:hover {
-  color: var(--accent);
-}
 
 .spacer {
   flex: 1;

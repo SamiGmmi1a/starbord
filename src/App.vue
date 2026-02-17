@@ -1,12 +1,13 @@
 <template>
   <div class="app">
-    <Header />
+    <Header v-if="showHeaderFooter" />
     <router-view />
-    <Footer />
+    <Footer v-if="showHeaderFooter" />
   </div>
 </template>
 
 <script>
+
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import { useComicsStore } from './stores/comics'
@@ -16,6 +17,13 @@ export default {
   components: {
     Header,
     Footer
+  },
+  computed: {
+    showHeaderFooter() {
+      // Utilise le nom de la route (à adapter si besoin)
+      const noHeaderFooter = ['Login', 'Legal']
+      return !noHeaderFooter.includes(this.$route.name)
+    }
   },
   mounted() {
     // Charger les comics au démarrage

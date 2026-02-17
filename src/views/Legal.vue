@@ -1,6 +1,6 @@
 <template>
   <div class="legal-page">
-    <Header />
+    
 
     <main class="legal-container">
       <div class="legal-content">
@@ -94,19 +94,17 @@
       </div>
     </main>
 
-    <Footer />
+    
   </div>
 </template>
 
 <script>
-import Header from '../components/Header.vue'
-import Footer from '../components/Footer.vue'
+// Header/Footer supprimés
 
 export default {
   name: 'Legal',
   components: {
-    Header,
-    Footer
+    
   }
 }
 </script>
