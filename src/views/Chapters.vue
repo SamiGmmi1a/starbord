@@ -43,8 +43,14 @@
       </section>
     </div>
 
-    <div class="loading" v-else>
-      <p>Chargement...</p>
+    <div v-else>
+      <div v-if="error" class="error-message">
+        <p>{{ error }}</p>
+        <router-link to="/" class="back-home">Retour à l'accueil</router-link>
+      </div>
+      <div v-else class="loading">
+        <p>Chargement...</p>
+      </div>
     </div>
 
     <Footer />
@@ -68,7 +74,12 @@ export default {
   },
   async mounted() {
     const comicsStore = useComicsStore()
-    this.comic = await comicsStore.fetchComicById(this.comicId)
+    const result = await comicsStore.fetchComicById(this.comicId)
+    if (!result) {
+      this.error = "BD introuvable. Vérifiez l'URL ou choisissez une autre histoire.";
+    } else {
+      this.comic = result
+    }
   }
 }
 </script>
@@ -225,6 +236,22 @@ export default {
   justify-content: center;
   color: var(--text-muted);
   font-size: 1.1rem;
+}
+.error-message {
+  color: #ff4d4f;
+  background: #fff0f0;
+  border: 1px solid #ff4d4f;
+  padding: 2rem;
+  border-radius: var(--radius);
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 400px;
+}
+.back-home {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--primary);
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {

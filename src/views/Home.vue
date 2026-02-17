@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <Carousel />
+    <Hero />
 
     <main class="container">
       <!-- Section Catalogue -->
@@ -14,7 +14,7 @@
           <router-link
             v-for="comic in displayedComics"
             :key="comic.id"
-            :to="`/chapters/${comic.id}`"
+            :to="{ name: 'Chapters', params: { id: comic.id } }"
             class="card card-comic"
           >
             <img :src="comic.cover" :alt="comic.title" class="img-cover">
@@ -38,7 +38,7 @@
           <!-- Détenu 278 et Figé dans l'acier renvoient vers leurs pages chapters -->
           <router-link 
             v-if="hasComic('bd1')"
-            to="/chapters/bd1"
+            :to="{ name: 'Chapters', params: { id: 'bd1' } }"
             class="card card-product"
           >
             <img src="/assets/img/produits/detenu_278.jpg" alt="Détenu 278" class="img-product">
@@ -50,7 +50,7 @@
 
           <router-link 
             v-if="hasComic('bd2')"
-            to="/chapters/bd2"
+            :to="{ name: 'Chapters', params: { id: 'bd2' } }"
             class="card card-product"
           >
             <img :src="getImagePath('fige_dans_l_acier')" alt="Figé dans l'acier" class="img-product">
@@ -88,12 +88,12 @@
 
 <script>
 import { useComicsStore } from '../stores/comics'
-import Carousel from '../components/Carousel.vue'
+import Hero from '../components/Hero.vue'
 
 export default {
   name: 'Home',
   components: {
-    Carousel
+    Hero
   },
   data() {
     return {
@@ -225,6 +225,8 @@ section {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  color: inherit;
 }
 
 .card-comic:hover {
@@ -242,9 +244,16 @@ section {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  color: inherit;
 }
 
 .card-product:hover {
+  background: rgba(0, 168, 255, 0.08);
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 168, 255, 0.15);
+}.card-product:hover {
   background: rgba(0, 168, 255, 0.08);
   border-color: var(--primary);
   transform: translateY(-4px);
