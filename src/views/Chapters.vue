@@ -78,16 +78,21 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(180deg, var(--bg-dark), var(--bg));
 }
 
 .site-header {
-  background: #1a1a1a;
-  border-bottom: 1px solid #333;
+  background: rgba(15, 17, 22, 0.95);
+  border-bottom: 1px solid var(--border);
   padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
 }
 
 .header-inner {
-  max-width: 1200px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 1rem;
   display: flex;
@@ -96,22 +101,22 @@ export default {
 
 .close-btn {
   font-size: 1.5rem;
-  color: white;
+  color: var(--text-primary);
   text-decoration: none;
   margin-right: 1rem;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: var(--transition);
 }
 
 .close-btn:hover {
-  color: #00a8ff;
+  color: var(--primary);
 }
 
 .logo {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-title);
   font-size: 1.5rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   text-decoration: none;
 }
 
@@ -122,7 +127,7 @@ export default {
 .chapter-layout {
   flex: 1;
   display: flex;
-  max-width: 1200px;
+  max-width: var(--max-width);
   margin: 0 auto;
   width: 100%;
   gap: 2rem;
@@ -130,17 +135,20 @@ export default {
 }
 
 .chapter-cover {
-  flex: 0 0 300px;
+  flex: 0 0 250px;
   position: sticky;
-  top: 2rem;
+  top: 6rem;
   height: fit-content;
 }
 
 .comic-cover-img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
 }
 
 .chapter-panel {
@@ -153,28 +161,29 @@ export default {
 }
 
 .comic-title-name {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-title);
   font-size: 2rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   margin: 0 0 0.5rem;
 }
 
 .comic-title-author {
-  color: #00a8ff;
+  color: var(--primary);
   font-size: 1.1rem;
   margin: 0;
 }
 
 .comic-info {
-  background: #2a2a2a;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: var(--radius);
   margin-bottom: 2rem;
 }
 
 .comic-info p {
-  color: #aaa;
+  color: var(--text-muted);
   margin: 0.5rem 0;
   font-size: 0.95rem;
 }
@@ -192,17 +201,19 @@ export default {
 .chapter-link {
   display: block;
   padding: 1rem;
-  background: #2a2a2a;
-  color: white;
+  background: var(--bg-card);
+  color: var(--text-primary);
   text-decoration: none;
-  border-radius: 4px;
-  border-left: 4px solid #00a8ff;
-  transition: all 0.3s ease;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  transition: var(--transition);
   font-weight: 600;
 }
 
 .chapter-link:hover {
-  background: #333;
+  background: rgba(0, 168, 255, 0.08);
+  border-color: var(--primary);
   padding-left: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 168, 255, 0.2);
 }
@@ -212,7 +223,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #aaa;
+  color: var(--text-muted);
   font-size: 1.1rem;
 }
 
@@ -226,11 +237,15 @@ export default {
   .chapter-cover {
     position: static;
     flex: none;
-    max-width: 250px;
+    max-width: 200px;
   }
 
   .comic-title-name {
     font-size: 1.5rem;
+  }
+  
+  .chapter-layout {
+    max-width: 100%;
   }
 }
 </style>

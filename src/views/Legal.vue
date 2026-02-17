@@ -116,27 +116,30 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(180deg, var(--bg-dark), var(--bg));
 }
 
 .legal-container {
   flex: 1;
-  max-width: 900px;
+  max-width: var(--max-width);
   margin: 0 auto;
   width: 100%;
   padding: 2rem 1rem;
 }
 
 .legal-content {
-  background: #2a2a2a;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
 }
 
 .legal-content h1 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-title);
   font-size: 2.5rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   margin-top: 0;
   margin-bottom: 1rem;
 }
@@ -148,19 +151,19 @@ export default {
 .legal-section h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #00a8ff;
+  color: var(--primary);
   margin-bottom: 1rem;
   margin-top: 0;
 }
 
 .legal-section p {
-  color: #ccc;
+  color: var(--text-secondary);
   line-height: 1.8;
   margin: 0.5rem 0;
 }
 
 .legal-section ul {
-  color: #ccc;
+  color: var(--text-secondary);
   line-height: 1.8;
   padding-left: 2rem;
   margin: 1rem 0;
@@ -171,7 +174,7 @@ export default {
 }
 
 strong {
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 600;
 }
 

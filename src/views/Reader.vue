@@ -155,20 +155,21 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #1a1a1a;
+  background: linear-gradient(180deg, var(--bg-dark), var(--bg));
 }
 
 .site-header {
-  background: #0a0a0a;
-  border-bottom: 1px solid #333;
+  background: rgba(15, 17, 22, 0.95);
+  border-bottom: 1px solid var(--border);
   padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
+  backdrop-filter: blur(10px);
 }
 
 .header-inner {
-  max-width: 1200px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 1rem;
   display: flex;
@@ -177,10 +178,10 @@ export default {
 }
 
 .chapter-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-title);
   font-size: 1.3rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -188,28 +189,30 @@ export default {
   font-size: 1.5rem;
   background: none;
   border: none;
-  color: white;
+  color: var(--text-primary);
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: var(--transition);
 }
 
 .reader-close:hover {
-  color: #00a8ff;
+  color: var(--primary);
 }
 
 .reader-container {
   flex: 1;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   width: 100%;
   padding: 2rem 1rem;
 }
 
 .reader-toolbar {
-  background: #2a2a2a;
-  border-radius: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   padding: 1rem;
   margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
 }
 
 .toolbar-content {
@@ -221,7 +224,7 @@ export default {
 }
 
 .page-counter {
-  color: #aaa;
+  color: var(--text-muted);
   font-weight: 600;
 }
 
@@ -232,18 +235,23 @@ export default {
 
 .nav-btn {
   padding: 0.5rem 1rem;
-  background: #333;
-  color: white;
-  border: 1px solid #444;
-  border-radius: 4px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-size: 0.85rem;
 }
 
 .nav-btn:hover:not(:disabled) {
-  background: #00a8ff;
-  border-color: #00a8ff;
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  box-shadow: 0 0 12px rgba(0, 168, 255, 0.3);
 }
 
 .nav-btn:disabled {
@@ -252,8 +260,9 @@ export default {
 }
 
 .reader-inner {
-  background: #2a2a2a;
-  border-radius: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   overflow: hidden;
   min-height: 400px;
   display: flex;
@@ -274,17 +283,19 @@ export default {
 .premium-cta {
   text-align: center;
   padding: 3rem 2rem;
-  background: linear-gradient(135deg, rgba(0, 168, 255, 0.1), rgba(0, 133, 204, 0.1));
+  background: linear-gradient(135deg, rgba(0, 168, 255, 0.08), rgba(155, 107, 255, 0.08));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .premium-content h3 {
-  color: white;
+  color: var(--text-primary);
   font-size: 1.5rem;
   margin: 0 0 1rem;
 }
 
 .premium-content p {
-  color: #aaa;
+  color: var(--text-muted);
   font-size: 1.1rem;
   margin: 0 0 1.5rem;
 }
@@ -292,29 +303,32 @@ export default {
 .premium-btn {
   display: inline-block;
   padding: 0.75rem 2rem;
-  background: linear-gradient(135deg, #00a8ff, #0085cc);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 999px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: var(--transition);
 }
 
 .premium-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 168, 255, 0.3);
+  box-shadow: 0 0 12px rgba(0, 168, 255, 0.3);
 }
 
 .loading {
-  color: #aaa;
+  color: var(--text-muted);
   font-size: 1.1rem;
 }
 
 .next-chapter-banner {
-  background: linear-gradient(135deg, #00a8ff, #0085cc);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   text-align: center;
   padding: 2rem;
   margin: 2rem 0 0;
+  border-radius: var(--radius);
 }
 
 .next-chapter-btn {
@@ -323,10 +337,12 @@ export default {
   text-decoration: none;
   font-size: 1.1rem;
   font-weight: 600;
-  padding: 0.5rem 1.5rem;
+  padding: 0.75rem 2rem;
   border: 2px solid white;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+  border-radius: 999px;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .next-chapter-btn:hover {

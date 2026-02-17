@@ -53,7 +53,7 @@
             to="/chapters/bd2"
             class="card card-product"
           >
-            <img src="/assets/img/produits/fige_dans_lacier.jpg" alt="Figé dans l'acier" class="img-product">
+            <img :src="getImagePath('fige_dans_l_acier')" alt="Figé dans l'acier" class="img-product">
             <div class="card-content">
               <h3 class="card-title">Figé dans l'acier</h3>
               <p class="card-subtitle mt-2">Lire l'histoire</p>
@@ -156,12 +156,19 @@ export default {
     hasComic(id) {
       const comicsStore = useComicsStore()
       return comicsStore.comics.some(comic => comic.id === id)
+    },
+    getImagePath(fileName) {
+      // Special case for fige_dans_l_acier to use the apostrophe in filename
+      if (fileName === 'fige_dans_l_acier') {
+        return `/assets/img/produits/fige_dans_l'acier.jpg`
+      }
+      return `/assets/img/produits/${fileName}.jpg`
     }
   },
-  async mounted() {
+  mounted() {
     const comicsStore = useComicsStore()
     if (comicsStore.comics.length === 0) {
-      await comicsStore.fetchComics()
+      comicsStore.fetchComics()
     }
   }
 }
@@ -170,7 +177,7 @@ export default {
 <style scoped>
 .home-page {
   min-height: 100vh;
-  background: var(--bg-dark);
+  background: linear-gradient(180deg, var(--bg-dark), var(--bg));
 }
 
 section {
@@ -183,9 +190,10 @@ section {
 }
 
 .section-header h2 {
-  font-size: 2.8rem;
+  font-size: 2.2rem;
   margin-bottom: 0.75rem;
   color: var(--text-primary);
+  font-weight: 700;
 }
 
 .section-header p {
@@ -199,28 +207,75 @@ section {
 }
 
 .shop-section {
-  background: linear-gradient(135deg, rgba(0, 168, 255, 0.08), rgba(0, 133, 204, 0.08));
+  background: linear-gradient(135deg, rgba(0, 168, 255, 0.05), rgba(155, 107, 255, 0.05));
   padding: 5rem 2rem;
-  margin: 0 -2rem;
+  margin: 0 -28px;
+  border: 1px solid var(--border);
+  border-left: none;
+  border-right: none;
 }
 
 /* Cards styling */
 .card-comic {
+  background: var(--bg-card);
   border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-comic:hover {
   border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 168, 255, 0.15);
 }
 
 .card-product {
-  border: none;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-product:hover {
-  background: rgba(0, 168, 255, 0.05);
+  background: rgba(0, 168, 255, 0.08);
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 168, 255, 0.15);
+}
+
+.card-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.card-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.card-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 1rem;
 }
 
 .text-sm {
@@ -233,12 +288,12 @@ section {
   }
 
   .section-header h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .shop-section {
     padding: 3rem 1rem;
-    margin: 0 -1rem;
+    margin: 0 -12px;
   }
 
   .grid-auto {
