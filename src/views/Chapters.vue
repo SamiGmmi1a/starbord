@@ -38,12 +38,12 @@
             class="chapter-item chapter-item-flex"
           >
             <router-link
-              :to="`/reader/${comicId}/${chapterId}`"
+              :to="getReaderLink(chapterId)"
               class="chapter-link chapter-link-flex"
             >
               <img
                 v-if="comic.chapters[chapterId].pages && comic.chapters[chapterId].pages.length > 0"
-                :src="comic.chapters[chapterId].pages[0]"
+                :src="getScanThumbnail(comic.chapters[chapterId].pages)"
                 :alt="comic.chapters[chapterId].title || 'Chapitre ' + chapterId"
                 class="chapter-thumb"
               />
@@ -53,6 +53,20 @@
                 </div>
               </div>
             </router-link>
+            methods: {
+              getReaderLink(chapterId) {
+                // Always route to Reader.vue with correct comic and chapter
+                return `/reader/${this.comicId}/${chapterId}`;
+              },
+              getScanThumbnail(pages) {
+                // Return the first scan image for the chapter (from assets/pages)
+                if (pages && pages.length > 0) {
+                  return pages[0];
+                }
+                // Fallback image if no scan exists
+                return '/assets/img/cover/placeholder.jpg';
+              }
+            },
           </li>
         </ul>
       </section>
