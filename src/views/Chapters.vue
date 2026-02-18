@@ -57,32 +57,6 @@
   </div>
 </template>
 
-<script>
-import { useComicsStore } from '../stores/comics'
-import Footer from '../components/Footer.vue'
-
-export default {
-  name: 'Chapters',
-  components: {
-    Footer
-  },
-  data() {
-    return {
-      comicId: this.$route.params.id,
-      comic: null
-    }
-  },
-  async mounted() {
-    const comicsStore = useComicsStore()
-    const result = await comicsStore.fetchComicById(this.comicId)
-    if (!result) {
-      this.error = "BD introuvable. Vérifiez l'URL ou choisissez une autre histoire.";
-    } else {
-      this.comic = result
-    }
-  }
-}
-</script>
 
 <style scoped>
 .chapters-page {
