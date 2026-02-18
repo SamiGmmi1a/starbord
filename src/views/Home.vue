@@ -2,17 +2,23 @@
   <div class="home-page">
     <Hero />
     <div class="bd-grid">
-      <div class="bd-card" v-for="comic in bdComics" :key="comic.id">
+      <router-link
+        class="bd-card"
+        v-for="comic in bdComics"
+        :key="comic.id"
+        :to="comic.title === 'Détenu 278' ? '/chapters/detenu278' : (comic.title === 'Figé dans l\'acier' ? '/chapters/fige_dans_lacier' : '/')"
+        style="text-decoration: none; color: inherit;"
+      >
         <img :src="comic.cover" :alt="comic.title" class="bd-img" />
         <div class="bd-info">
           <h3 class="bd-title">{{ comic.title }}</h3>
           <p class="bd-author">Par {{ comic.author }}</p>
           <p class="bd-chapters">{{ comic.chapters }} chapitre(s)</p>
         </div>
-        <button class="fav-btn" :class="{ active: comic.fav }" @click="toggleFav(comic)">
+        <button class="fav-btn" :class="{ active: comic.fav }" @click.stop="toggleFav(comic)">
           <span v-if="comic.fav">★</span><span v-else>☆</span>
         </button>
-      </div>
+      </router-link>
     </div>
     <!-- Section Boutique -->
     <section class="shop-section">

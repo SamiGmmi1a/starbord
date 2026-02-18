@@ -21,22 +21,37 @@
           <p class="comic-title-author">par {{ comic.author }}</p>
         </div>
 
+
+        <div class="comic-story-block">
+          <h3 class="comic-story-title">Histoire</h3>
+          <p class="comic-story-text">{{ comic.description || 'Pas de description disponible.' }}</p>
+        </div>
         <div class="comic-info">
           <p><strong>Auteur :</strong> {{ comic.author }}</p>
           <p><strong>Chapitres :</strong> {{ comic.chapters }}</p>
         </div>
 
         <ul class="chapter-list">
-          <li 
-            v-for="chapter in Object.keys(comic.chapters)" 
-            :key="chapter"
-            class="chapter-item"
+          <li
+            v-for="chapterId in Object.keys(comic.chapters)"
+            :key="chapterId"
+            class="chapter-item chapter-item-flex"
           >
-            <router-link 
-              :to="`/reader/${comicId}/${chapter}`"
-              class="chapter-link"
+            <router-link
+              :to="`/reader/${comicId}/${chapterId}`"
+              class="chapter-link chapter-link-flex"
             >
-              Chapitre {{ chapter }}
+              <img
+                v-if="comic.chapters[chapterId].pages && comic.chapters[chapterId].pages.length > 0"
+                :src="comic.chapters[chapterId].pages[0]"
+                :alt="comic.chapters[chapterId].title || 'Chapitre ' + chapterId"
+                class="chapter-thumb"
+              />
+              <div class="chapter-link-info">
+                <div class="chapter-link-title">
+                  {{ comic.chapters[chapterId].title || ('Chapitre ' + chapterId) }}
+                </div>
+              </div>
             </router-link>
           </li>
         </ul>
@@ -57,6 +72,33 @@
   </div>
 </template>
 
+<script>
+import { useComicsStore } from '../stores/comics'
+import Footer from '../components/Footer.vue'
+
+export default {
+  name: 'Chapters',
+  components: {
+    Footer
+  },
+  data() {
+    return {
+      comicId: this.$route.params.id,
+      comic: null,
+      error: null
+    }
+  },
+  async mounted() {
+    const comicsStore = useComicsStore()
+    const result = await comicsStore.fetchComicById(this.comicId)
+    if (!result) {
+      this.error = "BD introuvable. Vérifiez l'URL ou choisissez une autre histoire.";
+    } else {
+      this.comic = result
+    }
+  }
+}
+</script>
 
 <style scoped>
 .chapters-page {
@@ -177,15 +219,19 @@
   list-style: none;
   padding: 0;
   margin: 0;
-}
 
+}
 .chapter-item {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
-
+.chapter-item-flex {
+  display: flex;
+  align-items: center;
+}
 .chapter-link {
-  display: block;
-  padding: 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 1.2rem;
   background: var(--bg-card);
   color: var(--text-primary);
   text-decoration: none;
@@ -194,13 +240,55 @@
   border-left: 4px solid var(--primary);
   transition: var(--transition);
   font-weight: 600;
+  min-height: 90px;
+  gap: 1.2rem;
 }
-
 .chapter-link:hover {
   background: rgba(0, 168, 255, 0.08);
   border-color: var(--primary);
-  padding-left: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 168, 255, 0.2);
+}
+.chapter-link-flex {
+  display: flex;
+  align-items: center;
+}
+.chapter-thumb {
+  width: 70px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 1.2rem;
+  background: #181b22;
+  border: 1px solid var(--border);
+}
+.chapter-link-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.chapter-link-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+
+}
+.comic-story-block {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem 1.2rem 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+}
+.comic-story-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+.comic-story-text {
+  color: var(--text-primary);
+  font-size: 1.08rem;
+  line-height: 1.6;
 }
 
 .loading {
