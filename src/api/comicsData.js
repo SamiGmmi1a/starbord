@@ -7,31 +7,33 @@ export const comicsData = {
     id: 'bd1',
     title: 'Détenu 278',
     author: 'FÉNIX',
-    chapters: 1,
     cover: '/assets/img/cover/detenu278-cover.jpg',
     description: 'Une histoire captivante de suspense et de rédemption',
-    chapters_list: {
-      1: [
-        '/assets/pages/detenu278/001.jpg',
-        '/assets/pages/detenu278/002.jpg',
-        '/assets/pages/detenu278/003.jpg',
-        '/assets/pages/detenu278/004.jpg',
-        '/assets/pages/detenu278/005.jpg',
-        '/assets/pages/detenu278/006.jpg',
-        '/assets/pages/detenu278/007.jpg',
-        '/assets/pages/detenu278/008.jpg',
-        '/assets/pages/detenu278/009.jpg',
-        '/assets/pages/detenu278/010.jpg',
-        '/assets/pages/detenu278/011.jpg',
-        '/assets/pages/detenu278/012.jpg',
-        '/assets/pages/detenu278/013.jpg',
-        '/assets/pages/detenu278/014.jpg',
-        '/assets/pages/detenu278/015.jpg',
-        '/assets/pages/detenu278/016.jpg',
-        '/assets/pages/detenu278/017.jpg',
-        '/assets/pages/detenu278/018.jpg',
-        '/assets/pages/detenu278/019.jpg'
-      ]
+    chapters: {
+      1: {
+        title: 'Chapitre 1',
+        pages: [
+          '/assets/pages/detenu278/001.jpg',
+          '/assets/pages/detenu278/002.jpg',
+          '/assets/pages/detenu278/003.jpg',
+          '/assets/pages/detenu278/004.jpg',
+          '/assets/pages/detenu278/005.jpg',
+          '/assets/pages/detenu278/006.jpg',
+          '/assets/pages/detenu278/007.jpg',
+          '/assets/pages/detenu278/008.jpg',
+          '/assets/pages/detenu278/009.jpg',
+          '/assets/pages/detenu278/010.jpg',
+          '/assets/pages/detenu278/011.jpg',
+          '/assets/pages/detenu278/012.jpg',
+          '/assets/pages/detenu278/013.jpg',
+          '/assets/pages/detenu278/014.jpg',
+          '/assets/pages/detenu278/015.jpg',
+          '/assets/pages/detenu278/016.jpg',
+          '/assets/pages/detenu278/017.jpg',
+          '/assets/pages/detenu278/018.jpg',
+          '/assets/pages/detenu278/019.jpg'
+        ]
+      }
     }
   },
 
@@ -39,27 +41,29 @@ export const comicsData = {
     id: 'bd2',
     title: 'Figé dans l\'acier',
     author: 'FÉNIX',
-    chapters: 1,
     cover: '/assets/img/cover/fige_dans_lacier-cover.jpg',
     description: 'Une aventure épique dans un monde de science-fiction',
-    chapters_list: {
-      1: [
-        '/assets/pages/fige_dans_lacier/001.png',
-        '/assets/pages/fige_dans_lacier/002.png',
-        '/assets/pages/fige_dans_lacier/003.png',
-        '/assets/pages/fige_dans_lacier/004.png',
-        '/assets/pages/fige_dans_lacier/005.png',
-        '/assets/pages/fige_dans_lacier/006.png',
-        '/assets/pages/fige_dans_lacier/007.png',
-        '/assets/pages/fige_dans_lacier/008.png',
-        '/assets/pages/fige_dans_lacier/009.png',
-        '/assets/pages/fige_dans_lacier/010.png',
-        '/assets/pages/fige_dans_lacier/011.png',
-        '/assets/pages/fige_dans_lacier/012.png',
-        '/assets/pages/fige_dans_lacier/013.png',
-        '/assets/pages/fige_dans_lacier/014.png',
-        '/assets/pages/fige_dans_lacier/015.png'
-      ]
+    chapters: {
+      1: {
+        title: 'Chapitre 1',
+        pages: [
+          '/assets/pages/fige_dans_lacier/001.png',
+          '/assets/pages/fige_dans_lacier/002.png',
+          '/assets/pages/fige_dans_lacier/003.png',
+          '/assets/pages/fige_dans_lacier/004.png',
+          '/assets/pages/fige_dans_lacier/005.png',
+          '/assets/pages/fige_dans_lacier/006.png',
+          '/assets/pages/fige_dans_lacier/007.png',
+          '/assets/pages/fige_dans_lacier/008.png',
+          '/assets/pages/fige_dans_lacier/009.png',
+          '/assets/pages/fige_dans_lacier/010.png',
+          '/assets/pages/fige_dans_lacier/011.png',
+          '/assets/pages/fige_dans_lacier/012.png',
+          '/assets/pages/fige_dans_lacier/013.png',
+          '/assets/pages/fige_dans_lacier/014.png',
+          '/assets/pages/fige_dans_lacier/015.png'
+        ]
+      }
     }
   }
 };
@@ -128,7 +132,7 @@ export const shopProducts = [
  */
 export function getChapterCount(comicId) {
   const comic = comicsData[comicId];
-  return comic ? Object.keys(comic.chapters_list).length : 0;
+  return comic && comic.chapters ? Object.keys(comic.chapters).length : 0;
 }
 
 /**
@@ -136,8 +140,8 @@ export function getChapterCount(comicId) {
  */
 export function getChapterPages(comicId, chapterId) {
   const comic = comicsData[comicId];
-  if (!comic) return [];
-  return comic.chapters_list[chapterId] || [];
+  if (!comic || !comic.chapters || !comic.chapters[chapterId]) return [];
+  return comic.chapters[chapterId].pages || [];
 }
 
 /**

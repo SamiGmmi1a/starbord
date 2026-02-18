@@ -1,12 +1,5 @@
 <template>
   <div class="chapters-page">
-    <header class="site-header">
-      <div class="header-inner">
-        <router-link to="/" class="close-btn">✕</router-link>
-        <router-link to="/" class="logo">STARBORD</router-link>
-        <div class="spacer"></div>
-      </div>
-    </header>
 
     <div class="chapter-layout" v-if="comic">
       <!-- Colonne gauche : image fixe -->
@@ -14,64 +7,11 @@
         <img :src="comic.cover" :alt="comic.title" class="comic-cover-img">
       </aside>
 
-      <!-- Colonne droite : chapitres -->
-      <section class="chapter-panel">
-        <div class="comic-header">
-          <h2 class="comic-title-name">{{ comic.title }}</h2>
-          <p class="comic-title-author">par {{ comic.author }}</p>
-        </div>
-
-
-        <div class="comic-story-block">
-          <h3 class="comic-story-title">Histoire</h3>
-          <p class="comic-story-text">{{ comic.description || 'Pas de description disponible.' }}</p>
-        </div>
-        <div class="comic-info">
-          <p><strong>Auteur :</strong> {{ comic.author }}</p>
-          <p><strong>Chapitres :</strong> {{ comic.chapters }}</p>
-        </div>
-
-        <ul class="chapter-list">
-          <li
-            v-for="chapterId in Object.keys(comic.chapters)"
-            :key="chapterId"
-            class="chapter-item chapter-item-flex"
-          >
-            <router-link
-              :to="getReaderLink(chapterId)"
-              class="chapter-link chapter-link-flex"
-            >
-              <img
-                v-if="comic.chapters[chapterId].pages && comic.chapters[chapterId].pages.length > 0"
-                :src="getScanThumbnail(comic.chapters[chapterId].pages)"
-                :alt="comic.chapters[chapterId].title || 'Chapitre ' + chapterId"
-                class="chapter-thumb"
-              />
-              <div class="chapter-link-info">
-                <div class="chapter-link-title">
-                  {{ comic.chapters[chapterId].title || ('Chapitre ' + chapterId) }}
-                </div>
-              </div>
-            </router-link>
-            methods: {
-              getReaderLink(chapterId) {
-                // Always route to Reader.vue with correct comic and chapter
-                return `/reader/${this.comicId}/${chapterId}`;
-              },
-              getScanThumbnail(pages) {
-                // Return the first scan image for the chapter (from assets/pages)
-                if (pages && pages.length > 0) {
-                  return pages[0];
-                }
-                // Fallback image if no scan exists
-                return '/assets/img/cover/placeholder.jpg';
-              }
-            },
-          </li>
-        </ul>
-      </section>
+    <div class="chapter-layout" v-if="comic">
+      <aside class="chapter-cover">
+        <img :src="comic.cover" :alt="comic.title" class="comic-cover-img" />
+      </aside>
     </div>
-
     <div v-else>
       <div v-if="error" class="error-message">
         <p>{{ error }}</p>
@@ -81,20 +21,15 @@
         <p>Chargement...</p>
       </div>
     </div>
-
-    <Footer />
+  </div>
   </div>
 </template>
 
 <script>
 import { useComicsStore } from '../stores/comics'
-import Footer from '../components/Footer.vue'
 
 export default {
-  name: 'Chapters',
-  components: {
-    Footer
-  },
+
   data() {
     return {
       comicId: this.$route.params.id,
@@ -104,11 +39,27 @@ export default {
   },
   async mounted() {
     const comicsStore = useComicsStore()
-    const result = await comicsStore.fetchComicById(this.comicId)
+    let result = null
+    // 1. Try API
+    try {
+      result = await comicsStore.fetchComicById(this.comicId)
+    } catch (e) {
+      result = null
+    }
+    // 2. Always fallback to local static data if API fails or returns nothing
+    if (!result) {
+      try {
+        const localData = await import('../api/comicsData.js')
+        result = localData.getComic(this.comicId)
+      } catch (e) {
+        result = null
+      }
+    }
     if (!result) {
       this.error = "BD introuvable. Vérifiez l'URL ou choisissez une autre histoire.";
     } else {
       this.comic = result
+      this.error = null
     }
   }
 }
@@ -154,9 +105,6 @@ export default {
 }
 
 .logo {
-  font-family: var(--font-title);
-  font-size: 1.5rem;
-  font-weight: 700;
   color: var(--text-primary);
   text-decoration: none;
 }
