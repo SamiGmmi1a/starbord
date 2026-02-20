@@ -1,21 +1,34 @@
 <template>
   <div class="home-page">
     <Hero />
-    <div class="bd-search-bar">
-      <input
-        v-model="searchQuery"
-        type="search"
-        class="bd-search-input"
-        placeholder="Rechercher une histoire..."
-        aria-label="Recherche"
-      />
-      <span class="bd-search-icon">
-        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="9" cy="9" r="7" stroke="#a9c7ff" stroke-width="2"/>
-          <line x1="14.4142" y1="14" x2="18" y2="17.5858" stroke="#a9c7ff" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </span>
+
+
+    <div class="bd-toolbar">
+      <div class="bd-search-bar">
+        <input
+          v-model="searchQuery"
+          type="search"
+          class="bd-search-input"
+          placeholder="Rechercher une histoire..."
+          aria-label="Recherche"
+        />
+        <span class="bd-search-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="9" r="7" stroke="#a9c7ff" stroke-width="2"/>
+            <line x1="14.4142" y1="14" x2="18" y2="17.5858" stroke="#a9c7ff" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </div>
+      <div class="bd-filter-bar">
+        <span class="bd-filter-label">Trier par genre :</span>
+        <a href="#" :class="['bd-filter-link', { active: selectedGenre === '' }]" @click.prevent="selectedGenre = ''">Tous</a>
+        <a href="#" :class="['bd-filter-link', { active: selectedGenre === 'Action' }]" @click.prevent="selectedGenre = 'Action'">Action</a>
+        <a href="#" :class="['bd-filter-link', { active: selectedGenre === 'Aventure' }]" @click.prevent="selectedGenre = 'Aventure'">Aventure</a>
+        <a href="#" :class="['bd-filter-link', { active: selectedGenre === 'Science-fiction' }]" @click.prevent="selectedGenre = 'Science-fiction'">Science-fiction</a>
+      </div>
     </div>
+
+
     <div class="bd-grid">
       <router-link
         class="bd-card"
@@ -80,7 +93,9 @@ export default {
           author: 'Fénix',
           chapters: 5,
           cover: '/assets/img/cover/detenu278-cover.jpg',
-          fav: false
+          fav: false,
+          genre: 'Action'
+
         },
         {
           id: 'bd2',
@@ -88,7 +103,8 @@ export default {
           author: 'Fénix',
           chapters: 4,
           cover: "/assets/img/cover/fige_dans_lacier-cover.jpg",
-          fav: false
+          fav: false,
+          genre: 'Science-fiction'
         }
       ],
       shopProducts: [
@@ -101,7 +117,8 @@ export default {
         { id: 'prod7', title: "Figé dans l'acier Int", img: "/assets/img/produits/fige_dans_l'acier_int.jpg", link: '/boutique/fige_dans_l_acier_int' },
         { id: 'prod8', title: 'Fonce crois en toi', img: '/assets/img/produits/fonce_crois_en_toi.jpg', link: '/boutique/fonce_crois_en_toi' }
       ],
-      searchQuery: ''
+      searchQuery: '',
+      selectedGenre: '',
     }
   },
   methods: {
@@ -121,14 +138,14 @@ export default {
     }
   },
   computed: {
-    filteredComics() {
-      if (!this.searchQuery) return this.bdComics
+        filteredComics() {
       const normalize = str => str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
       const q = normalize(this.searchQuery)
-      return this.bdComics.filter(comic =>
-        normalize(comic.title).includes(q) ||
-        normalize(comic.author).includes(q)
-      )
+      return this.bdComics.filter(comic => {
+        const matchSearch = !q || normalize(comic.title).includes(q) || normalize(comic.author).includes(q)
+        const matchGenre = !this.selectedGenre || (comic.genre && comic.genre.toLowerCase() === this.selectedGenre.toLowerCase())
+        return matchSearch && matchGenre
+      })
     }
   },
   methods: {
@@ -359,7 +376,6 @@ export default {
 /* Barre de recherche BD */
 .bd-search-bar {
   max-width: 600px;
-  margin: 2.5rem auto 1.5rem auto;
   position: relative;
   display: flex;
   align-items: center;
@@ -391,5 +407,45 @@ export default {
   align-items: center;
   justify-content: center;
   z-index: 2;
+}
+
+.bd-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 5rem auto 1.5rem auto;
+  gap: 2rem;
+}
+.bd-search-bar {
+  flex: 1 1 60%;
+  max-width: 600px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.bd-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.bd-filter-label {
+  color: #b3b3b3;
+  font-size: 1.05rem;
+  margin-right: 0.5rem;
+}
+.bd-filter-link {
+  color: #a9c7ff;
+  font-size: 1.08rem;
+  text-decoration: none;
+  margin: 0 0.3rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+}
+.bd-filter-link:hover {
+  color: #fff;
 }
 </style>
