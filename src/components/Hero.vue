@@ -184,19 +184,7 @@ export default {
   height: 100%;
   pointer-events: none;
 }
-.hero-text-bg {
-  background: rgba(15,17,22,0.85);
-  padding: 3.5rem 2.5rem 2rem 3.5rem;
-  border-radius: 0 0 0 2.5rem;
-  max-width: 520px;
-  margin-bottom: 0;
-  margin-left: 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  pointer-events: auto;
-}
+
 .hero-title {
   font-family: var(--font-title);
   font-size: 3.2rem;
@@ -212,9 +200,14 @@ export default {
   font-weight: 400;
 }
 .hero-text-bg {
-  background: linear-gradient(90deg, var(--bg) 75%, transparent 100%);
+  background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.85) 40%,
+      rgba(0, 0, 0, 0.4) 75%,
+      rgba(0, 0, 0, 0) 100%
+  );
   padding: 3.5rem 25rem 2rem 3.5rem;
-  border-radius: 0 0 0 2.5rem;
   max-width: 750px;
   margin-bottom: 0;
   margin-left: 0;
@@ -247,8 +240,8 @@ export default {
   display: inline-block;
   background: #fff;
   color: #0F1116;
-  border-radius: 999px;
-  padding: 0.7rem 1.7rem;
+  border-radius: 250px;
+  padding: 1rem 3rem;
   font-size: 1.08rem;
   font-weight: 700;
   text-decoration: none;
@@ -268,8 +261,9 @@ export default {
   pointer-events: auto;
 }
 .hero-btn:hover {
-  background: #2563eb;
+  background: #0c0f1479;
   color: #fff;
+  border: 1px solid #46546F;
 }
 
 @media (max-width: 768px) {

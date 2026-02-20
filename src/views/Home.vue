@@ -43,9 +43,14 @@
           <p class="bd-author">Par {{ comic.author }}</p>
           <p class="bd-chapters">{{ comic.chapters }} chapitre(s)</p>
         </div>
-        <button class="fav-btn" :class="{ active: comic.fav }" @click.stop="toggleFav(comic)">
-          <span v-if="comic.fav">★</span><span v-else>☆</span>
-        </button>
+        
+         <!-- étoile en dehors du bloc principal -->
+  <div class="bd-card-fav-row">
+    <button class="fav-btn" :class="{ active: comic.fav }" @click.stop="toggleFav(comic)">
+      <span v-if="comic.fav">★</span><span v-else>☆</span>
+    </button>
+  </div>
+
       </router-link>
     </div>
     <!-- Section Boutique -->
@@ -123,7 +128,7 @@ export default {
   },
   methods: {
     toggleFav(comic) {
-      comic.fav = !comic.fav
+      comic.fav = !comic.fav;
     },
     hasComic(id) {
       const comicsStore = useComicsStore()
@@ -297,7 +302,6 @@ export default {
     border: 2px solid rgba(255,255,255,0.13);
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 1.5rem 1rem 1rem 1rem;
     position: relative;
     transition: transform 0.18s, border-color 0.18s;
@@ -321,8 +325,9 @@ export default {
   }
 
   .bd-info {
-    text-align: center;
+    text-align: left;
     margin-bottom: 0.7rem;
+    margin-left: 0.5rem;
   }
 
   .bd-title {
@@ -344,19 +349,32 @@ export default {
     margin: 0;
   }
 
-  .fav-btn {
-    position: absolute;
-    top: 14px;
-    right: 18px;
-    background: none;
-    border: none;
-    font-size: 1.7rem;
-    color: #fff;
-    cursor: pointer;
-    transition: color 0.2s;
-    padding: 0;
-    line-height: 1;
-  }
+    .fav-btn {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      color: #fff;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 0;
+      line-height: 1;
+      z-index: 2;
+      font-weight: 400;
+      /* Bord plus fin pour l'étoile non active */
+    }
+    .fav-btn span {
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      /* Pour étoile vide, bord plus fin */
+      -webkit-text-stroke: 1px #fff;
+    }
+    .fav-btn.active span {
+      -webkit-text-stroke: 0;
+    }
   .fav-btn.active,
   .fav-btn:hover {
     color: #FFD700;
@@ -448,4 +466,37 @@ export default {
 .bd-filter-link:hover {
   color: #fff;
 }
+
+.bd-card-fav-row {
+  width: 100%;
+  display: flex;
+  margin-top: 0.7rem;
+  margin-bottom: 0.2rem;
+}
+
+.fav-btn {
+  position: static !important;
+  font-size: 1.15rem;
+  color: #b3b3b3;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0;
+  line-height: 1;
+  font-weight: 400;
+  -webkit-text-stroke: 1px #b3b3b3;
+}
+
+.fav-btn.active {
+  color: #FFD700;
+  -webkit-text-stroke: 0;
+}
+
+.fav-btn span {
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
 </style>
