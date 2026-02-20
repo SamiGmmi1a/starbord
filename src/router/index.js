@@ -36,7 +36,7 @@ const routes = [
     redirect: '/'
   }
 ]
-
+ 
 const router = createRouter({
   history: createWebHistory(),
   routes

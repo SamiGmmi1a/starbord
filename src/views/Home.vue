@@ -178,6 +178,29 @@ export default {
 </script>
 
 <style scoped>
+          .admin-access-btn-row {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 2.5rem 0 1.5rem 0;
+          }
+          .admin-access-btn {
+            background: #2563eb;
+            color: #fff;
+            border-radius: 999px;
+            padding: 0.7rem 2.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 2px 12px rgba(0,168,255,0.18);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+          }
+          .admin-access-btn:hover {
+            background: #181b22;
+            color: #a9c7ff;
+          }
         .shop-choose-btn {
           width: 100%;
           background: #fff;
