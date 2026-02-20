@@ -19,22 +19,12 @@
 
     <div class="hero-gradient"></div>
 
-    <div class="carousel-text">
-      <div class="text-content active">
-        <div class="text-title">STARBORD</div>
-        <div class="text-subtitle">inspirer à rêver grand à travers des illustrations incroyables</div>
-      </div>
-    </div>
-
-    <button class="scroll-to-shop" aria-label="Descendre vers la boutique" title="Descendre vers la boutique" @click="scrollToShop">
-      DÉCOUVRIR
-    </button>
 
     <div class="hero-content">
-      <div class="hero-text">
-        <h1>STARBORD</h1>
-        <p>Des bandes dessinées conçues pour inspirer à rêver grand.</p>
-        <a href="#shop" class="hero-btn">Découvrir</a>
+      <div class="hero-text-bg">
+        <h1 class="hero-title">STARBORD</h1>
+        <p class="hero-subtitle">inspirer à rêver grand à travers des illustrations incroyables</p>
+        <a href="#shop" class="hero-btn">DÉCOUVRIR</a>
       </div>
     </div>
   </section>
@@ -96,27 +86,35 @@ export default {
   background: linear-gradient(135deg, var(--bg-dark), var(--bg));
   overflow: hidden;
   padding-bottom: 2rem;
-}
-
-.carousel-container {
+.hero {
   position: relative;
   width: 100%;
-  height: 340px;
+  min-height: 420px;
+  background: linear-gradient(135deg, var(--bg-dark), var(--bg));
+  overflow: hidden;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+.carousel-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  z-index: 1;
   overflow: hidden;
 }
-
-.carousel-slide {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  opacity: 0;
-  transition: opacity 0.7s;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.hero-img {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
-.carousel-slide.active {
-  opacity: 1;
   z-index: 2;
 }
 
@@ -185,36 +183,58 @@ export default {
 
 .hero-content {
   position: absolute;
-  left: 0; right: 0; bottom: 0;
+  left: 0; top: 0; bottom: 0;
+  right: 0;
   z-index: 6;
-  text-align: center;
-  padding-bottom: 1.5rem;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  pointer-events: none;
 }
-.hero-text h1 {
+.hero-text-bg {
+  background: rgba(15,17,22,0.85);
+  padding: 3.5rem 2.5rem 2rem 3.5rem;
+  border-radius: 0 0 0 2.5rem;
+  max-width: 520px;
+  margin-bottom: 0;
+  margin-left: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  pointer-events: auto;
+}
+.hero-title {
   font-family: var(--font-title);
-  font-size: 2.5rem;
-  color: var(--text-primary);
-  margin: 0 0 0.5rem;
+  font-size: 3.2rem;
+  color: #fff;
+  font-weight: 800;
+  margin: 0 0 1.2rem 0;
+  letter-spacing: 1px;
 }
-.hero-text p {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  margin: 0 0 1.2rem;
+.hero-subtitle {
+  color: #fff;
+  font-size: 1.35rem;
+  margin: 0 0 2.2rem 0;
+  font-weight: 400;
 }
 .hero-btn {
   display: inline-block;
-  background: var(--primary);
-  color: #fff;
+  background: #fff;
+  color: #0F1116;
   border-radius: 999px;
-  padding: 0.7rem 2.2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.18rem;
+  font-weight: 700;
   text-decoration: none;
   box-shadow: 0 2px 12px rgba(0,168,255,0.18);
   transition: var(--transition);
+  margin-top: 0.5rem;
+  pointer-events: auto;
 }
 .hero-btn:hover {
-  background: var(--primary-dark);
+  background: #2563eb;
+  color: #fff;
 }
 
 @media (max-width: 768px) {
