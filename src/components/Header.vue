@@ -3,17 +3,7 @@
     <div class="container header-inner">
       <router-link to="/" class="logo">STARBORD</router-link>
       <div class="spacer"></div>
-      
-      <div class="search">
-        <input 
-          v-model="searchQuery" 
-          type="search" 
-          placeholder="Rechercher un titre, auteur..." 
-          aria-label="Recherche"
-          @keyup="handleSearch"
-        >
-      </div>
-      
+
       <router-link 
         v-if="!isLoggedIn" 
         to="/login" 
@@ -33,10 +23,9 @@ import { useAuthStore } from '../stores/auth'
 
 export default {
   name: 'Header',
+  // plus de prop hideSearch
   data() {
-    return {
-      searchQuery: ''
-    }
+    return {}
   },
   computed: {
     isLoggedIn() {
@@ -45,9 +34,6 @@ export default {
     }
   },
   methods: {
-    handleSearch() {
-      this.$emit('search', this.searchQuery)
-    },
     logout() {
       const authStore = useAuthStore()
       authStore.logout()

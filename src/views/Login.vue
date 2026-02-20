@@ -2,10 +2,8 @@
   <div class="login-page">
     <div class="login-wrapper">
       <div class="login-card">
-        <div class="login-header-back">
-          <router-link to="/" class="login-back">← Retour</router-link>
-        </div>
-
+         <button class="login-back" @click="$router.back()">← Retour</button>
+         
         <div class="login-header">
           <h2>STARBORD</h2>
           <p>Connectez vous pour avoir accès aux chapitres complets</p>

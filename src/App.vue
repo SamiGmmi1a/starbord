@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <Header v-if="showHeaderFooter" />
+    <Header v-if="showHeaderFooter" :hideSearch="$route.name === 'Chapters'" />
     <router-view />
     <Footer v-if="showHeaderFooter" />
   </div>
@@ -21,7 +21,7 @@ export default {
   computed: {
     showHeaderFooter() {
       // Utilise le nom de la route (à adapter si besoin)
-      const noHeaderFooter = ['Login', 'Legal', 'Chapters', 'Reader']
+      const noHeaderFooter = ['Login', 'Legal', 'Reader']
       return !noHeaderFooter.includes(this.$route.name)
     }
   },

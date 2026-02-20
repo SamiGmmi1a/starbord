@@ -1,10 +1,25 @@
 <template>
   <div class="home-page">
     <Hero />
+    <div class="bd-search-bar">
+      <input
+        v-model="searchQuery"
+        type="search"
+        class="bd-search-input"
+        placeholder="Rechercher une histoire..."
+        aria-label="Recherche"
+      />
+      <span class="bd-search-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="9" cy="9" r="7" stroke="#a9c7ff" stroke-width="2"/>
+          <line x1="14.4142" y1="14" x2="18" y2="17.5858" stroke="#a9c7ff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </div>
     <div class="bd-grid">
       <router-link
         class="bd-card"
-        v-for="comic in bdComics"
+        v-for="comic in filteredComics"
         :key="comic.id"
         :to="comic.title === 'Détenu 278' ? '/chapters/detenu278' : (comic.title === 'Figé dans l\'acier' ? '/chapters/fige_dans_lacier' : '/')"
         style="text-decoration: none; color: inherit;"
@@ -56,9 +71,6 @@ export default {
   components: {
     Hero
   },
-
-
-
   data() {
     return {
       bdComics: [
@@ -88,21 +100,35 @@ export default {
         { id: 'prod6', title: "Figé dans l'acier", img: "/assets/img/produits/pensez_grand.jpg", link: '/boutique/fige_dans_l_acier' },
         { id: 'prod7', title: "Figé dans l'acier Int", img: "/assets/img/produits/fige_dans_l'acier_int.jpg", link: '/boutique/fige_dans_l_acier_int' },
         { id: 'prod8', title: 'Fonce crois en toi', img: '/assets/img/produits/fonce_crois_en_toi.jpg', link: '/boutique/fonce_crois_en_toi' }
-      ]
+      ],
+      searchQuery: ''
     }
   },
   methods: {
     toggleFav(comic) {
       comic.fav = !comic.fav
+    },
+    hasComic(id) {
+      const comicsStore = useComicsStore()
+      return comicsStore.comics.some(comic => comic.id === id)
+    },
+    getImagePath(fileName) {
+      // Special case for fige_dans_l_acier to use the apostrophe in filename
+      if (fileName === 'fige_dans_l_acier') {
+        return `/assets/img/produits/fige_dans_l'acier.jpg`
+      }
+      return `/assets/img/produits/${fileName}.jpg`
     }
   },
   computed: {
-    displayedComics() {
-      const comicsStore = useComicsStore()
-      return comicsStore.comics
-    },
-    otherProducts() {
-      return this.allProducts
+    filteredComics() {
+      if (!this.searchQuery) return this.bdComics
+      const normalize = str => str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
+      const q = normalize(this.searchQuery)
+      return this.bdComics.filter(comic =>
+        normalize(comic.title).includes(q) ||
+        normalize(comic.author).includes(q)
+      )
     }
   },
   methods: {
@@ -330,4 +356,40 @@ export default {
       gap: 1.2rem;
     }
   }
+/* Barre de recherche BD */
+.bd-search-bar {
+  max-width: 600px;
+  margin: 2.5rem auto 1.5rem auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.bd-search-input {
+  width: 100%;
+  padding: 0.85rem 2.5rem 0.85rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  color: var(--text-primary);
+  font-size: 1.08rem;
+  transition: var(--transition);
+  outline: none;
+}
+.bd-search-input:focus {
+  border-color: var(--primary);
+  background: rgba(0, 168, 255, 0.08);
+  box-shadow: 0 0 12px rgba(0, 168, 255, 0.2);
+}
+.bd-search-icon {
+  position: absolute;
+  right: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
 </style>
