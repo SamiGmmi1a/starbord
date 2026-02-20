@@ -17,15 +17,15 @@
       </div>
     </div>
 
-    <div class="hero-gradient"></div>
 
 
     <div class="hero-content">
       <div class="hero-text-bg">
+        <div class="hero-text-fade"></div>
         <h1 class="hero-title">STARBORD</h1>
         <p class="hero-subtitle">inspirer à rêver grand à travers des illustrations incroyables</p>
-        <a href="#shop" class="hero-btn">DÉCOUVRIR</a>
       </div>
+      <button class="hero-btn hero-btn-absolute" @click="scrollToShop">DÉCOUVRIR</button>
     </div>
   </section>
 </template>
@@ -69,9 +69,10 @@ export default {
       }, 5000)
     },
     scrollToShop() {
-      const shopSection = document.querySelector('#shop')
+      // Scroll to the first .shop-grid section
+      const shopSection = document.querySelector('.shop-grid');
       if (shopSection) {
-        shopSection.scrollIntoView({ behavior: 'smooth' })
+        shopSection.scrollIntoView({ behavior: 'smooth' });
       }
     }
   }
@@ -131,14 +132,6 @@ export default {
   object-fit: cover;
   border-radius: var(--radius);
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-}
-
-.hero-gradient {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 120px;
-  background: linear-gradient(0deg, var(--bg) 60%, transparent 100%);
-  z-index: 3;
 }
 
 .carousel-text {
@@ -218,18 +211,60 @@ export default {
   margin: 0 0 2.2rem 0;
   font-weight: 400;
 }
+.hero-text-bg {
+  background: linear-gradient(90deg, var(--bg) 75%, transparent 100%);
+  padding: 3.5rem 25rem 2rem 3.5rem;
+  border-radius: 0 0 0 2.5rem;
+  max-width: 750px;
+  margin-bottom: 0;
+  margin-left: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  pointer-events: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title, .hero-subtitle, .hero-btn {
+  position: relative;
+  z-index: 2;
+}
+.hero-content {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  right: 0;
+  z-index: 6;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  pointer-events: none;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 .hero-btn {
   display: inline-block;
   background: #fff;
   color: #0F1116;
   border-radius: 999px;
-  padding: 0.9rem 2.5rem;
-  font-size: 1.18rem;
+  padding: 0.7rem 1.7rem;
+  font-size: 1.08rem;
   font-weight: 700;
   text-decoration: none;
   box-shadow: 0 2px 12px rgba(0,168,255,0.18);
   transition: var(--transition);
   margin-top: 0.5rem;
+  pointer-events: auto;
+  border: none;
+  cursor: pointer;
+}
+.hero-btn-absolute {
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  z-index: 20;
   pointer-events: auto;
 }
 .hero-btn:hover {
