@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('auth', {
         const response = await fetch('/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, accessCode })
+          body: JSON.stringify({ email, code: accessCode })
         })
 
         if (!response.ok) {

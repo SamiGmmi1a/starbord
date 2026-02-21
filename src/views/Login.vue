@@ -12,7 +12,8 @@
         <div class="login-form">
           <input v-model="email" type="email" placeholder="Votre email" required>
           <input v-model="code" type="text" placeholder="Code d’identification" required>
-          <button @click.prevent="login">Se connecter</button>
+          <button class="login-submit" @click.prevent="login">Se connecter</button>
+      
           <div v-if="error" class="error">{{ error }}</div>
         </div>
       </div>
@@ -209,4 +210,29 @@ ease;
     font-size: 1.5rem;
   }
 }
+
+/* Bouton de connexion harmonisé avec le header */
+.login-submit {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 7px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #a9c7ff;
+  background: rgba(80, 140, 255, 0.08);
+  border: 1px solid rgba(120, 170, 255, 0.25);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 12px rgba(80,140,255,0.08);
+}
+.login-submit:hover, .login-submit:focus {
+  color: #fff;
+  background: rgba(80, 140, 255, 0.18);
+  border-color: rgba(150, 190, 255, 0.6);
+  box-shadow: 0 0 12px rgba(80, 140, 255, 0.35);
+}
+
 </style>

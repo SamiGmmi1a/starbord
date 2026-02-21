@@ -1,5 +1,6 @@
 <template>
   <div class="profil-page">
+    <button class="profil-back" @click="$router.back()">← Retour</button>
     <h2>Mon Profil</h2>
     <form @submit.prevent="saveProfile" class="profil-form">
       <div class="form-group">
@@ -15,7 +16,7 @@
         <input type="file" @change="onFileChange">
         <img v-if="photoPreview" :src="photoPreview" class="profile-pic-preview" alt="Aperçu photo" />
       </div>
-      <button type="submit">Enregistrer</button>
+      <button class="profil-submit" type="submit">Enregistrer</button>
       <div v-if="message" class="message">{{ message }}</div>
     </form>
   </div>
@@ -61,6 +62,47 @@ export default {
 </script>
 
 <style scoped>
+/* Bouton Enregistrer moderne */
+/* Bouton Enregistrer harmonisé avec le header */
+.profil-submit {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 7px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #a9c7ff;
+  background: rgba(80, 140, 255, 0.08);
+  border: 1px solid rgba(120, 170, 255, 0.25);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 12px rgba(80,140,255,0.08);
+}
+.profil-submit:hover, .profil-submit:focus {
+  color: #fff;
+  background: rgba(80, 140, 255, 0.18);
+  border-color: rgba(150, 190, 255, 0.6);
+  box-shadow: 0 0 12px rgba(80, 140, 255, 0.35);
+}
+.profil-back {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 6px 12px;
+  font-size: 12px;
+  text-decoration: none;
+  color: #9bbcff;
+  background: rgba(80, 140, 255, 0.08);
+  border: 1px solid rgba(120, 170, 255, 0.2);
+  border-radius: 999px;
+  transition: 0.2s ease;
+}
+.profil-back:hover, .profil-back:focus {
+  background: rgba(80, 140, 255, 0.18);
+  box-shadow: 0 0 4px rgba(0, 168, 255, 0.08);
+  border-color: rgba(140, 180, 255, 0.4);
+}
 .profil-page {
   max-width: 400px;
   margin: 2rem auto;

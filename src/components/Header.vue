@@ -184,26 +184,45 @@ export default {
   .user-info {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.2rem;
+    padding: 4px 0;
+    background: rgba(80,140,255,0.04);
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(80,140,255,0.08);
   }
   .profile-pic {
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid var(--border);
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 8px rgba(80,140,255,0.12);
   }
   .user-name {
-    font-weight: 500;
-    color: var(--text-primary);
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 1.05rem;
+    margin-left: 4px;
   }
   .profile-btn {
-    background: none;
-    border: none;
+    background: rgba(80,140,255,0.08);
+    border: 1px solid rgba(120,170,255,0.18);
     color: var(--primary);
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none;
     font-size: 1rem;
+    border-radius: 999px;
+    padding: 6px 16px;
+    margin-left: 8px;
+    transition: var(--transition);
+    font-weight: 500;
+    box-shadow: 0 0 4px rgba(80,140,255,0.08);
   }
+  .profile-btn:hover, .profile-btn:focus {
+    background: rgba(80,140,255,0.18);
+    border-color: rgba(140,180,255,0.4);
+    color: #fff;
+  }
+  
 
 </style>
