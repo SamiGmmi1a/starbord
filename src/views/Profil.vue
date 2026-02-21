@@ -11,11 +11,7 @@
         <label>Email</label>
         <input v-model="email" type="email" placeholder="Votre email" disabled>
       </div>
-      <div class="form-group">
-        <label>Photo de profil</label>
-        <input type="file" @change="onFileChange">
-        <img v-if="photoPreview" :src="photoPreview" class="profile-pic-preview" alt="Aperçu photo" />
-      </div>
+      <!-- Champ photo de profil supprimé -->
       <button class="profil-submit" type="submit">Enregistrer</button>
       <div v-if="message" class="message">{{ message }}</div>
     </form>
@@ -32,28 +28,15 @@ export default {
     const authStore = useAuthStore()
     const email = authStore.email
     const nomKey = `auth_nom_${email}`
-    const photoKey = `auth_photo_${email}`
     const nom = localStorage.getItem(nomKey) || authStore.nom
-    const photo = localStorage.getItem(photoKey) || authStore.photo
     return {
       nom,
       email,
-      photo,
-      photoPreview: photo,
       message: ''
     }
   },
   methods: {
-    onFileChange(e) {
-      const file = e.target.files[0]
-      if (file) {
-        const reader = new FileReader()
-        reader.onload = e2 => {
-          this.photoPreview = e2.target.result
-        }
-        reader.readAsDataURL(file)
-      }
-    },
+    // Méthode onFileChange supprimée
     async saveProfile() {
       // Ici, on simule la sauvegarde côté client
       const authStore = useAuthStore()
@@ -142,31 +125,38 @@ export default {
   border-color: rgba(140, 180, 255, 0.4);
 }
 .profil-page {
-  max-width: 400px;
-  margin: 2rem auto;
+  max-width: 600px;
+  min-width: 320px;
+  margin: 3rem auto;
   background: var(--bg-card);
   border-radius: var(--radius);
-  padding: 2rem;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 3rem 2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  font-size: 1.15rem;
 }
 .profil-form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 2rem;
 }
+
 .form-group label {
-  font-weight: 500;
-  margin-bottom: 0.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
   display: block;
+  font-size: 1.1rem;
 }
 
 .form-group input[type="text"],
+.form-group input[type="text"],
 .form-group input[type="email"] {
   width: 100%;
-  padding: 0.7rem 1rem;
+  padding: 1rem 1.2rem;
   border-radius: var(--radius);
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
   background: var(--glass);
+  font-size: 1.05rem;
+  color: var(--text);
 }
 .profile-pic-preview {
   width: 64px;
@@ -178,6 +168,8 @@ export default {
 }
 .message {
   color: var(--primary);
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 </style>

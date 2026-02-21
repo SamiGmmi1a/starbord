@@ -9,7 +9,7 @@
       </template>
       <template v-else>
         <div class="user-info">
-          <img :src="userPhoto" alt="Photo de profil" class="profile-pic" />
+          <!-- Photo de profil supprimée -->
           <span class="user-name">Bonjour : {{ userName }}</span>
           <router-link to="/profil" class="profile-btn">Profil</router-link>
         </div>
@@ -37,11 +37,7 @@ export default {
       // Affiche uniquement le nom
       return authStore.nom || ''
     },
-    userPhoto() {
-      const authStore = useAuthStore()
-      // Affiche la photo si disponible, sinon une image par défaut
-      return authStore.photo || '/assets/img/default-profile.png'
-    }
+    // userPhoto supprimé
   },
 
   methods: {
