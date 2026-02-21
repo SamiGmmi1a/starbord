@@ -91,27 +91,7 @@ export default {
   },
   data() {
     return {
-      bdComics: [
-        {
-          id: 'bd1',
-          title: 'Détenu 278',
-          author: 'Fénix',
-          chapters: 5,
-          cover: '/assets/img/cover/detenu278-cover.jpg',
-          fav: false,
-          genre: 'Action'
-
-        },
-        {
-          id: 'bd2',
-          title: "Figé dans l'acier",
-          author: 'Fénix',
-          chapters: 4,
-          cover: "/assets/img/cover/fige_dans_lacier-cover.jpg",
-          fav: false,
-          genre: 'Science-fiction'
-        }
-      ],
+      // La liste des BD est désormais gérée par le store comics
       shopProducts: [
         { id: 'prod1', title: 'Atomic Maid', img: '/assets/img/produits/atomic_maid.jpg', link: '/boutique/atomic_maid' },
         { id: 'prod2', title: 'Atomic Maid Int', img: '/assets/img/produits/detenu_278.jpg', link: '/boutique/atomic_maid_int' },
@@ -143,10 +123,12 @@ export default {
     }
   },
   computed: {
-        filteredComics() {
+    filteredComics() {
+      const comicsStore = useComicsStore()
+      const comics = comicsStore.comics
       const normalize = str => str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
       const q = normalize(this.searchQuery)
-      return this.bdComics.filter(comic => {
+      return comics.filter(comic => {
         const matchSearch = !q || normalize(comic.title).includes(q) || normalize(comic.author).includes(q)
         const matchGenre = !this.selectedGenre || (comic.genre && comic.genre.toLowerCase() === this.selectedGenre.toLowerCase())
         return matchSearch && matchGenre

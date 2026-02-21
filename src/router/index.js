@@ -54,8 +54,8 @@ const router = createRouter({
 import { useAuthStore } from '../stores/auth'
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
-  const protectedRoutes = ['Reader', 'Profil']
-  if (protectedRoutes.includes(to.name) && !authStore.isLoggedIn()) {
+  // Seule la page Profil est protégée
+  if (to.name === 'Profil' && !authStore.isLoggedIn()) {
     next({ name: 'Login' })
   } else {
     next()

@@ -16,11 +16,14 @@
           >
           <div v-else-if="index === freeLimit" :key="'premium-cta'" class="premium-cta">
             <div>
-              <p>Connectez vous pour lire la suite</p>
+              <p>Connectez-vous pour lire la totalité de l'histoire&nbsp;!</p>
               <router-link to="/login" class="premium-btn">Se connecter</router-link>
             </div>
           </div>
         </template>
+        <div v-if="!isLogged && pages.length > freeLimit" class="premium-info">
+          <p class="premium-note">Vous voyez les 5 premières pages. Connectez-vous pour lire la suite.</p>
+        </div>
       </template>
       <div v-else class="loading">Chargement du chapitre...</div>
     </div>

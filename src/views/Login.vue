@@ -41,8 +41,17 @@ export default {
         });
         const data = await response.json();
         if (data.success) {
-          // Connexion réussie : redirige ou stocke l’email
-          this.$router.push({ name: 'Home' }); // ou autre page
+          // Met à jour le store utilisateur
+          const authStore = useAuthStore()
+          authStore.token = 'token_' + this.email // ou data.token si disponible
+          authStore.email = this.email
+          authStore.nom = data.nom || ''
+          authStore.photo = data.photo || ''
+          localStorage.setItem('auth_token', authStore.token)
+          localStorage.setItem('auth_email', this.email)
+          localStorage.setItem('auth_nom', data.nom || '')
+          localStorage.setItem('auth_photo', data.photo || '')
+          this.$router.push({ name: 'Home' });
         } else {
           this.error = data.message || 'Erreur de connexion';
         }
