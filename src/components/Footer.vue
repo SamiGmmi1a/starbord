@@ -111,10 +111,9 @@
     border: 1px solid transparent;
   }
   .footer-link:hover {
-    background: #181b22;
     color: #a9c7ff;
-    border-color: #222;
   }
+  
   .footer-left .footer-link {
     margin-left: 0;
   }

@@ -185,15 +185,18 @@ export default {
     display: flex;
     align-items: center;
     gap: 1.2rem;
-    padding: 4px 0;
     background: rgba(80,140,255,0.04);
     border-radius: 999px;
     box-shadow: 0 2px 8px rgba(80,140,255,0.08);
-    padding: 0rem 0.5rem;
+    padding: 0.5rem 1rem;
+    min-height: 48px;
   }
+  
   .profile-pic {
     width: 44px;
     height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--primary);
@@ -204,6 +207,11 @@ export default {
     color: var(--primary);
     font-size: 1.05rem;
     margin-left: 4px;
+    min-width: 120px;
+    text-align: left;
+    height: 44px;
+    display: flex;
+    align-items: center;
   }
   .profile-btn {
     background: rgba(80,140,255,0.08);
@@ -211,14 +219,16 @@ export default {
     color: var(--primary);
     cursor: pointer;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 14px;
     border-radius: 999px;
-    padding: 6px 16px;
-    margin-left: 8px;
+    padding: 7px 16px;
     transition: var(--transition);
     font-weight: 500;
     box-shadow: 0 0 4px rgba(80,140,255,0.08);
+    display: flex;
+    align-items: center;
   }
+
   .profile-btn:hover, .profile-btn:focus {
     background: rgba(80,140,255,0.18);
     border-color: rgba(140,180,255,0.4);
