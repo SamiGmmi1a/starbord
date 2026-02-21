@@ -10,26 +10,10 @@
         </div>
 
         <div class="login-form">
-          <div class="input-group">
-            <input 
-              v-model="email" 
-              type="email" 
-              placeholder="Adresse email"
-              @keyup.enter="login"
-            >
-          </div>
-
-          <div class="input-group">
-            <input 
-              v-model="accessCode" 
-              type="text" 
-              placeholder="Code d'accès (STB-XXXX01)"
-              @keyup.enter="login"
-            >
-          </div>
-
-          <button class="login-main-btn" @click="login">Se connecter</button>
-          <p class="login-message" :class="messageClass">{{ message }}</p>
+          <input v-model="email" type="email" placeholder="Votre email" required>
+          <input v-model="code" type="text" placeholder="Code d’identification" required>
+          <button @click.prevent="login">Se connecter</button>
+          <div v-if="error" class="error">{{ error }}</div>
         </div>
       </div>
     </div>
@@ -37,38 +21,33 @@
 </template>
 
 <script>
-import { useAuthStore } from '../stores/auth'
-
 export default {
   name: 'Login',
   data() {
     return {
       email: '',
-      accessCode: '',
-      message: '',
-      messageClass: ''
+      code: '',
+      error: ''
     }
   },
   methods: {
     async login() {
-      if (!this.email || !this.accessCode) {
-        this.message = 'Remplis tous les champs'
-        this.messageClass = 'error'
-        return
-      }
-
-      const authStore = useAuthStore()
-      const success = await authStore.login(this.email, this.accessCode)
-
-      if (success) {
-        this.message = 'Accès autorisé ✔'
-        this.messageClass = 'success'
-        setTimeout(() => {
-          this.$router.push('/')
-        }, 800)
-      } else {
-        this.message = 'Email ou code d\'accès invalide'
-        this.messageClass = 'error'
+      this.error = '';
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: this.email, code: this.code })
+        });
+        const data = await response.json();
+        if (data.success) {
+          // Connexion réussie : redirige ou stocke l’email
+          this.$router.push({ name: 'Home' }); // ou autre page
+        } else {
+          this.error = data.message || 'Erreur de connexion';
+        }
+      } catch (e) {
+        this.error = 'Erreur serveur';
       }
     }
   }
