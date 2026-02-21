@@ -24,6 +24,7 @@ export const useAuthStore = defineStore('auth', {
         const data = await response.json()
         this.token = data.token
         this.email = data.email
+        // Stocker le token dans localStorage
         localStorage.setItem('auth_token', data.token)
         localStorage.setItem('auth_email', data.email)
         return true
