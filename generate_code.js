@@ -4,14 +4,14 @@ const { verbose } = sqlite3;
 const db = new (verbose())('./database.sqlite');
 
 function randomCode() {
-  const chars = '0123456789';
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let suffix = '';
   for (let i = 0; i < 6; i++) suffix += chars[Math.floor(Math.random() * chars.length)];
   return 'STB-' + suffix;
 }
 
 const code = randomCode();
-db.run('INSERT INTO codes (code) VALUES (?)', [code], function(err) {
+db.run('INSERT INTO codes (code, utilise) VALUES (?, 0)', [code], function(err) {
   if (err) {
     console.error('Erreur insertion code:', err.message);
   } else {
