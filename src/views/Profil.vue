@@ -19,6 +19,7 @@
       <button class="profil-submit" type="submit">Enregistrer</button>
       <div v-if="message" class="message">{{ message }}</div>
     </form>
+    <button class="login-btn" @click="logout">Déconnexion</button>
   </div>
 </template>
 
@@ -29,11 +30,16 @@ export default {
   name: 'Profil',
   data() {
     const authStore = useAuthStore()
+    const email = authStore.email
+    const nomKey = `auth_nom_${email}`
+    const photoKey = `auth_photo_${email}`
+    const nom = localStorage.getItem(nomKey) || authStore.nom
+    const photo = localStorage.getItem(photoKey) || authStore.photo
     return {
-      nom: authStore.nom,
-      email: authStore.email,
-      photo: authStore.photo,
-      photoPreview: authStore.photo,
+      nom,
+      email,
+      photo,
+      photoPreview: photo,
       message: ''
     }
   },
@@ -53,17 +59,48 @@ export default {
       const authStore = useAuthStore()
       authStore.nom = this.nom
       authStore.photo = this.photoPreview
-      localStorage.setItem('auth_nom', this.nom)
-      localStorage.setItem('auth_photo', this.photoPreview)
+      const nomKey = `auth_nom_${authStore.email}`
+      const photoKey = `auth_photo_${authStore.email}`
+      localStorage.setItem(nomKey, this.nom)
+      localStorage.setItem(photoKey, this.photoPreview)
       this.message = 'Profil mis à jour !'
+    },
+    logout() {
+      const authStore = useAuthStore()
+      authStore.logout()
+      this.$router.push('/')
     }
   }
 }
 </script>
 
+
+
+
 <style scoped>
-/* Bouton Enregistrer moderne */
-/* Bouton Enregistrer harmonisé avec le header */
+/* Style du bouton déconnexion harmonisé avec le header */
+.login-btn {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 7px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffa9a9;
+  background: rgba(255, 80, 80, 0.08);
+  border: 1px solid rgba(255, 120, 120, 0.25);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 12px rgba(255, 80, 80, 0.08);
+}
+.login-btn:hover, .login-btn:focus {
+  color: #fff;
+  background: rgba(255, 80, 80, 0.18);
+  border-color: rgba(255, 150, 150, 0.6);
+  box-shadow: 0 0 12px rgba(255, 80, 80, 0.35);
+}
 .profil-submit {
   display: block;
   width: 100%;
@@ -121,6 +158,7 @@ export default {
   margin-bottom: 0.3rem;
   display: block;
 }
+
 .form-group input[type="text"],
 .form-group input[type="email"] {
   width: 100%;

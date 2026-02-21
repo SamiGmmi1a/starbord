@@ -12,7 +12,6 @@
           <img :src="userPhoto" alt="Photo de profil" class="profile-pic" />
           <span class="user-name">Bonjour : {{ userName }}</span>
           <router-link to="/profil" class="profile-btn">Profil</router-link>
-          <button @click="logout" class="login-btn">Déconnexion</button>
         </div>
       </template>
     </div>
@@ -59,7 +58,7 @@ export default {
 .site-header {
   background: rgba(15, 17, 22, 0.95);
   border-bottom: 1px solid var(--border);
-  padding: 10px 12px;
+  padding: 1rem;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -185,9 +184,7 @@ export default {
     display: flex;
     align-items: center;
     gap: 1.2rem;
-    background: rgba(80,140,255,0.04);
     border-radius: 999px;
-    box-shadow: 0 2px 8px rgba(80,140,255,0.08);
     padding: 0.5rem 1rem;
     min-height: 48px;
   }

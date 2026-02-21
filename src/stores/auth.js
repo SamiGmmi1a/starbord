@@ -32,9 +32,15 @@ export const useAuthStore = defineStore('auth', {
         const data = await response.json()
         this.token = data.token
         this.email = data.email
+        // Restaurer nom et photo depuis localStorage si existants
+        this.nom = localStorage.getItem('auth_nom') || this.nom || ''
+        this.photo = localStorage.getItem('auth_photo') || this.photo || ''
         // Stocker le token dans localStorage
         localStorage.setItem('auth_token', data.token)
         localStorage.setItem('auth_email', data.email)
+        // Enregistrer nom et photo dans localStorage si présents
+        if (this.nom) localStorage.setItem('auth_nom', this.nom)
+        if (this.photo) localStorage.setItem('auth_photo', this.photo)
         return true
       } catch (error) {
         console.error('Login error:', error)
@@ -52,11 +58,9 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('auth_nom')
       localStorage.removeItem('auth_photo')
     },
-
     isLoggedIn() {
       return this.token !== null
     },
-
     hasAccessToChapter() {
       return this.isLoggedIn()
     }
