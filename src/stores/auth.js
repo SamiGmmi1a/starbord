@@ -11,7 +11,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(email, accessCode) {
       try {
-        const response = await fetch('/api/auth/login', {
+        const response = await fetch('/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, accessCode })
@@ -24,14 +24,8 @@ export const useAuthStore = defineStore('auth', {
         const data = await response.json()
         this.token = data.token
         this.email = data.email
-        this.nom = data.nom || ''
-        this.photo = data.photo || ''
-
         localStorage.setItem('auth_token', data.token)
         localStorage.setItem('auth_email', data.email)
-        localStorage.setItem('auth_nom', data.nom || '')
-        localStorage.setItem('auth_photo', data.photo || '')
-
         return true
       } catch (error) {
         console.error('Login error:', error)

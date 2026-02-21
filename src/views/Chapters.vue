@@ -53,7 +53,8 @@
 export default {
   data() {
     return {
-      comic: null
+      comic: null,
+      error: ''
     }
   },
   async mounted() {
@@ -68,6 +69,7 @@ export default {
       this.comic = localData.getComic(comicId)
     } catch (e) {
       this.comic = null
+      this.error = 'Erreur lors du chargement du comic.'
     }
   }
 }
