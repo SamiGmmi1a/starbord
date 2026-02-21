@@ -7,8 +7,16 @@ export const useAuthStore = defineStore('auth', {
     nom: localStorage.getItem('auth_nom') || '',
     photo: localStorage.getItem('auth_photo') || ''
   }),
+  // Synchronisation du store avec localStorage au démarrage
+  persist: true,
 
   actions: {
+        refreshUser() {
+          this.token = localStorage.getItem('auth_token') || null;
+          this.email = localStorage.getItem('auth_email') || null;
+          this.nom = localStorage.getItem('auth_nom') || '';
+          this.photo = localStorage.getItem('auth_photo') || '';
+        },
     async login(email, accessCode) {
       try {
         const response = await fetch('/api/login', {

@@ -14,7 +14,7 @@
             :alt="`Page ${index + 1}`"
             class="scan-img"
           >
-          <div v-else-if="index === freeLimit" :key="'premium-cta'" class="premium-cta">
+          <div v-else-if="!isLogged && index === freeLimit" :key="'premium-cta'" class="premium-cta">
             <div>
               <p>Connectez-vous pour lire la totalité de l'histoire&nbsp;!</p>
               <router-link to="/login" class="premium-btn">Se connecter</router-link>
