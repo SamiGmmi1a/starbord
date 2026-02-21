@@ -57,12 +57,13 @@ export default {
     async saveProfile() {
       // Ici, on simule la sauvegarde côté client
       const authStore = useAuthStore()
-      authStore.nom = this.nom
-      authStore.photo = this.photoPreview
       const nomKey = `auth_nom_${authStore.email}`
       const photoKey = `auth_photo_${authStore.email}`
       localStorage.setItem(nomKey, this.nom)
       localStorage.setItem(photoKey, this.photoPreview)
+      // Met à jour le store Pinia pour affichage immédiat
+      authStore.nom = this.nom
+      authStore.photo = this.photoPreview
       this.message = 'Profil mis à jour !'
     },
     logout() {

@@ -34,8 +34,8 @@ export default {
     },
     userName() {
       const authStore = useAuthStore()
-      // Affiche le nom si disponible, sinon l'email
-      return authStore.nom || authStore.email || ''
+      // Affiche uniquement le nom
+      return authStore.nom || ''
     },
     userPhoto() {
       const authStore = useAuthStore()

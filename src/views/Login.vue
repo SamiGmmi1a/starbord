@@ -10,10 +10,10 @@
         </div>
 
         <div class="login-form">
+          <input v-model="prenom" type="text" placeholder="Votre prénom" required>
           <input v-model="email" type="email" placeholder="Votre email" required>
           <input v-model="code" type="text" placeholder="Code d’identification" required>
           <button class="login-submit" @click.prevent="login">Se connecter</button>
-      
           <div v-if="error" class="error">{{ error }}</div>
         </div>
       </div>
@@ -27,6 +27,7 @@ export default {
   name: 'Login',
   data() {
     return {
+      prenom: '',
       email: '',
       code: '',
       error: ''
@@ -40,6 +41,9 @@ export default {
         // Appel du store pour login
         const success = await authStore.login(this.email, this.code)
         if (success) {
+          // Stocke le prénom dans le store et localStorage
+          authStore.nom = this.prenom
+          localStorage.setItem(`auth_nom_${this.email}`, this.prenom)
           this.$router.push({ name: 'Home' })
         } else {
           this.error = 'Identifiants invalides ou code incorrect.'
