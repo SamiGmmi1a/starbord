@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { useAuthStore } from '../stores/auth'
 export default {
   name: 'Login',
   data() {
@@ -33,18 +34,14 @@ export default {
   methods: {
     async login() {
       this.error = '';
+      const authStore = useAuthStore()
       try {
-        const response = await fetch('/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: this.email, code: this.code })
-        });
-        const data = await response.json();
-        if (data.success) {
-          // Connexion réussie : redirige ou stocke l’email
-          this.$router.push({ name: 'Home' }); // ou autre page
+        // Appel du store pour login
+        const success = await authStore.login(this.email, this.code)
+        if (success) {
+          this.$router.push({ name: 'Home' })
         } else {
-          this.error = data.message || 'Erreur de connexion';
+          this.error = 'Identifiants invalides ou code incorrect.'
         }
       } catch (e) {
         this.error = 'Erreur serveur';
