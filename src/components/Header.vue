@@ -4,16 +4,17 @@
       <router-link to="/" class="logo">STARBORD</router-link>
       <div class="spacer"></div>
 
-      <router-link 
-        v-if="!isLoggedIn" 
-        to="/login" 
-        class="login-btn"
-      >
-        Connexion
-      </router-link>
-      <button v-else @click="logout" class="login-btn">
-        Déconnexion
-      </button>
+      <template v-if="!isLoggedIn">
+        <router-link to="/login" class="login-btn">Connexion</router-link>
+      </template>
+      <template v-else>
+        <div class="user-info">
+          <img :src="userPhoto" alt="Photo de profil" class="profile-pic" />
+          <span class="user-name">Bonjour : {{ userName }}</span>
+          <router-link to="/profil" class="profile-btn">Profil</router-link>
+          <button @click="logout" class="login-btn">Déconnexion</button>
+        </div>
+      </template>
     </div>
   </header>
 </template>
@@ -31,8 +32,19 @@ export default {
     isLoggedIn() {
       const authStore = useAuthStore()
       return authStore.token !== null
+    },
+    userName() {
+      const authStore = useAuthStore()
+      // Affiche le nom si disponible, sinon l'email
+      return authStore.nom || authStore.email || ''
+    },
+    userPhoto() {
+      const authStore = useAuthStore()
+      // Affiche la photo si disponible, sinon une image par défaut
+      return authStore.photo || '/assets/img/default-profile.png'
     }
   },
+
   methods: {
     logout() {
       const authStore = useAuthStore()
@@ -167,4 +179,31 @@ export default {
     margin-left: 0;
   }
 }
+
+  /* Ajout styles pour l'affichage utilisateur */
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .profile-pic {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+  }
+  .user-name {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  .profile-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 1rem;
+  }
+
 </style>

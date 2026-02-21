@@ -1,50 +1,4 @@
-// API pour ajouter un code
-app.post('/api/codes/add', (req, res) => {
-  const { email, accessCode } = req.body;
-  if (!email || !accessCode) {
-    return res.status(400).json({ success: false, message: 'Email et code requis.' });
-  }
-  let validCodes = {};
-  try {
-    const codesRaw = fs.readFileSync(path.join(__dirname, 'codes.json'), 'utf-8');
-    validCodes = JSON.parse(codesRaw);
-  } catch (err) {
-    return res.status(500).json({ success: false, message: 'Erreur serveur: codes non accessibles.' });
-  }
-  validCodes[email] = accessCode;
-  try {
-    fs.writeFileSync(path.join(__dirname, 'codes.json'), JSON.stringify(validCodes, null, 2));
-    return res.json({ success: true });
-  } catch (err) {
-    return res.status(500).json({ success: false, message: 'Erreur lors de l’écriture.' });
-  }
-});
 
-// API pour supprimer un code
-app.delete('/api/codes/remove', (req, res) => {
-  const { email } = req.body;
-  if (!email) {
-    return res.status(400).json({ success: false, message: 'Email requis.' });
-  }
-  let validCodes = {};
-  try {
-    const codesRaw = fs.readFileSync(path.join(__dirname, 'codes.json'), 'utf-8');
-    validCodes = JSON.parse(codesRaw);
-  } catch (err) {
-    return res.status(500).json({ success: false, message: 'Erreur serveur: codes non accessibles.' });
-  }
-  if (validCodes[email]) {
-    delete validCodes[email];
-    try {
-      fs.writeFileSync(path.join(__dirname, 'codes.json'), JSON.stringify(validCodes, null, 2));
-      return res.json({ success: true });
-    } catch (err) {
-      return res.status(500).json({ success: false, message: 'Erreur lors de l’écriture.' });
-    }
-  } else {
-    return res.status(404).json({ success: false, message: 'Email non trouvé.' });
-  }
-});
 
 import express from 'express'
 import cors from 'cors'
@@ -105,25 +59,7 @@ app.post('/api/login', (req, res) => {
   });
 });
 
-// API pour authentification
-  const { email, accessCode } = req.body;
-  // Lecture dynamique des codes
-  let validCodes = {};
-  try {
-    const codesRaw = fs.readFileSync(path.join(__dirname, 'codes.json'), 'utf-8');
-    validCodes = JSON.parse(codesRaw);
-  } catch (err) {
-    return res.status(500).json({ success: false, message: 'Erreur serveur: codes non accessibles.' });
-  }
-  if (validCodes[email] === accessCode) {
-    res.json({ 
-      success: true, 
-      token: `token_${email}_${Date.now()}`,
-      email: email 
-    });
-  } else {
-    res.status(401).json({ success: false, message: 'Identifiants invalides' });
-  }
+
 
 app.post('/api/auth/verify', (req, res) => {
   const { token } = req.body
