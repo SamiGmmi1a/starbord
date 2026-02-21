@@ -8,7 +8,7 @@
         <div class="story-info-section">
           <div class="story-info-header">
             <h2 class="chapter-list-title">{{ comic.title }}</h2>
-            <router-link to="/" class="close-btn chapter-close-btn" title="Retour à l'accueil">&#10005;</router-link>
+            <button class="close-btn" @click="$router.push('/')" title="Retour à l'accueil">✕</button>
           </div>
           <div class="chapter-list-author">par {{ comic.author }}</div>
           <div class="chapter-list-genre">Genre : {{ comic.genre || 'Action, Science-fiction, Aventure' }}</div>
@@ -155,8 +155,10 @@ export default {
   font-size: 1.05rem;
   margin-bottom: 0.1rem;
 }
-.chapter-close-btn {
-  font-size: 2rem;
+
+
+.close-btn {
+  font-size: 2rem !important;
   color: #fff;
   background: none;
   border: none;
@@ -165,9 +167,10 @@ export default {
   text-decoration: none;
   transition: color 0.2s;
 }
-.chapter-close-btn:hover {
+.close-btn:hover {
   color: #00bfff;
 }
+
 .chapter-list {
   list-style: none;
   padding: 0;

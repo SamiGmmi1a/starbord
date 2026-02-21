@@ -2,7 +2,7 @@
   <div>
     <header :class="['reader-header', { 'header-scrolled': isScrolled }]">
       <div class="header-left">{{ chapterTitle }}</div>
-      <button class="header-close" @click="goBack" title="Fermer le lecteur">✕</button>
+      <button class="close-btn" @click="goBack" title="Fermer le lecteur">✕</button>
     </header>
     <div class="reader-content">
       <template v-if="pages && pages.length > 0">
@@ -26,6 +26,14 @@
         </div>
       </template>
       <div v-else class="loading">Chargement du chapitre...</div>
+      <div class="reader-bottom">
+        <div class="reader-bottom-col">
+          <div class="reader-promo">
+            <p>Cette histoire vous a plu ? Découvrez-en de nouvelles toujours plus incroyables sur <strong>starbord.io</strong></p>
+          </div>
+          <router-link to="/" class="reader-back-btn">← Retour à l'accueil</router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -100,6 +108,43 @@ export default {
 </script>
 
 <style scoped>
+.reader-bottom-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.reader-promo {
+  color: #fff;
+  text-align: center;
+  font-size: 1.08rem;
+  margin-bottom: 1.1rem;
+}
+.reader-bottom {
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem 0 1.5rem 0;
+}
+.reader-back-btn {
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid rgba(120, 170, 255, 0.25);
+  color: #a9c7ff;
+  background: rgba(80, 140, 255, 0.08);
+  backdrop-filter: blur(6px);
+  transition: var(--transition);
+  box-shadow: 0 2px 12px rgba(80,140,255,0.08);
+}
+.reader-back-btn:hover, .reader-back-btn:focus {
+  color: #fff;
+  background: rgba(80, 140, 255, 0.18);
+  border-color: rgba(150, 190, 255, 0.6);
+  box-shadow: 0 0 12px rgba(80, 140, 255, 0.35);
+}
 .reader-header {
   position: sticky;
   top: 0;
@@ -128,18 +173,29 @@ export default {
   color: var(--text-primary);
   font-family: var(--font-title);
 }
-.header-close {
+
+
+.close-btn {
+  width: 19.61px;
+  height: 32px;
   font-size: 2rem;
+  color: #fff;
   background: none;
   border: none;
-  color: var(--text-primary);
   cursor: pointer;
+  margin-left: 1rem;
+  text-decoration: none;
   transition: color 0.2s;
-  margin-left: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
-.header-close:hover {
-  color: var(--primary);
+.close-btn:hover {
+  color: #00bfff;
 }
+
+
 .reader-content {
   max-width: 900px;
   margin: 0 auto;

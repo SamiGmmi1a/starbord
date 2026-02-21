@@ -189,6 +189,7 @@ export default {
     background: rgba(80,140,255,0.04);
     border-radius: 999px;
     box-shadow: 0 2px 8px rgba(80,140,255,0.08);
+    padding: 0rem 0.5rem;
   }
   .profile-pic {
     width: 44px;
