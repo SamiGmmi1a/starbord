@@ -53,6 +53,7 @@
     margin-bottom: 0.7rem;
   }
   .footer-title {
+    font-family: 'Tintin', Arial, sans-serif !important;
     font-size: 2.7rem;
     font-weight: 800;
     letter-spacing: 0.02em;
@@ -113,7 +114,7 @@
   .footer-link:hover {
     color: #a9c7ff;
   }
-  
+
   .footer-left .footer-link {
     margin-left: 0;
   }

@@ -36,6 +36,7 @@ html, body {
 }
 
 body {
+  font-family: var(--font-family);
   background: linear-gradient(180deg, var(--bg-dark), var(--bg));
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
@@ -728,5 +729,32 @@ section {
   body {
     font-size: 0.95rem;
   }
+}
+
+@font-face {
+  font-family: 'Tintin';
+  src: url('/assets/Tintin.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Tintin', Arial, sans-serif;
+}
+
+.logo {
+  font-family: 'Tintin', Arial, sans-serif !important;
+}
+
+.hero-title {
+  font-family: 'Tintin', Arial, sans-serif !important;
+}
+
+button, .btn, .profil-submit, .login-btn, .profile-btn {
+  font-family: 'Tintin', Arial, sans-serif;
+}
+
+.footer {
+  font-family: 'Tintin', Arial, sans-serif !important;
 }
 

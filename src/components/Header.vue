@@ -5,13 +5,13 @@
       <div class="spacer"></div>
 
       <template v-if="!isLoggedIn">
-        <router-link to="/login" class="login-btn">Connexion</router-link>
+        <router-link to="/login" class="login-btn">connexion</router-link>
       </template>
       <template v-else>
         <div class="user-info">
           <!-- Photo de profil supprimée -->
           <span class="user-name">Bonjour : {{ userName }}</span>
-          <router-link to="/profil" class="profile-btn">Profil</router-link>
+          <router-link to="/profil" class="profile-btn">profil</router-link>
         </div>
       </template>
     </div>

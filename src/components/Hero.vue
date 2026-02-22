@@ -22,10 +22,10 @@
     <div class="hero-content">
       <div class="hero-text-bg">
         <div class="hero-text-fade"></div>
-        <h1 class="hero-title">Bienvenue sur STARBORD</h1>
+        <h1 class="hero-title">bienvenue sur STARBORD</h1>
         <p class="hero-subtitle">inspirer à rêver grand à travers des illustrations incroyables</p>
       </div>
-      <button class="hero-btn hero-btn-absolute" @click="scrollToShop">DÉCOUVRIR</button>
+      <button class="hero-btn hero-btn-absolute" @click="scrollToShop">DECOUVRIR</button>
     </div>
   </section>
 </template>
