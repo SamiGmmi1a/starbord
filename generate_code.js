@@ -1,4 +1,4 @@
-// Script pour générer un code STB-XXXXXX aléatoire et afficher les codes utilisés/non utilisés
+// Script pour générer un code STB-XXXX01 aléatoire et afficher les codes utilisés/non utilisés
 
 import sqlite3 from 'sqlite3';
 const { verbose } = sqlite3;
@@ -6,13 +6,13 @@ const sqlite3Instance = verbose();
 const db = new sqlite3Instance.Database('./database.sqlite');
 
 function randomCode() {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let suffix = '';
-  for (let i = 0; i < 6; i++) suffix += chars[Math.floor(Math.random() * chars.length)];
-  return 'STB-' + suffix;
+  // Génère un code de la forme STB-XXXX01
+  const digits = Math.floor(1000 + Math.random() * 9000); // 4 chiffres
+  const serial = '01'; // Peut être incrémenté si besoin
+  return `STB-${digits}${serial}`;
 }
 
-const code = 'STB-ABC123';
+const code = randomCode();
 db.run('INSERT INTO codes (code, utilise) VALUES (?, 0)', [code], function(err) {
   if (err) {
     console.error('Erreur insertion code:', err.message);

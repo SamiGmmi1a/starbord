@@ -38,12 +38,8 @@ export default {
       this.error = '';
       const authStore = useAuthStore()
       try {
-        // Appel du store pour login
-        const success = await authStore.login(this.email, this.code)
+        const success = await authStore.login(this.email, this.prenom, this.code)
         if (success) {
-          // Stocke le prénom dans le store et localStorage
-          authStore.nom = this.prenom
-          localStorage.setItem(`auth_nom_${this.email}`, this.prenom)
           this.$router.push({ name: 'Home' })
         } else {
           this.error = 'Identifiants invalides ou code incorrect.'

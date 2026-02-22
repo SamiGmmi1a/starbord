@@ -27,8 +27,7 @@ export default {
   data() {
     const authStore = useAuthStore()
     const email = authStore.email
-    const nomKey = `auth_nom_${email}`
-    const nom = localStorage.getItem(nomKey) || authStore.nom
+    const nom = authStore.nom // Utilise le nom du store, mis à jour à la connexion
     return {
       nom,
       email,

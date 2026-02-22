@@ -18,26 +18,23 @@ export const useAuthStore = defineStore('auth', {
       const nomKey = this.email ? `auth_nom_${this.email}` : '';
       this.nom = nomKey ? localStorage.getItem(nomKey) || '' : '';
     },
-    async login(email, accessCode) {
+    async login(email, nom, code) {
       try {
         const response = await fetch('/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, code: accessCode })
+          body: JSON.stringify({ email, nom, code })
         })
-
-        if (!response.ok) {
-          throw new Error('Identifiants invalides')
-        }
-
         const data = await response.json()
-        this.token = data.token
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || 'Identifiants invalides')
+        }
+        this.token = 'dummy-token' // à adapter si tu veux un vrai token
         this.email = data.email
-        const nomKey = `auth_nom_${this.email}`
-        this.nom = localStorage.getItem(nomKey) || ''
-        localStorage.setItem('auth_token', data.token)
+        this.nom = data.nom
+        localStorage.setItem('auth_token', this.token)
         localStorage.setItem('auth_email', data.email)
-        localStorage.setItem(nomKey, this.nom)
+        localStorage.setItem(`auth_nom_${data.email}`, data.nom)
         return true
       } catch (error) {
         console.error('Login error:', error)
