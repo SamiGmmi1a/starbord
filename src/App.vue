@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     showHeaderFooter() {
-      // Utilise le nom de la route (à adapter si besoin)
+      // Utilise le prénom de l'utilisateur (à adapter si besoin)
       const noHeaderFooter = ['Login', 'Legal', 'Reader', 'Chapters', 'Profil']
       return !noHeaderFooter.includes(this.$route.name)
     }

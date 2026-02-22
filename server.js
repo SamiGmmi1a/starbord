@@ -22,9 +22,9 @@ app.use(express.static('dist'))
 
 // API d'authentification code/email
 app.post('/api/login', (req, res) => {
-  const { email, nom, code } = req.body;
-  if (!email || !nom || !code) {
-    return res.status(400).json({ success: false, message: 'Email, nom et code requis.' });
+  const { email, prenom, code } = req.body;
+  if (!email || !prenom || !code) {
+    return res.status(400).json({ success: false, message: 'Email, prénom et code requis.' });
   }
   // Vérifie le format du code
   if (!/^STB-\\d{4}01$/.test(code)) {
@@ -36,22 +36,22 @@ app.post('/api/login', (req, res) => {
     if (codeRow.utilise && codeRow.email_associe !== email) {
       return res.status(403).json({ success: false, message: 'Code déjà utilisé.' });
     }
-    // Associer le code à l'email et au nom si non utilisé
+    // Associer le code à l'email et au prénom si non utilisé
     if (!codeRow.utilise) {
-      db.run('UPDATE codes SET utilise = 1, email_associe = ?, nom_associe = ?, date_utilisation = CURRENT_TIMESTAMP WHERE code = ?', [email, nom, code], (err2) => {
+      db.run('UPDATE codes SET utilise = 1, email_associe = ?, prenom_associe = ?, date_utilisation = CURRENT_TIMESTAMP WHERE code = ?', [email, prenom, code], (err2) => {
         if (err2) return res.status(500).json({ success: false, message: 'Erreur lors de l’association.' });
         // Créer l'utilisateur
-        db.run('INSERT OR IGNORE INTO users (email, nom, code_associe) VALUES (?, ?, ?)', [email, nom, code], (err3) => {
+        db.run('INSERT OR IGNORE INTO users (email, prenom, code_associe) VALUES (?, ?, ?)', [email, prenom, code], (err3) => {
           if (err3) return res.status(500).json({ success: false, message: 'Erreur création utilisateur.' });
-          return res.json({ success: true, email, nom });
+          return res.json({ success: true, email, prenom });
         });
       });
     } else {
-      // Si déjà utilisé, vérifier que l'email et le nom correspondent
+      // Si déjà utilisé, vérifier que l'email et le prénom correspondent
       db.get('SELECT * FROM users WHERE email = ? AND code_associe = ?', [email, code], (err4, userRow) => {
         if (err4) return res.status(500).json({ success: false, message: 'Erreur serveur.' });
         if (!userRow) return res.status(403).json({ success: false, message: 'Code déjà utilisé par un autre utilisateur.' });
-        return res.json({ success: true, email, nom: userRow.nom });
+        return res.json({ success: true, email, prenom: userRow.prenom });
       });
     }
   });
@@ -66,7 +66,7 @@ app.post('/api/check-login', (req, res) => {
   db.get('SELECT * FROM users WHERE email = ? AND code_associe = ?', [email, code], (err, userRow) => {
     if (err) return res.status(500).json({ success: false, message: 'Erreur serveur.' });
     if (!userRow) return res.status(403).json({ success: false, message: 'Combinaison email/code incorrecte.' });
-    return res.json({ success: true, email: userRow.email, nom: userRow.nom });
+    return res.json({ success: true, email: userRow.email, prenom: userRow.prenom });
   });
 })
 
@@ -137,3 +137,19 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`)
 })
+
+// Création automatique des tables au démarrage
+
+db.run(`CREATE TABLE IF NOT EXISTS codes (
+  code TEXT PRIMARY KEY,
+  utilise INTEGER DEFAULT 0,
+  email_associe TEXT,
+  prenom_associe TEXT,
+  date_utilisation TEXT
+)`);
+
+db.run(`CREATE TABLE IF NOT EXISTS users (
+  email TEXT PRIMARY KEY,
+  prenom TEXT,
+  code_associe TEXT
+)`);

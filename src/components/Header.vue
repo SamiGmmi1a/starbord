@@ -34,8 +34,8 @@ export default {
     },
     userName() {
       const authStore = useAuthStore()
-      // Affiche uniquement le nom
-      return authStore.nom || ''
+      // Affiche uniquement le prénom
+      return authStore.prenom || ''
     },
     // userPhoto supprimé
   },

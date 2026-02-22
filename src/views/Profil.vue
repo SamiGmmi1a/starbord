@@ -4,14 +4,13 @@
     <h2>Mon Profil</h2>
     <form @submit.prevent="saveProfile" class="profil-form">
       <div class="form-group">
-        <label>Nom</label>
-        <input v-model="nom" type="text" placeholder="Votre nom">
+        <label>Prénom</label>
+        <input v-model="prenom" type="text" placeholder="Votre prénom">
       </div>
       <div class="form-group">
         <label>Email</label>
         <input v-model="email" type="email" placeholder="Votre email" disabled>
       </div>
-      <!-- Champ photo de profil supprimé -->
       <button class="profil-submit" type="submit">Enregistrer</button>
       <div v-if="message" class="message">{{ message }}</div>
     </form>
@@ -24,41 +23,49 @@ import { useAuthStore } from '../stores/auth'
 
 export default {
   name: 'Profil',
+  computed: {
+    authStore() {
+      return useAuthStore();
+    },
+    prenom: {
+      get() {
+        return this.authStore.prenom || '';
+      },
+      set(value) {
+        this.authStore.prenom = value;
+        localStorage.setItem(`auth_prenom_${this.authStore.email}`, value);
+      }
+    },
+    email() {
+      return this.authStore.email;
+    }
+  },
   data() {
-    const authStore = useAuthStore()
-    const email = authStore.email
-    const nom = authStore.nom // Utilise le nom du store, mis à jour à la connexion
     return {
-      nom,
-      email,
       message: ''
     }
   },
+  mounted() {
+    // Synchronise le prénom du store avec le localStorage si besoin
+    if (!this.authStore.prenom && this.authStore.email) {
+      const prenomKey = `auth_prenom_${this.authStore.email}`;
+      const storedPrenom = localStorage.getItem(prenomKey);
+      if (storedPrenom) {
+        this.authStore.prenom = storedPrenom;
+      }
+    }
+  },
   methods: {
-    // Méthode onFileChange supprimée
     async saveProfile() {
-      // Ici, on simule la sauvegarde côté client
-      const authStore = useAuthStore()
-      const nomKey = `auth_nom_${authStore.email}`
-      const photoKey = `auth_photo_${authStore.email}`
-      localStorage.setItem(nomKey, this.nom)
-      localStorage.setItem(photoKey, this.photoPreview)
-      // Met à jour le store Pinia pour affichage immédiat
-      authStore.nom = this.nom
-      authStore.photo = this.photoPreview
-      this.message = 'Profil mis à jour !'
+      this.message = 'Profil mis à jour !';
     },
     logout() {
-      const authStore = useAuthStore()
-      authStore.logout()
-      this.$router.push('/')
+      this.authStore.logout();
+      this.$router.push('/');
     }
   }
 }
 </script>
-
-
-
 
 <style scoped>
 /* Style du bouton déconnexion harmonisé avec le header */
