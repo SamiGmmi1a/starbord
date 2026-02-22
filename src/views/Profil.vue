@@ -126,7 +126,7 @@ export default {
 }
 .profil-page {
   max-width: 600px;
-  min-width: 320px;
+  min-width: 500px;
   margin: 3rem auto;
   background: var(--bg-card);
   border-radius: var(--radius);
@@ -172,4 +172,6 @@ export default {
   font-size: 1.1rem;
   font-weight: 500;
 }
+
+
 </style>
