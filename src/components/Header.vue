@@ -51,6 +51,7 @@ export default {
 </script>
 
 <style scoped>
+
 .site-header {
   background: rgba(15, 17, 22, 0.95);
   border-bottom: 1px solid var(--border);
@@ -59,7 +60,6 @@ export default {
   top: 0;
   z-index: 1000;
   width: 100%;
-  left: 0;
   backdrop-filter: blur(10px);
 }
 
@@ -70,17 +70,7 @@ export default {
   width: 100%;
 }
 
-@media (min-width: 720px) {
-  .container {
-    padding: 0 20px;
-  }
-}
 
-@media (min-width: 1100px) {
-  .container {
-    padding: 0 24px;
-  }
-}
 
 .header-inner {
   display: flex;

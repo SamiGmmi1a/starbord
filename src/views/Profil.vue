@@ -86,7 +86,6 @@ export default {
 <style scoped>
 /* Style du bouton déconnexion harmonisé avec le header */
 .login-btn {
-  display: block;
   width: 100%;
   margin-top: 18px;
   padding: 7px 16px;
@@ -99,16 +98,13 @@ export default {
   backdrop-filter: blur(6px);
   cursor: pointer;
   transition: var(--transition);
-  box-shadow: 0 2px 12px rgba(255, 80, 80, 0.08);
 }
 .login-btn:hover, .login-btn:focus {
   color: #fff;
   background: rgba(255, 80, 80, 0.18);
   border-color: rgba(255, 150, 150, 0.6);
-  box-shadow: 0 0 12px rgba(255, 80, 80, 0.35);
 }
 .profil-submit {
-  display: block;
   width: 100%;
   margin-top: 18px;
   padding: 7px 16px;
@@ -121,13 +117,11 @@ export default {
   backdrop-filter: blur(6px);
   cursor: pointer;
   transition: var(--transition);
-  box-shadow: 0 2px 12px rgba(80,140,255,0.08);
 }
 .profil-submit:hover, .profil-submit:focus {
   color: #fff;
   background: rgba(80, 140, 255, 0.18);
   border-color: rgba(150, 190, 255, 0.6);
-  box-shadow: 0 0 12px rgba(80, 140, 255, 0.35);
 }
 .profil-back {
   display: inline-block;

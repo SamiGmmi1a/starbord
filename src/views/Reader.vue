@@ -128,8 +128,8 @@ export default {
 .reader-back-btn {
   padding: 7px 16px;
   border-radius: 999px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 1.08rem;
+  font-weight: 600;
   text-decoration: none;
   cursor: pointer;
   border: 1px solid rgba(120, 170, 255, 0.25);
@@ -137,13 +137,11 @@ export default {
   background: rgba(80, 140, 255, 0.08);
   backdrop-filter: blur(6px);
   transition: var(--transition);
-  box-shadow: 0 2px 12px rgba(80,140,255,0.08);
 }
 .reader-back-btn:hover, .reader-back-btn:focus {
   color: #fff;
   background: rgba(80, 140, 255, 0.18);
   border-color: rgba(150, 190, 255, 0.6);
-  box-shadow: 0 0 12px rgba(80, 140, 255, 0.35);
 }
 .reader-header {
   position: sticky;

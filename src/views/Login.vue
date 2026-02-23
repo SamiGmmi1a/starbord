@@ -55,22 +55,20 @@ export default {
 <style scoped>
 /* Bouton retour login-back amélioré */
 .login-back {
-     display: inline-block;
-    margin-bottom: 20px;
-    padding: 6px 12px;
-    font-size: 12px;
-    text-decoration: none;
-    color: #9bbcff;
-    background: rgba(80, 140, 255, 0.08);
-    border: 1px solid rgba(120, 170, 255, 0.2);
-    border-radius: 999px;
-    transition: 0.2s 
-ease;
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 6px 12px;
+  font-size: 12px;
+  text-decoration: none;
+  color: #9bbcff;
+  background: rgba(80, 140, 255, 0.08);
+  border: 1px solid rgba(120, 170, 255, 0.2);
+  border-radius: 999px;
+  transition: var(--transition);
 }
 .login-back:hover, .login-back:focus {
-  background: rgba (80, 140, 255, 0.18);
-  box-shadow: rgba(0, 168, 255, 0.08);
-  border-color: rgba (140, 180, 255, 0.4);
+  background: rgba(80, 140, 255, 0.18);
+  border-color: rgba(140, 180, 255, 0.4);
 }
 .login-page {
   min-height: 100vh;

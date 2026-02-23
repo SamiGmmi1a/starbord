@@ -108,8 +108,8 @@ export default {
 .chapter-back-btn {
   padding: 1.1rem 2.8rem;
   border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.13rem;
+  font-weight: 600;
   text-decoration: none;
   cursor: pointer;
   border: 1.5px solid rgba(120, 170, 255, 0.25);
@@ -117,14 +117,12 @@ export default {
   background: rgba(80, 140, 255, 0.13);
   backdrop-filter: blur(6px);
   transition: var(--transition);
-  box-shadow: 0 2px 18px rgba(80,140,255,0.13);
   margin-top: 0.2rem;
 }
 .chapter-back-btn:hover, .chapter-back-btn:focus {
   color: #fff;
   background: rgba(80, 140, 255, 0.22);
   border-color: rgba(150, 190, 255, 0.6);
-  box-shadow: 0 0 18px rgba(80, 140, 255, 0.35);
 }
 .comic-cover-img {
   width: 100%;

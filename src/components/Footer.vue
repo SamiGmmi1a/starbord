@@ -32,10 +32,8 @@
   .footer-connect {
     background: #0F1116;
     color: #fff;
-    padding: 0;
     border-top: 1px solid #222;
     font-family: 'Inter', Arial, sans-serif;
-    position: relative;
     min-height: 220px;
     display: flex;
     flex-direction: column;

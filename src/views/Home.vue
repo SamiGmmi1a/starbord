@@ -189,7 +189,6 @@ export default {
           }
         .shop-choose-btn {
           width: 100%;
-          display: block;
           background: rgba(80, 140, 255, 0.08);
           color: #a9c7ff;
           border: 1px solid rgba(120, 170, 255, 0.25);
@@ -198,21 +197,17 @@ export default {
           font-weight: 600;
           padding: 0.7rem 0;
           margin-top: 0.2rem;
-          cursor: pointer;
           transition: var(--transition);
           letter-spacing: 0.01em;
-          outline: none;
-          box-shadow: 0 2px 12px rgba(80,140,255,0.08);
           text-align: center;
-          text-decoration: none !important;
+          text-decoration: none;
         }
         .shop-choose-btn:hover,
         .shop-choose-btn:focus {
           color: #fff;
           background: rgba(80, 140, 255, 0.18);
           border-color: rgba(150, 190, 255, 0.6);
-          box-shadow: 0 0 12px rgba(80, 140, 255, 0.35);
-          text-decoration: none !important;
+          text-decoration: none;
         }
     .shop-section {
       margin: 4rem auto 0 auto;
@@ -235,7 +230,6 @@ export default {
     }
     .shop-card {
       background: none;
-      box-shadow: none;
       border: none;
       display: flex;
       flex-direction: column;
@@ -485,32 +479,8 @@ export default {
   width: 100%;
   display: flex;
   margin-top: 0.7rem;
-  margin-bottom: 0.2rem;
 }
 
-.fav-btn {
-  position: static !important;
-  font-size: 1.15rem;
-  color: #b3b3b3;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.2s;
-  padding: 0;
-  line-height: 1;
-  font-weight: 400;
-  -webkit-text-stroke: 1px #b3b3b3;
-}
 
-.fav-btn.active {
-  color: #FFD700;
-  -webkit-text-stroke: 0;
-}
-
-.fav-btn span {
-  font-size: 1.15rem;
-  font-weight: 400;
-  letter-spacing: 0;
-}
 
 </style>
