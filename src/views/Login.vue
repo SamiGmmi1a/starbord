@@ -234,3 +234,25 @@ export default {
 }
 
 </style>
+<style scoped>
+@media (max-width: 700px) {
+  .login-card {
+    padding: 1.2rem;
+  }
+  .login-header h2 {
+    font-size: 1.3rem;
+  }
+}
+@media (max-width: 480px) {
+  .login-card {
+    padding: 0.7rem;
+  }
+  .login-header h2 {
+    font-size: 1.1rem;
+  }
+  .login-main-btn, .login-submit {
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+  }
+}
+</style>

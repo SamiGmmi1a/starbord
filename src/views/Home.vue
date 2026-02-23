@@ -480,7 +480,4 @@ export default {
   display: flex;
   margin-top: 0.7rem;
 }
-
-
-
 </style>

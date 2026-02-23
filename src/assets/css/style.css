@@ -1,3 +1,175 @@
+/* ===== RESPONSIVE CUSTOM ===== */
+@media (max-width: 1100px) {
+  .bd-grid, .shop-grid {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.6rem !important;
+    border-radius: 999px !important;
+    min-width: 0 !important;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .bd-grid, .shop-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem;
+  }
+  .header-inner {
+    align-items: center !important;
+  }
+  .user-info {
+    align-items: center !important;
+    display: flex !important;
+  }
+  .logo, .user-name, .profile-btn, .login-btn {
+    vertical-align: middle !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+  .logo {
+    font-size: 1.15rem !important;
+  }
+  .user-name {
+    font-size: 1rem !important;
+  }
+  .login-btn {
+    font-size: 1rem !important;
+    padding: 0.7rem 1.5rem !important;
+    border-radius: 999px !important;
+  }
+  .profile-btn {
+    font-size: 1rem !important;
+    padding: 0.3rem 1rem !important;
+    border-radius: 999px !important;
+  }
+  .bd-search-bar {
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+    position: relative !important;
+  }
+  .bd-search-icon {
+    right: 0.9rem !important;
+    font-size: 1.1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+  .bd-search-input {
+    padding-right: 2.2rem !important;
+  }
+  .bd-search-bar {
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+  }
+  .bd-filter-bar {
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+  }
+  .bd-filter-bar, .bd-filter-label, .bd-filter-link {
+    font-size: 0.85rem !important;
+  }
+  .bd-filter-link {
+    padding: 0.15rem 0.5rem !important;
+    border-radius: 999px !important;
+  }
+  .bd-filter-label {
+    margin-right: 0.3rem !important;
+  }
+  .bd-filter-bar {
+    gap: 0.3rem !important;
+  }
+  .shop-choose-btn {
+    font-size: 0.85rem !important;
+    padding: 0.5rem 0.7rem !important;
+    border-radius: 999px !important;
+    min-width: 0 !important;
+    max-width: 100%;
+  }
+  .shop-card {
+    padding: 0.3rem !important;
+  }
+  .shop-title-img {
+    font-size: 0.95rem !important;
+  }
+  .shop-price {
+    font-size: 0.95rem !important;
+  }
+  .bd-search-bar {
+    display: flex !important;
+    flex-direction: column !important;
+    margin-bottom: 1rem !important;
+  }
+  .bd-toolbar {
+    flex-direction: column !important;
+    gap: 0.7rem !important;
+    align-items: stretch !important;
+  }
+  .bd-filter-bar {
+    margin-top: 0 !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
+  }
+}
+  .shop-card, .bd-card {
+    width: 100% !important;
+    min-width: 0;
+    max-width: 100vw;
+  }
+  .shop-img, .bd-img {
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0;
+    max-width: 100vw;
+  }
+  .shop-section, .bd-grid {
+    padding: 0 0.5rem 2rem 0.5rem !important;
+  }
+  .reader-content, .chapter-content-col, .profil-page, .login-card {
+    padding: 1rem !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+  }
+  .reader-header, .site-header {
+    padding: 0.7rem 1.5rem 0.7rem 1.5rem !important;
+    font-size: 1rem !important;
+  }
+  .chapter-back-btn, .reader-back-btn, .profil-submit, .login-btn, .shop-choose-btn {
+    font-size: 1rem !important;
+    padding: 0.7rem 1.2rem !important;
+  }
+  .chapter-back-content, .reader-bottom-col {
+    gap: 0.7rem !important;
+  }
+  .footer-connect, .footer-main, .footer-bottom {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem !important;
+  }
+  h2 {
+    font-size: 1rem !important;
+  }
+  .shop-title, .bd-title {
+    font-size: 1rem !important;
+  }
+  .shop-img, .bd-img {
+    border-radius: 0.4rem !important;
+  }
+  .footer-title {
+    font-size: 1.3rem !important;
+  }
+  .footer-logo {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .footer-logo img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
 /* ===== VARIABLES CSS ===== */
 :root {
   --primary: #00a8ff;
@@ -48,6 +220,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.2;
+  margin-bottom: 2rem;
 }
 
 h1 {
@@ -177,6 +350,13 @@ main.container {
     padding: 24px;
   }
 }
+
+  .bd-search-icon {
+    right: 1.5rem !important;
+    font-size: 1.1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
 
 @media (min-width: 1400px) {
   .container {

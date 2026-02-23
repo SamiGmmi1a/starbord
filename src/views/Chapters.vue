@@ -290,3 +290,43 @@ export default {
   border: none; 
 }
 </style>
+<style scoped>
+@media (max-width: 900px) {
+  .chapter-layout {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .chapter-list-section {
+    padding: 1.2rem 0.5rem;
+  }
+}
+@media (max-width: 700px) {
+  .chapters-page {
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+  .chapter-list-title {
+    font-size: 1.1rem;
+  }
+  .chapter-back-btn {
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
+  }
+  .chapter-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .chapter-list-section {
+    padding: 0.7rem 0.2rem;
+  }
+  .chapter-list-title {
+    font-size: 0.97rem;
+  }
+  .chapter-back-btn {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.7rem;
+  }
+}
+</style>

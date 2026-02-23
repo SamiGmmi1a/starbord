@@ -191,3 +191,30 @@ export default {
 
 
 </style>
+<style scoped>
+@media (max-width: 700px) {
+  .profil-page {
+    min-width: unset;
+    max-width: 98vw;
+    padding: 2rem 0.5rem;
+    font-size: 1rem;
+  }
+  .profil-form {
+    gap: 1.2rem;
+  }
+  .profile-pic-preview {
+    width: 48px;
+    height: 48px;
+  }
+}
+@media (max-width: 480px) {
+  .profil-page {
+    padding: 1rem 0.2rem;
+    font-size: 0.97rem;
+  }
+  .profil-back, .profil-submit, .login-btn {
+    font-size: 0.95rem;
+    padding: 6px 8px;
+  }
+}
+</style>

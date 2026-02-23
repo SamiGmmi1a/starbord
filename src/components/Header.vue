@@ -71,7 +71,6 @@ export default {
 }
 
 
-
 .header-inner {
   display: flex;
   flex-wrap: wrap;
@@ -147,21 +146,87 @@ export default {
   box-shadow: 0 0 12px rgba(80, 140, 255, 0.35);
 }
 
+
+@media (max-width: 900px) {
+  .header-inner {
+    gap: 4px;
+  }
+  .logo {
+    font-size: 17px;
+  }
+  .user-info {
+    min-height: 38px;
+    padding: 0.3rem 0.5rem;
+    gap: 0.7rem;
+  }
+  .profile-pic {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+  }
+  .user-name {
+    font-size: 0.97rem;
+    min-width: 80px;
+    height: 32px;
+  }
+  .profile-btn, .login-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
 @media (max-width: 600px) {
-  .login-btn {
-    padding: 6px 12px;
-    font-size: 13px;
+  .site-header {
+    padding: 0.5rem 0.2rem;
   }
-
-  .search {
-    flex: 1 1 100%;
-    order: 3;
-    margin: 0;
+  .container {
+    padding: 0 2px;
   }
-
-  .login-btn {
+  .header-inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+  }
+  .logo {
+    font-size: 15px;
+    text-align: left;
+    margin-bottom: 0;
+    order: 1;
+  }
+  .spacer {
     order: 2;
-    margin-left: 0;
+  }
+  .user-info, .login-btn {
+    order: 3;
+    margin-left: auto;
+  }
+  .search {
+    margin: 0.5rem 0 0.5rem 0;
+    order: 4;
+    width: 100%;
+  }
+  .user-info {
+    flex-direction: row;
+    justify-content: flex-end;
+    min-height: 32px;
+    padding: 0.2rem 0.2rem;
+    gap: 0.4rem;
+  }
+  .profile-pic {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    min-height: 26px;
+  }
+  .user-name {
+    font-size: 0.9rem;
+    min-width: 60px;
+    height: 26px;
+  }
+  .profile-btn, .login-btn {
+    font-size: 11px;
+    padding: 4px 7px;
   }
 }
 
@@ -219,4 +284,88 @@ export default {
   }
   
 
+</style>
+<style scoped>
+@media (max-width: 900px) {
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .logo {
+    font-size: 17px;
+  }
+  .user-info {
+    min-height: 38px;
+    padding: 0.3rem 0.5rem;
+    gap: 0.7rem;
+  }
+  .profile-pic {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+  }
+  .user-name {
+    font-size: 0.97rem;
+    min-width: 80px;
+    height: 32px;
+  }
+  .profile-btn, .login-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+@media (max-width: 600px) {
+  .site-header {
+    padding: 0.5rem 0.2rem;
+  }
+  .container {
+    padding: 0 2px;
+  }
+  .header-inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+  }
+  .logo {
+    font-size: 15px;
+    text-align: left;
+    margin-bottom: 0;
+    order: 1;
+  }
+  .spacer {
+    order: 2;
+  }
+  .user-info, .login-btn {
+    order: 3;
+    margin-left: auto;
+  }
+  .search {
+    margin: 0.5rem 0 0.5rem 0;
+    order: 4;
+    width: 100%;
+  }
+  .user-info {
+    flex-direction: row;
+    justify-content: flex-end;
+    min-height: 32px;
+    padding: 0.2rem 0.2rem;
+    gap: 0.4rem;
+  }
+  .profile-pic {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    min-height: 26px;
+  }
+  .user-name {
+    font-size: 0.9rem;
+    min-width: 60px;
+    height: 26px;
+  }
+  .profile-btn, .login-btn {
+    font-size: 11px;
+    padding: 4px 7px;
+  }
+}
 </style>

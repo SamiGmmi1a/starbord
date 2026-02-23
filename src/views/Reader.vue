@@ -244,3 +244,39 @@ export default {
   }
 }
 </style>
+<style scoped>
+@media (max-width: 900px) {
+  .reader-content {
+    max-width: 98vw;
+    padding: 2vw 0 3vw 0;
+  }
+}
+@media (max-width: 700px) {
+  .reader-header {
+    font-size: 1rem;
+    padding: 0.7rem 1rem 0.7rem 1rem;
+  }
+  .reader-content {
+    padding: 1vw 0 2vw 0;
+  }
+  .scan-img {
+    border-radius: 6px;
+  }
+  .premium-cta {
+    padding: 1.5rem 0.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .reader-header {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.5vw 0.5rem 0.5vw;
+  }
+  .reader-promo {
+    font-size: 0.97rem;
+  }
+  .premium-btn {
+    font-size: 0.97rem;
+    padding: 0.5rem 1.2rem;
+  }
+}
+</style>
