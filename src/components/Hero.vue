@@ -80,6 +80,64 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 700px) {
+  .hero-content {
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    padding-bottom: 1.2rem !important;
+    height: 100% !important;
+  }
+  .hero-text-bg {
+    padding: 1.2rem 0.5rem 0.7rem 0.5rem !important;
+    max-width: 100vw !important;
+    margin: 0 auto !important;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.65) 40%,
+      rgba(0, 0, 0, 0.2) 75%,
+      rgba(0, 0, 0, 0) 100%
+    ) !important;
+  }
+  .hero-title {
+    font-size: 2.1rem !important;
+    text-align: left !important;
+    margin-bottom: 0.7rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.5px !important;
+    color: #fff !important;
+  }
+  .hero-subtitle {
+    font-size: 1.05rem !important;
+    color: #fff !important;
+    margin-bottom: 1.2rem !important;
+    text-align: left !important;
+    font-weight: 400 !important;
+  }
+  .hero-btn {
+    font-size: 1rem !important;
+    padding: 0.7rem 2.2rem !important;
+    border-radius: 999px !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    display: block !important;
+    width: auto !important;
+    text-align: center !important;
+    box-shadow: 0 2px 12px rgba(0,168,255,0.18) !important;
+    background: #fff !important;
+    color: #0F1116 !important;
+    font-weight: 700 !important;
+  }
+  .hero-btn-absolute {
+    position: static !important;
+    transform: none !important;
+    left: unset !important;
+    bottom: unset !important;
+    margin: 0 auto !important;
+    z-index: 20 !important;
+  }
+}
 .hero {
   position: relative;
   width: 100%;
@@ -113,7 +171,6 @@ export default {
   height: 100%;
   min-height: 420px;
   object-fit: cover;
-  border-radius: var(--radius);
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
   z-index: 2;
@@ -130,7 +187,6 @@ export default {
   width: 100%;
   height: 340px;
   object-fit: cover;
-  border-radius: var(--radius);
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
 
