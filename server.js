@@ -22,12 +22,32 @@ app.use(express.static('dist'))
 
 // API d'authentification code/email
 app.post('/api/login', (req, res) => {
+  // API pour mettre à jour le prénom d'un utilisateur
+  app.post('/api/update-profile', (req, res) => {
+    const { email, prenom } = req.body;
+    if (!email || !prenom) {
+      return res.status(400).json({ success: false, message: 'Email et prénom requis.' });
+    }
+    db.run('UPDATE users SET prenom = ? WHERE email = ?', [prenom, email], function(err) {
+      if (err) {
+        return res.status(500).json({ success: false, message: 'Erreur lors de la mise à jour.' });
+      }
+      // Met à jour aussi dans la table codes si besoin
+      db.run('UPDATE codes SET prenom_associe = ? WHERE email_associe = ?', [prenom, email], function(err2) {
+        if (err2) {
+          // On ne bloque pas la réponse si la table codes échoue
+          return res.json({ success: true, message: 'Profil mis à jour (utilisateur). Erreur sur codes.' });
+        }
+        return res.json({ success: true, message: 'Profil mis à jour.' });
+      });
+    });
+  });
   const { email, prenom, code } = req.body;
   if (!email || !prenom || !code) {
     return res.status(400).json({ success: false, message: 'Email, prénom et code requis.' });
   }
   // Vérifie le format du code
-  if (!/^STB-\\d{4}01$/.test(code)) {
+  if (!/^STB-\d{4}01$/.test(code)) {
     return res.status(400).json({ success: false, message: 'Format de code invalide.' });
   }
   db.get('SELECT * FROM codes WHERE code = ?', [code], (err, codeRow) => {
