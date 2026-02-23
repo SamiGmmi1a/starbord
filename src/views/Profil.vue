@@ -57,8 +57,24 @@ export default {
   },
   methods: {
     async saveProfile() {
-      this.message = 'Profil mis à jour !';
+      this.message = '';
+      try {
+        const response = await fetch('/api/update-profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: this.email, prenom: this.prenom })
+        });
+        const data = await response.json();
+        if (data.success) {
+          this.message = 'Profil mis à jour !';
+        } else {
+          this.message = data.message || 'Erreur lors de la mise à jour.';
+        }
+      } catch (e) {
+        this.message = 'Erreur serveur lors de la mise à jour.';
+      }
     },
+    
     logout() {
       this.authStore.logout();
       this.$router.push('/');
