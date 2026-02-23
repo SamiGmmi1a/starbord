@@ -1,16 +1,20 @@
 <template>
   <div class="chapters-page">
+
+  <div class="story-info-header">
+     <h2 class="chapter-list-title">{{ comic.title }}</h2>
+       <button class="close-btn" @click="$router.push('/')" title="Retour à l'accueil">✕</button>
+     </div>
+
     <div class="chapter-layout" v-if="comic">
-      <aside class="chapter-cover">
+ 
+          <aside class="chapter-cover">
         <img :src="comic.cover" :alt="comic.title" class="comic-cover-img" />
       </aside>
       <div class="chapter-content-col">
         <div class="story-info-section">
-          <div class="story-info-header">
-            <h2 class="chapter-list-title">{{ comic.title }}</h2>
-            <button class="close-btn" @click="$router.push('/')" title="Retour à l'accueil">✕</button>
-          </div>
-          <div class="chapter-list-author">par {{ comic.author }}</div>
+
+          <div class="chapter-list-author">Par {{ comic.author }}</div>
           <div class="chapter-list-genre">Genre : {{ comic.genre || 'Action, Science-fiction, Aventure' }}</div>
           <div class="chapter-list-description">{{ comic.description }}</div>
         </div>
@@ -130,9 +134,6 @@ export default {
   border-radius: 8px;
 }
 
-.story-info-section {
-  margin-bottom: 2rem;
-}
 .story-info-header {
   display: flex;
   align-items: center;
@@ -195,7 +196,7 @@ export default {
 }
 .chapter-list-author {
   color: #bbb;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   margin-bottom: 0.1rem;
 }
 .chapter-list-genre {
@@ -224,9 +225,7 @@ export default {
   padding: 0;
   margin: 0;
 }
-.chapter-list-item {
-  margin-bottom: 1rem;
-}
+
 .chapter-list-row {
   display: flex;
   align-items: center;
@@ -289,8 +288,7 @@ export default {
   background: none;
   border: none; 
 }
-</style>
-<style scoped>
+
 @media (max-width: 900px) {
   .chapter-layout {
     flex-direction: column;
@@ -302,21 +300,141 @@ export default {
 }
 @media (max-width: 700px) {
   .chapters-page {
-    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    padding: 0 !important;
+    background: #0F1116 !important;
+  }
+  .chapter-layout {
+    flex-direction: column !important;
+    gap: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .story-info-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0 !important;
+    padding: 0.7rem 1rem 0.2rem 1rem !important;
+    background: #0F1116 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+    min-height: 56px !important;
+    border-bottom: 1px solid #23242a33 !important;
   }
   .chapter-list-title {
-    font-size: 1.1rem;
+    font-size: 1.25rem !important;
+    font-weight: 800 !important;
+    color: #fff !important;
+    margin: 0 !important;
+    letter-spacing: 0.01em !important;
   }
-  .chapter-back-btn {
-    font-size: 1rem;
-    padding: 0.7rem 1.2rem;
+  .close-btn {
+    font-size: 2rem !important;
+    color: #fff !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-left: 1rem !important;
+    text-decoration: none !important;
+    transition: color 0.2s !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    line-height: 1 !important;
   }
-  .chapter-list-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  .close-btn:hover {
+    color: #00bfff !important;
+  }
+  .chapter-cover {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: #0F1116 !important;
+  }
+  .comic-cover-img {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    display: block !important;
+  }
+  .chapter-content-col {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #0F1116 !important;
+  }
+  .story-info-section {
+    padding: 1.2rem 1rem 0.5rem 1rem !important;
+    background: #0F1116 !important;
+    border-bottom: 1px solid #23242a33 !important;
+  }
+  .chapter-list-author {
+    font-size: 1.3rem !important;
+    color: #b3b3b3 !important;
+  }
+
+  .chapter-list-genre {
+    color: #7fd6ff !important;
+    font-size: 1rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .chapter-list-description {
+    color: #e0e0e0 !important;
+    font-size: 1.05rem !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+  .chapter-list-section {
+    background: rgba(20, 22, 30, 0.85) !important;
+    border-radius: 12px !important; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+  }
+  .chapter-list {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .chapter-list-row {
+    display: flex !important;
+    align-items: center !important;
+    border-radius: 10px !important;
+    padding: 0.7rem 1rem !important;
+  }
+  .chapter-thumb {
+    margin-right: 0.7rem !important;
+  }
+  .chapter-thumb-img {
+    width: 56px !important;
+    height: 56px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15) !important;
+    margin-bottom: 0 !important;
+  }
+  .chapter-link {
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 1.1rem !important;
+    padding: 0rem 0.5rem !important;
+    display: block !important;
+    transition: color 0.2s !important;
   }
 }
+
 @media (max-width: 480px) {
   .chapter-list-section {
     padding: 0.7rem 0.2rem;

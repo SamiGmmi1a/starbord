@@ -116,7 +116,36 @@
   .footer-left .footer-link {
     margin-left: 0;
   }
+
+  @media (max-width: 700px) {
+  .footer-bottom {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    padding: 0.5rem 0.2rem 0.7rem 0.2rem !important;
+    font-size: 0.93rem !important;
+    gap: 0.2rem !important;
+  }
+  .footer-left, .footer-right {
+    flex: unset !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .footer-link {
+    font-size: 0.93rem !important;
+    margin: 0 0.3rem !important;
+    padding: 0.1rem 0.7rem !important;
+    display: inline-block !important;
+  }
+}
+
 </style>
+
+
+
+
 <style scoped>
 @media (max-width: 900px) {
   .footer-title {

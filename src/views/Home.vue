@@ -19,13 +19,16 @@
           </svg>
         </span>
       </div>
-      <div class="bd-filter-bar">
-        <span class="bd-filter-label">Trier par genre :</span>
-        <a href="#" :class="['bd-filter-link', { active: selectedGenre === '' }]" @click.prevent="selectedGenre = ''">Tous</a>
-        <a href="#" :class="['bd-filter-link', { active: selectedGenre === 'Action' }]" @click.prevent="selectedGenre = 'Action'">Action</a>
-        <a href="#" :class="['bd-filter-link', { active: selectedGenre === 'Aventure' }]" @click.prevent="selectedGenre = 'Aventure'">Aventure</a>
-        <a href="#" :class="['bd-filter-link', { active: selectedGenre === 'Science-fiction' }]" @click.prevent="selectedGenre = 'Science-fiction'">Science-fiction</a>
+         <div class="bd-filter-bar">
+      <div class="bd-filter-label">Trier par genre :</div>
+      <div class="bd-filter-links">
+        <a class="bd-filter-link" href="#">Tous</a>
+        <a class="bd-filter-link" href="#">Action</a>
+        <a class="bd-filter-link" href="#">Aventure</a>
+        <a class="bd-filter-link" href="#">Science-fiction</a>
+        <!-- ... -->
       </div>
+    </div>
     </div>
 
 
@@ -450,16 +453,31 @@ export default {
   display: flex;
   align-items: center;
 }
+
 .bd-filter-bar {
   display: flex;
   align-items: center;
   gap: 0.7rem;
 }
 
+@media (max-width: 700px) {
+  .bd-filter-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.2rem !important;
+  }
+
+
+  .bd-filter-links {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+  }
+}
+
 .bd-filter-label {
   color: #b3b3b3;
-  font-size: 1.05rem;
-  margin-right: 0.5rem;
+  font-size: 1rem;
 }
 .bd-filter-link {
   color: #a9c7ff;
