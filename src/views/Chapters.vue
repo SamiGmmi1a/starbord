@@ -36,6 +36,7 @@
           </ul>
         </section>
       </div>
+      
     </div>
     <div v-else>
       <div v-if="error" class="error-message">
@@ -47,6 +48,13 @@
       </div>
     </div>
   </div>
+        <!-- Bouton retour Home -->
+      <div class="chapter-back-row">
+        <div class="chapter-back-content">
+          <div class="chapter-back-text">D'autres histoires incroyables t'attendent ! Découvre-les maintenant !</div>
+          <button class="chapter-back-btn" @click="$router.push('/')">← Retour à l'accueil</button>
+        </div>
+      </div>
 </template>
 
 <script>
@@ -76,6 +84,48 @@ export default {
 </script>
 
 <style scoped>
+.chapter-back-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 3.5rem;
+  margin-bottom: 2.5rem;
+}
+.chapter-back-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+.chapter-back-text {
+  color: #a9c7ff;
+  font-size: 1.18rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.chapter-back-btn {
+  padding: 1.1rem 2.8rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1.5px solid rgba(120, 170, 255, 0.25);
+  color: #a9c7ff;
+  background: rgba(80, 140, 255, 0.13);
+  backdrop-filter: blur(6px);
+  transition: var(--transition);
+  box-shadow: 0 2px 18px rgba(80,140,255,0.13);
+  margin-top: 0.2rem;
+}
+.chapter-back-btn:hover, .chapter-back-btn:focus {
+  color: #fff;
+  background: rgba(80, 140, 255, 0.22);
+  border-color: rgba(150, 190, 255, 0.6);
+  box-shadow: 0 0 18px rgba(80, 140, 255, 0.35);
+}
 .comic-cover-img {
   width: 100%;
   height: auto;

@@ -57,10 +57,9 @@
     <section class="shop-section">
       <h2 class="shop-title">choisissez l'illustration qui vous ressemble</h2>
       <div class="shop-grid">
-        <router-link
+        <div
           v-for="product in shopProducts"
           :key="product.id"
-          :to="product.link"
           class="shop-card shop-link"
         >
           <div class="shop-title-img">{{ product.title }}</div>
@@ -72,8 +71,13 @@
             height="305"
           />
           <div class="shop-price">25.00€</div>
-          <button class="shop-choose-btn">je choisis</button>
-        </router-link>
+          <a
+            class="shop-choose-btn"
+            :href="product.link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >je choisis</a>
+        </div>
       </div>
     </section>
   </div>
@@ -93,14 +97,14 @@ export default {
     return {
       // La liste des BD est désormais gérée par le store comics
       shopProducts: [
-        { id: 'prod1', title: 'Atomic Maid', img: '/assets/img/produits/atomic_maid.jpg', link: '/boutique/atomic_maid' },
-        { id: 'prod2', title: 'Atomic Maid Int', img: '/assets/img/produits/detenu_278.jpg', link: '/boutique/atomic_maid_int' },
-        { id: 'prod3', title: 'Bloody Maid Int', img: '/assets/img/produits/fige_dans_lacier.jpg', link: '/boutique/bloody_maid_int' },
-        { id: 'prod4', title: 'Détenu 278', img: '/assets/img/produits/bloody_maid.jpg', link: '/boutique/detenu_278' },
-        { id: 'prod5', title: 'Détenu 278 Int', img: '/assets/img/produits/fonce_crois_en_toi.jpg', link: '/boutique/detenu_278_int' },
-        { id: 'prod6', title: "Figé dans l'acier", img: "/assets/img/produits/pensez_grand.jpg", link: '/boutique/fige_dans_l_acier' },
-        { id: 'prod7', title: "Figé dans l'acier Int", img: "/assets/img/produits/fige_dans_l'acier_int.jpg", link: '/boutique/fige_dans_l_acier_int' },
-        { id: 'prod8', title: 'Fonce crois en toi', img: '/assets/img/produits/fonce_crois_en_toi.jpg', link: '/boutique/fonce_crois_en_toi' }
+        { id: 'prod1', title: 'Atomic Maid', img: '/assets/img/produits/atomic_maid.jpg', link: 'https://starbord.shop/products/tenace?variant=55400992637252' },
+        { id: 'prod2', title: 'Détenu 278', img: '/assets/img/produits/detenu_278.jpg', link: 'https://starbord.shop/products/detenu-278?variant=56241279467844' },
+        { id: 'prod3', title: 'Pensez Grand', img: '/assets/img/produits/pensez_grand_1.jpg', link: 'https://starbord.shop/products/pensez-grand?variant=56428021645636' },
+        { id: 'prod4', title: 'Bloody Maid', img: '/assets/img/produits/bloody_maid.jpg', link: 'https://starbord.shop/products/vaincre?variant=55400980480324' },
+        { id: 'prod5', title: 'Fonce et Crois en Toi', img: '/assets/img/produits/fonce_crois_en_toi.jpg', link: '/boutique/detenu_278_int' },
+        { id: 'prod6', title: "Sunflower", img: "/assets/img/produits/pensez_grand.jpg", link: 'https://starbord.shop/products/relever-un-defi-chaque-jour?variant=55683308749124' },
+        { id: 'prod7', title: "Figé dans l'acier Int", img: "/assets/img/produits/fige_dans_l'acier.jpg", link: 'https://starbord.shop/products/fige-dans-lacier?variant=56241295884612' },
+        { id: 'prod8', title: 'Rêve', img: '/assets/img/produits/reve_vise_fonce.jpg', link: 'https://starbord.shop/products/reve-vise-fonce?variant=55451843952964' }
       ],
       searchQuery: '',
       selectedGenre: '',
@@ -185,25 +189,30 @@ export default {
           }
         .shop-choose-btn {
           width: 100%;
-          background: #fff;
-          color: #0F1116;
-          border: none;
-          border-radius: 0.7rem 0.7rem 0.7rem 0.7rem;
+          display: block;
+          background: rgba(80, 140, 255, 0.08);
+          color: #a9c7ff;
+          border: 1px solid rgba(120, 170, 255, 0.25);
+          border-radius: 999px;
           font-size: 1.08rem;
           font-weight: 600;
           padding: 0.7rem 0;
           margin-top: 0.2rem;
           cursor: pointer;
-          transition: background 0.18s, color 0.18s;
+          transition: var(--transition);
           letter-spacing: 0.01em;
           outline: none;
-          box-shadow: none;
-          display: block;
+          box-shadow: 0 2px 12px rgba(80,140,255,0.08);
+          text-align: center;
+          text-decoration: none !important;
         }
         .shop-choose-btn:hover,
         .shop-choose-btn:focus {
-          background: #2563eb;
           color: #fff;
+          background: rgba(80, 140, 255, 0.18);
+          border-color: rgba(150, 190, 255, 0.6);
+          box-shadow: 0 0 12px rgba(80, 140, 255, 0.35);
+          text-decoration: none !important;
         }
     .shop-section {
       margin: 4rem auto 0 auto;
