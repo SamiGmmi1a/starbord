@@ -1,4 +1,18 @@
+/* Header sticky et blur pour Chapters.vue */
+.story-info-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 17, 22, 0.55);
+  backdrop-filter: blur(10px);
+  transition: background 0.3s, backdrop-filter 0.3s;
+}
 @media (max-width: 700px) {
+    .bd-filter-label {
+      text-align: center !important;
+      width: 100%;
+      display: block;
+    }
   .bd-grid, .shop-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 1rem;

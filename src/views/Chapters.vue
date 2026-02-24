@@ -1,14 +1,14 @@
 <template>
-  <div class="chapters-page">
 
-  <div class="story-info-header">
-     <h2 class="chapter-list-title">{{ comic.title }}</h2>
-       <button class="close-btn" @click="$router.push('/')" title="Retour à l'accueil">✕</button>
-     </div>
+    <div v-if="comic">
+      <header :class="['story-info-header', { 'header-scrolled': isScrolled }]">
+        <h2 class="chapter-list-title">{{ comic.title }}</h2>
+        <button class="close-btn" @click="$router.push('/')" title="Retour à l'accueil">✕</button>
+      </header>
 
     <div class="chapter-layout" v-if="comic">
  
-          <aside class="chapter-cover">
+    <aside class="chapter-cover">
         <img :src="comic.cover" :alt="comic.title" class="comic-cover-img" />
       </aside>
       <div class="chapter-content-col">
@@ -51,14 +51,15 @@
         <p>Chargement...</p>
       </div>
     </div>
-  </div>
+
         <!-- Bouton retour Home -->
       <div class="chapter-back-row">
         <div class="chapter-back-content">
-          <div class="chapter-back-text">D'autres histoires incroyables t'attendent ! Découvre-les maintenant !</div>
+          <div class="chapter-back-text">D'autres histoires incroyables t'attendent !<br> Découvre-les maintenant !</br></div>
           <button class="chapter-back-btn" @click="$router.push('/')">← Retour à l'accueil</button>
         </div>
       </div>
+    </div>
 </template>
 
 <script>
@@ -66,7 +67,8 @@ export default {
   data() {
     return {
       comic: null,
-      error: ''
+      error: '',
+      isScrolled: false
     }
   },
   async mounted() {
@@ -82,6 +84,15 @@ export default {
     } catch (e) {
       this.comic = null
       this.error = 'Erreur lors du chargement du comic.'
+    }
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
+  },
+  methods: {
+    handleScroll() {
+      this.isScrolled = window.scrollY > 10
     }
   }
 }
@@ -104,15 +115,15 @@ export default {
 }
 .chapter-back-text {
   color: #a9c7ff;
-  font-size: 1.18rem;
+  font-size: 1rem;
   font-weight: 600;
   text-align: center;
   margin-bottom: 0.5rem;
 }
 .chapter-back-btn {
-  padding: 1.1rem 2.8rem;
+  padding: 0.6rem 1.5rem;
   border-radius: 999px;
-  font-size: 1.13rem;
+  font-size: 0.98rem;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
@@ -134,11 +145,28 @@ export default {
   border-radius: 8px;
 }
 
+/* Header sticky et blur identique à Reader.vue */
 .story-info-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.5rem;
+  padding: 1.2rem 2.5vw 1.2rem 2.5vw;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: rgba(15, 17, 22, 0.95);
+  transition: background 0.3s, backdrop-filter 0.3s;
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  backdrop-filter: blur(10px);
+}
+.story-info-header.header-scrolled {
+  background: rgba(15, 17, 22, 0.2);
+  backdrop-filter: blur(16px);
 }
 .chapter-list-description {
   color: #e0e0e0;
@@ -153,6 +181,7 @@ export default {
   padding: 2.5rem 2rem 2rem 2rem;
   min-height: 100vh;
   box-sizing: border-box;
+  overflow: visible;
 }
 
 .chapter-layout {
@@ -299,6 +328,13 @@ export default {
   }
 }
 @media (max-width: 700px) {
+    .chapter-back-text {
+      font-size: 0.93rem !important;
+    }
+    .chapter-back-btn {
+      font-size: 0.93rem !important;
+      padding: 0.5rem 1rem !important;
+    }
   .chapters-page {
     padding: 0 !important;
     background: #0F1116 !important;
@@ -311,20 +347,18 @@ export default {
     margin: 0 !important;
     padding: 0 !important;
   }
+  
   .story-info-header {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 0 !important;
-    padding: 0.7rem 1rem 0.2rem 1rem !important;
-    background: #0F1116 !important;
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 10 !important;
-    min-height: 56px !important;
-    border-bottom: 1px solid #23242a33 !important;
+    padding: 1rem !important;
+    font-size: 1.1rem;
+    backdrop-filter: blur(10px);
   }
+  .story-info-header.header-scrolled {
+    background: rgba(15, 17, 22, 0.2);
+    backdrop-filter: blur(16px);
+  }
+
+
   .chapter-list-title {
     font-size: 1.25rem !important;
     font-weight: 800 !important;

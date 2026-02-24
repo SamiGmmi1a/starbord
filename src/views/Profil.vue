@@ -141,12 +141,12 @@ export default {
   border-color: rgba(140, 180, 255, 0.4);
 }
 .profil-page {
-  max-width: 600px;
-  min-width: 500px;
+  max-width: 700px;
+  min-width: 420px;
   margin: 3rem auto;
   background: var(--bg-card);
   border-radius: var(--radius);
-  padding: 3rem 2rem;
+  padding: 3.5rem 2.5rem;
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   font-size: 1.15rem;
 }
@@ -195,9 +195,11 @@ export default {
 @media (max-width: 700px) {
   .profil-page {
     min-width: unset;
-    max-width: 98vw;
-    padding: 2rem 0.5rem;
+    max-width: 99vw;
+    padding: 1.2rem 0.3rem;
+    border-radius: 10px;
     font-size: 1rem;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
   }
   .profil-form {
     gap: 1.2rem;
@@ -209,7 +211,8 @@ export default {
 }
 @media (max-width: 480px) {
   .profil-page {
-    padding: 1rem 0.2rem;
+    padding: 0.7rem 0.1rem;
+    border-radius: 6px;
     font-size: 0.97rem;
   }
   .profil-back, .profil-submit, .login-btn {
