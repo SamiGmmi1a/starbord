@@ -54,6 +54,18 @@
     </button>
   </div>
 
+  <div class="stb-presentation">
+    <div class="stb-presentation-img">
+      <img src="/assets/img/presentation.png" alt="Présentation de Starbord" width="400" height="300">
+    </div>
+    <div class="stb-presentation-text">
+      <h2>Nous somme Starbord</h2>
+      <p>...</p>
+      <h3>Comment ça marche</h3>
+      <p>...</p>
+    </div>
+  </div>
+
       </router-link>
     </div>
     <!-- Section Boutique -->
@@ -498,4 +510,82 @@ export default {
   display: flex;
   margin-top: 0.7rem;
 }
+/* Présentation STARBORD */
+.stb-presentation {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  gap: 2.5rem;
+  background: var(--glass);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 2.5rem 2rem;
+  margin: 2.5rem auto 1.5rem auto;
+  max-width: 900px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.stb-presentation-img {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.13);
+  overflow: hidden;
+}
+.stb-presentation-img img {
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+}
+.stb-presentation-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.stb-presentation-content h2 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1.2rem;
+}
+.stb-presentation-content p {
+  font-size: 1.15rem;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .stb-presentation {
+    max-width: 98vw;
+    padding: 2rem 3vw;
+    border-radius: 14px;
+    gap: 1.5rem;
+  }
+}
+@media (max-width: 700px) {
+  .stb-presentation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.2rem 4vw;
+    border-radius: 10px;
+    gap: 1.2rem;
+  }
+  .stb-presentation-content h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .stb-presentation-content p {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .stb-presentation-img {
+    max-width: 90vw;
+    margin-bottom: 0.7rem;
+  }
+}
+
 </style>

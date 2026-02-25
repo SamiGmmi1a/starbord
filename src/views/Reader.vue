@@ -16,20 +16,17 @@
           >
           <div v-else-if="!isLogged && index === freeLimit" :key="'premium-cta'" class="premium-cta">
             <div>
-              <p>Connectez-vous pour lire la totalité de l'histoire&nbsp;!</p>
+              <p>Connectez-vous pour lire la totalité de l'histoire</p>
               <router-link to="/login" class="premium-btn">Se connecter</router-link>
             </div>
           </div>
         </template>
-        <div v-if="!isLogged && pages.length > freeLimit" class="premium-info">
-          <p class="premium-note">Vous voyez les 5 premières pages. Connectez-vous pour lire la suite.</p>
-        </div>
       </template>
       <div v-else class="loading">Chargement du chapitre...</div>
       <div class="reader-bottom">
         <div class="reader-bottom-col">
           <div class="reader-promo">
-            <p>Cette histoire vous a plu ? Découvrez-en de nouvelles toujours plus incroyables sur <strong>starbord.io</strong></p>
+            <p>Cette histoire vous a plu ? <br>Découvrez-en de nouvelles toujours plus incroyables sur <strong>starbord.io</strong></br></p>
           </div>
           <router-link to="/" class="reader-back-btn">← Retour à l'accueil</router-link>
         </div>
@@ -51,7 +48,7 @@ export default {
       chapitreId: parseInt(this.$route.params.chapitreId),
       currentPage: 1,
       pages: [],
-      freeLimit: 5,
+      freeLimit: 5, // sera mis à jour dynamiquement
       isScrolled: false
     }
   },
@@ -79,6 +76,12 @@ export default {
       if (comic && comic.chapters[this.chapitreId]) {
         this.pages = comic.chapters[this.chapitreId].pages || []
         this.currentPage = 1
+        // Met à jour freeLimit à la moitié du chapitre si non connecté
+        if (!this.isLogged) {
+          this.freeLimit = Math.floor(this.pages.length / 2)
+        } else {
+          this.freeLimit = this.pages.length // sécurité : accès total si connecté
+        }
       }
     },
     handleScroll() {
@@ -203,7 +206,7 @@ export default {
   display: block;
   width: 100%;
   max-width: 100%;
-  margin: 0 auto 2.5rem auto;
+  margin: 0 auto 5px auto;
   border-radius: 10px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.13);
   background: var(--bg-card);
@@ -242,23 +245,12 @@ export default {
     max-width: 98vw;
     padding: 2vw 0 3vw 0;
   }
-}
-</style>
-<style scoped>
-@media (max-width: 900px) {
-  .reader-content {
-    max-width: 98vw;
-    padding: 2vw 0 3vw 0;
-  }
-}
-@media (max-width: 700px) {
+
   .reader-header {
     font-size: 1rem;
     padding: 0.7rem 1rem 0.7rem 1rem;
   }
-  .reader-content {
-    padding: 1vw 0 2vw 0;
-  }
+
   .scan-img {
     border-radius: 6px;
   }
