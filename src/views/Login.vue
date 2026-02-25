@@ -233,8 +233,6 @@ export default {
   box-shadow: 0 0 12px rgba(80, 140, 255, 0.35);
 }
 
-</style>
-<style scoped>
 @media (max-width: 700px) {
   .login-card {
     padding: 1.2rem;
@@ -242,7 +240,12 @@ export default {
   .login-header h2 {
     font-size: 1.3rem;
   }
+  .login-submit {
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+  }
 }
+
 @media (max-width: 480px) {
   .login-card {
     padding: 0.7rem;
@@ -250,9 +253,9 @@ export default {
   .login-header h2 {
     font-size: 1.1rem;
   }
-  .login-main-btn, .login-submit {
-    font-size: 0.95rem;
-    padding: 0.6rem 1rem;
+  .login-submit {
+    font-size: 0.92rem;
+    padding: 0.5rem 0.7rem;
   }
 }
 </style>
