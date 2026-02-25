@@ -2,7 +2,7 @@
   <div class="login-page">
     <div class="login-wrapper">
       <div class="login-card">
-         <button class="login-back" @click="$router.back()">← Retour</button>
+         <button class="login-back" @click="$router.back()">← retour</button>
          
         <div class="login-header">
           <h2>STARBORD</h2>
