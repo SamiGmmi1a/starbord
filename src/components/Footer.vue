@@ -17,8 +17,8 @@
         <a href="/legal" class="footer-link">Conditions d'utilisation</a>
       </div>
       <div class="footer-right">
-        <a href="https://instagram.com" target="_blank" class="footer-link">Instagram</a>
-        <a href="https://tiktok.com" target="_blank" class="footer-link">TikTok</a>
+        <a href="https://www.instagram.com/sam_de_starbord/" target="_blank" class="footer-link">Instagram</a>
+        <a href="https://www.tiktok.com/@starbord_illustration" target="_blank" class="footer-link">TikTok</a>
       </div>
     </div>
   </footer>

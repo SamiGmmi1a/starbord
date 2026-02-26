@@ -73,7 +73,7 @@
 
 <!-- Présentation STARBORD -->
   <div class="stb-presentation">
-    <h2 class="stb-presentation-title">nous somme starbord</h2>
+    <h2 class="stb-presentation-title">nous sommes starbord</h2>
   <!-- étoiles de décoration -->
 
     <div class="stb-presentation-stars">

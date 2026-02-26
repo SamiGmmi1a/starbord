@@ -38,13 +38,13 @@ export default {
     }
   },
   computed: {
-    duplicatedReviews() {
-      // Duplique les reviews pour permettre un scroll infini
-      return [...this.reviews, ...this.reviews];
-    },
+      duplicatedReviews() {
+        // Duplique les reviews pour permettre un scroll infini (8x pour éviter toute coupure)
+        return [...this.reviews, ...this.reviews, ...this.reviews, ...this.reviews, ...this.reviews, ...this.reviews, ...this.reviews, ...this.reviews];
+      },
     trackStyle() {
       return {
-        transform: `translateX(-${this.translateX}px)`,
+        transform: `translateX(-${this.translateX}px)`, 
         transition: this.isTransitioning ? 'transform 0.1s linear' : 'none',
       };
     }
@@ -70,8 +70,8 @@ export default {
       this.translateX += step;
       const totalCards = this.reviews.length;
       const totalWidth = totalCards * (this.cardWidth + this.gap);
-      // Quand on a scrollé la longueur d'une série, on prépare le reset sans transition
-      if (this.translateX >= totalWidth) {
+      // On scroll sur 2 séries pour éviter la coupure
+      if (this.translateX >= totalWidth * 2) {
         this.isTransitioning = false;
         this.translateX = 0;
         // Force le repaint pour appliquer le style sans transition
