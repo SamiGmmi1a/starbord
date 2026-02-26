@@ -68,7 +68,7 @@
     padding-right: 0.7rem !important;
   }
   .bd-filter-bar, .bd-filter-label, .bd-filter-link {
-    font-size: 1rem !important;
+    font-size: 0.7rem !important;
   }
   .bd-filter-link {
     padding: 0.15rem 0.5rem !important;
@@ -78,6 +78,23 @@
   .bd-filter-bar {
     gap: 0.3rem !important;
   }
+
+@media (max-width: 700px) {
+  .bd-search-bar {
+    margin: 0 auto 1rem auto !important;
+    width: 100vw !important;
+    max-width: 95vw !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .bd-search-input {
+    width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+}
+
   .shop-choose-btn {
     font-size: 0.85rem !important;
     padding: 0.5rem 0.7rem !important;
@@ -124,10 +141,7 @@
   .shop-section, .bd-grid {
     padding: 0 0.5rem 2rem 0.5rem !important;
   }
-  .reader-content, .chapter-content-col, .profil-page, .login-card {
-    padding: 0.3rem !important;
-    min-width: 0 !important;
-  }
+
   .reader-header, .site-header {
     padding: 0.7rem 1.5rem 0.7rem 1.5rem !important;
     font-size: 1rem !important;

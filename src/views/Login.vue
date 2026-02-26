@@ -9,13 +9,13 @@
           <p>Connectez vous pour avoir accès aux chapitres complets</p>
         </div>
 
-        <div class="login-form">
+        <form class="login-form" @submit.prevent="login">
           <input v-model="prenom" type="text" placeholder="Votre prénom" required>
           <input v-model="email" type="email" placeholder="Votre email" required>
           <input v-model="code" type="text" placeholder="Code d’identification" required>
-          <button class="login-submit" @click.prevent="login">Se connecter</button>
+          <button class="login-submit" type="submit">se connecter</button>
           <div v-if="error" class="error">{{ error }}</div>
-        </div>
+        </form>
       </div>
     </div>
   </div>

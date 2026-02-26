@@ -30,7 +30,7 @@
 
 <style scoped>
   .footer-connect {
-    background: #0F1116;
+    background: linear-gradient(#0F1116, #000000);
     color: #fff;
     border-top: 1px solid #222;
     font-family: 'Inter', Arial, sans-serif;
@@ -47,6 +47,7 @@
     padding-top: 2.5rem;
     padding-bottom: 1.2rem;
   }
+  
   .footer-title-row {
     margin-bottom: 0.7rem;
   }
@@ -141,12 +142,6 @@
   }
 }
 
-</style>
-
-
-
-
-<style scoped>
 @media (max-width: 900px) {
   .footer-title {
     font-size: 2rem;

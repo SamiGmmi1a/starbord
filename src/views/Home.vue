@@ -19,17 +19,31 @@
           </svg>
         </span>
       </div>
-         <div class="bd-filter-bar">
+     <div class="bd-filter-bar">
       <div class="bd-filter-label">Trier par genre :</div>
       <div class="bd-filter-links">
+      <div>
         <a class="bd-filter-link" href="#">Tous</a>
+        <div class="">
         <a class="bd-filter-link" href="#">Action</a>
+        </div>
+        <div>
+         <a class="bd-filter-link" href="#">Fantastique</a>
+        </div>
+        <div>
         <a class="bd-filter-link" href="#">Aventure</a>
+        </div>
+        <div>
         <a class="bd-filter-link" href="#">Science-fiction</a>
-        <!-- ... -->
+        </div>
+       </div>
+
       </div>
     </div>
     </div>
+           <hr class="separateur">
+
+
 
 
     <div class="bd-grid">
@@ -53,21 +67,24 @@
       <span v-if="comic.fav">★</span><span v-else>☆</span>
     </button>
   </div>
+      </router-link>
 
+    </div>
+
+<!-- Présentation STARBORD -->
   <div class="stb-presentation">
     <div class="stb-presentation-img">
-      <img src="/assets/img/presentation.png" alt="Présentation de Starbord" width="400" height="300">
+      <img src="/assets/img/stb-presentation.png" alt="Présentation de Starbord" width="400" height="300">
     </div>
     <div class="stb-presentation-text">
-      <h2>Nous somme Starbord</h2>
+      <h2>nous somme starbord</h2>
       <p>...</p>
-      <h3>Comment ça marche</h3>
+      <h3>des cadres uniques, pour des histoires uniques</h3>
       <p>...</p>
     </div>
   </div>
 
-      </router-link>
-    </div>
+
     <!-- Section Boutique -->
     <section class="shop-section">
       <h2 class="shop-title">choisissez l'illustration qui vous ressemble</h2>
@@ -174,137 +191,136 @@ export default {
     if (comicsStore.comics.length === 0) {
       comicsStore.fetchComics()
     }
+    // Animation parallax sur stb-presentation-img
+    const imgWrapper = document.querySelector('.stb-presentation-img');
+    const img = imgWrapper ? imgWrapper.querySelector('img') : null;
+    if (imgWrapper && img) {
+      imgWrapper.addEventListener('mousemove', (e) => {
+        const rect = imgWrapper.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * 10; // max 10deg
+        const rotateY = ((x - centerX) / centerX) * 10;
+        img.style.transform = `scale(1.04) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      imgWrapper.addEventListener('mouseleave', () => {
+        img.style.transform = 'none';
+      });
+      imgWrapper.addEventListener('mouseenter', () => {
+        img.style.transition = 'transform 0.18s cubic-bezier(.25,.8,.25,1)';
+      });
+    }
   }
 }
 </script>
 
-<style scoped>
-          .admin-access-btn-row {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin: 2.5rem 0 1.5rem 0;
-          }
-          .admin-access-btn {
-            background: #2563eb;
-            color: #fff;
-            border-radius: 999px;
-            padding: 0.7rem 2.2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 2px 12px rgba(0,168,255,0.18);
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-          }
-          .admin-access-btn:hover {
-            background: #181b22;
-            color: #a9c7ff;
-          }
-        .shop-choose-btn {
-          width: 100%;
-          background: rgba(80, 140, 255, 0.08);
-          color: #a9c7ff;
-          border: 1px solid rgba(120, 170, 255, 0.25);
-          border-radius: 999px;
-          font-size: 1.08rem;
-          font-weight: 600;
-          padding: 0.7rem 0;
-          margin-top: 0.2rem;
-          transition: var(--transition);
-          letter-spacing: 0.01em;
-          text-align: center;
-          text-decoration: none;
-        }
-        .shop-choose-btn:hover,
-        .shop-choose-btn:focus {
-          color: #fff;
-          background: rgba(80, 140, 255, 0.18);
-          border-color: rgba(150, 190, 255, 0.6);
-          text-decoration: none;
-        }
-    .shop-section {
-      margin: 4rem auto 0 auto;
-      max-width: 1200px;
-      padding: 0 2rem 4rem 2rem;
-    }
-    .shop-title {
-      color: #fff;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 2.5rem;
-      text-align: center;
-      letter-spacing: 0.01em;
-    }
-    .shop-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2.2rem 1.5rem;
-      justify-items: center;
-    }
-    .shop-card {
-      background: none;
-      border: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.18s, box-shadow 0.18s;
-      position: relative;
-      padding: 0;
-      text-decoration: none;
-      width: 241px;
-      cursor: pointer;
-    }
-    .shop-card:hover,
-    .shop-card:focus {
-      transform: scale(1.04);
-    }
-    .shop-title-img {
-      color: #fff;
-      font-size: 1.13rem;
-      font-weight: 600;
-      margin-bottom: 0.7rem;
-      text-align: center;
-      width: 100%;
-      transition: color 0.18s;
-    }
-    .shop-img {
-      width: 241px;
-      height: 305px;
-      object-fit: cover;
-      border-radius: 0.7rem;
-      margin-bottom: 0.7rem;
-    }
-    .shop-price {
-      color: #fff;
-      font-size: 1.12rem;
-      font-weight: 600;
-      margin-bottom: 0.2rem;
-      text-align: center;
-      width: 100%;
-      letter-spacing: 0.01em;
-      transition: color 0.18s;
-    }
- 
-    @media (max-width: 1100px) {
-      .shop-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 700px) {
-      .shop-grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-      }
-      .shop-link {
-        width: 100%;
-      }
-      .shop-img {
-        width: 100%;
-        height: auto;
-      }
-    }
+<style scopse>
+/* --- Boutique --- */
+.shop-section {
+  margin: 4rem auto 0 auto;
+  max-width: 1200px;
+  padding: 0 2rem 4rem 2rem;
+}
+.shop-title {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.2rem 1.5rem;
+  justify-items: center;
+}
+.shop-card {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.18s, box-shadow 0.18s;
+  position: relative;
+  padding: 0;
+  text-decoration: none;
+  width: 241px;
+  cursor: pointer;
+}
+.shop-card:hover,
+.shop-card:focus {
+  transform: scale(1.04);
+}
+.shop-title-img {
+  color: #fff;
+  font-size: 1.13rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  text-align: center;
+  width: 100%;
+  transition: color 0.18s;
+}
+.shop-img {
+  width: 241px;
+  height: 305px;
+  object-fit: cover;
+  border-radius: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+.shop-price {
+  color: #fff;
+  font-size: 1.12rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  text-align: center;
+  width: 100%;
+  letter-spacing: 0.01em;
+  transition: color 0.18s;
+}
+.shop-choose-btn {
+  width: 100%;
+  background: rgba(80, 140, 255, 0.08);
+  color: #a9c7ff;
+  border: 1px solid rgba(120, 170, 255, 0.25);
+  border-radius: 999px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  padding: 0.7rem 0;
+  margin-top: 0.2rem;
+  transition: var(--transition);
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-decoration: none;
+}
+.shop-choose-btn:hover,
+.shop-choose-btn:focus {
+  color: #fff;
+  background: rgba(80, 140, 255, 0.18);
+  border-color: rgba(150, 190, 255, 0.6);
+  text-decoration: none;
+}
+
+@media (max-width: 1100px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .shop-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .shop-link {
+    width: 100%;
+  }
+  .shop-img {
+    width: 100%;
+    height: auto;
+  }
+}
   .home-page {
     min-height: 100vh;
     background: #0F1116;
@@ -361,13 +377,20 @@ export default {
   }
 
   .bd-author {
-    font-size: 0.95rem;
-    color: #b3b3b3;
-    margin: 0 0 0.2rem 0;
-  }
-
-  .bd-chapters {
-    font-size: 0.9rem;
+    .bd-search-bar {
+      margin: 0 auto 1rem auto;
+      width: 100vw;
+      max-width: 95vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .bd-search-input {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+    }
     color: #b3b3b3;
     margin: 0;
   }
@@ -452,7 +475,6 @@ export default {
 
 .bd-toolbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   max-width: 1200px;
   margin: 5rem auto 1.5rem auto;
@@ -475,15 +497,23 @@ export default {
 @media (max-width: 700px) {
   .bd-filter-bar {
     flex-direction: column !important;
-    align-items: flex-start !important;
+    align-items: center !important;
     gap: 0.2rem !important;
+    width: 100vw;
+    justify-content: center !important;
+    text-align: center !important;
   }
-
-
+  .bd-filter-label {
+    width: 100%;
+    text-align: center !important;
+    margin-bottom: 0.2rem;
+    font-weight: 700;
+  }
   .bd-filter-links {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    width: 100% !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin: 0 auto;
   }
 }
 
@@ -503,6 +533,7 @@ export default {
 }
 .bd-filter-link:hover {
   color: #fff;
+  text-decoration: none;
 }
 
 .bd-card-fav-row {
@@ -510,18 +541,19 @@ export default {
   display: flex;
   margin-top: 0.7rem;
 }
+
+
 /* Présentation STARBORD */
 .stb-presentation {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   align-items: center;
   gap: 2.5rem;
-  background: var(--glass);
+  background: rgba(8, 9, 12, 0.503);
   border-radius: 18px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   padding: 2.5rem 2rem;
   margin: 2.5rem auto 1.5rem auto;
-  max-width: 900px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -529,14 +561,14 @@ export default {
   width: 100%;
   max-width: 320px;
   margin: 0 auto;
-  border-radius: 16px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.13);
   overflow: hidden;
 }
 .stb-presentation-img img {
   width: 100%;
   display: block;
-  border-radius: 16px;
+  transition: transform 0.18s cubic-bezier(.25,.8,.25,1);
+  will-change: transform;
 }
 .stb-presentation-content {
   display: flex;
@@ -586,6 +618,61 @@ export default {
     max-width: 90vw;
     margin-bottom: 0.7rem;
   }
+}
+
+@media (max-width: 1235px) and (min-width: 480px) {
+  .bd-grid, .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+}
+
+/* Aligne les liens de filtre sur une seule ligne, même entourés de div */
+.bd-filter-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.bd-filter-links > div {
+  display: flex;
+}
+.bd-filter-link {
+  display: inline-block;
+  min-width: 80px;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .bd-filter-links {
+    flex-wrap: wrap;
+    gap: 0.2rem 0.5rem;
+    max-width: 98vw;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    overflow-x: auto;
+    box-sizing: border-box;
+  }
+  .bd-filter-link {
+    min-width: unset;
+    padding: 0.18rem 0.7rem;
+    margin: 0.1rem 0.2rem;
+    word-break: break-word;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+.separateur {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.13);
+  margin: 0 auto;
+  width: 50%;
+  max-width: 95vw;
 }
 
 </style>
