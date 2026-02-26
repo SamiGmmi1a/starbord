@@ -122,18 +122,27 @@
         </div>
       </div>
     </section>
+
+    <!--espace avis clients-->
+    <div class="feedback">
+      <h2 class="feedback-title">visez toujours plus haut</h2>
+      <FeedbackCarousel />
+    </div>
+
   </div>
 </template>
 
 <script>
 import { useComicsStore } from '../stores/comics'
 import Hero from '../components/Hero.vue'
+import FeedbackCarousel from '../components/FeedbackCarousel.vue'
 
 
 export default {
   name: 'Home',
   components: {
-    Hero
+    Hero,
+    FeedbackCarousel
   },
   data() {
     return {
