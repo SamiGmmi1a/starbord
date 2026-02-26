@@ -214,7 +214,7 @@ export default {
 }
 .chapter-list-title {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1.5rem !important;
   margin-bottom: 1rem;
   margin-bottom: 0;
 }
@@ -360,11 +360,12 @@ export default {
 
 
   .chapter-list-title {
-    font-size: 1.25rem !important;
+    font-size: 1.5rem !important;
     font-weight: 800 !important;
     color: #fff !important;
     margin: 0 !important;
     letter-spacing: 0.01em !important;
+    text-align: center !important;
   }
   .close-btn {
     font-size: 2rem !important;
@@ -474,7 +475,8 @@ export default {
     padding: 0.7rem 0.2rem;
   }
   .chapter-list-title {
-    font-size: 0.97rem;
+    font-size: 1.5rem !important;
+    text-align: center !important;
   }
   .chapter-back-btn {
     font-size: 0.95rem;

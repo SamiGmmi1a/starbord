@@ -73,15 +73,25 @@
 
 <!-- Présentation STARBORD -->
   <div class="stb-presentation">
-    <div class="stb-presentation-img">
-      <img src="/assets/img/stb-presentation.png" alt="Présentation de Starbord" width="400" height="300">
+    <h2 class="stb-presentation-title">nous somme starbord</h2>
+  <!-- étoiles de décoration -->
+
+    <div class="stb-presentation-stars">
+      <svg v-for="n in 3" :key="n" width="14" height="14" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" style="margin: 0 0.3em;">
+        <path d="M12 2l2.917 6.26L22 9.27l-5 4.87L18.834 22 12 18.27 5.166 22 7 14.14l-5-4.87 7.083-1.01z"/>
+      </svg>
     </div>
-    <div class="stb-presentation-text">
-      <h2>nous somme starbord</h2>
-      <p>...</p>
+
+
+    <div class="stb-presentation-content">
+      <div class="stb-presentation-img">
+       <img src="/assets/img/stb-presentation.png" alt="Présentation de Starbord" width="400" height="300">
+      </div>
+        <div class="stb-presentation-text">
       <h3>des cadres uniques, pour des histoires uniques</h3>
       <p>...</p>
     </div>
+  </div>
   </div>
 
 
@@ -225,7 +235,7 @@ export default {
 }
 .shop-title {
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.5rem !important;
   font-weight: 700;
   margin-bottom: 2.5rem;
   text-align: center;
@@ -391,8 +401,6 @@ export default {
       margin: 0 auto;
       text-align: center;
     }
-    color: #b3b3b3;
-    margin: 0;
   }
 
     .fav-btn {
@@ -545,18 +553,49 @@ export default {
 
 /* Présentation STARBORD */
 .stb-presentation {
+    background: rgba(8, 9, 12, 0.503);
+}
+
+/* Décoration étoiles stb-presentation */
+.stb-presentation-stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+@media (max-width: 700px) {
+  .stb-presentation-stars {
+    margin: 0.3rem 0 0.7rem 0;
+  }
+}
+
+.stb-presentation-content {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   align-items: center;
-  gap: 2.5rem;
-  background: rgba(8, 9, 12, 0.503);
-  border-radius: 18px;
+  padding: 0 2rem 0 2rem;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-  padding: 2.5rem 2rem;
-  margin: 2.5rem auto 1.5rem auto;
   width: 100%;
   box-sizing: border-box;
+  gap: 2rem;
 }
+
+@media screen and (max-width: 900px) {
+  .stb-presentation-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+.stb-presentation-title {
+  font-size: 1.5rem !important;
+  font-weight: 700;
+  padding: 1.2rem;
+  text-align: center !important;
+}
+
 .stb-presentation-img {
   width: 100%;
   max-width: 320px;
@@ -570,18 +609,7 @@ export default {
   transition: transform 0.18s cubic-bezier(.25,.8,.25,1);
   will-change: transform;
 }
-.stb-presentation-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-.stb-presentation-content h2 {
-  font-size: 2.3rem;
-  font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 1.2rem;
-}
+
 .stb-presentation-content p {
   font-size: 1.15rem;
   color: var(--text);
@@ -604,12 +632,9 @@ export default {
     align-items: center;
     padding: 1.2rem 4vw;
     border-radius: 10px;
-    gap: 1.2rem;
+    gap: 0.1rem;
   }
-  .stb-presentation-content h2 {
-    font-size: 1.5rem;
-    text-align: center;
-  }
+
   .stb-presentation-content p {
     font-size: 1rem;
     text-align: center;
@@ -676,3 +701,4 @@ export default {
 }
 
 </style>
+
