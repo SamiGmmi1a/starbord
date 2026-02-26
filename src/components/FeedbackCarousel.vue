@@ -1,12 +1,10 @@
 <template>
   <div class="feedback-carousel">
-    <button class="carousel-arrow left" @click="prevSlide">&#8592;</button>
-    <div class="carousel-track">
+    <div class="carousel-track" :style="trackStyle" ref="track" @transitionend="onTransitionEnd">
       <div
-        v-for="(review, idx) in visibleReviews"
-        :key="review.id"
+        v-for="(review, idx) in duplicatedReviews"
+        :key="'review-' + idx"
         class="feedback-card"
-        :class="{ active: idx === 2 }"
       >
         <div class="feedback-card-title">{{ review.name }}</div>
         <div class="feedback-card-comment">{{ review.comment }}</div>
@@ -15,7 +13,6 @@
         </div>
       </div>
     </div>
-    <button class="carousel-arrow right" @click="nextSlide">&#8594;</button>
   </div>
 </template>
 
@@ -25,33 +22,77 @@ export default {
   data() {
     return {
       reviews: [
-        { id: 1, name: 'Alice', comment: 'Super expérience, je recommande !', stars: 5 },
-        { id: 2, name: 'Benoit', comment: 'Livraison rapide et qualité au top.', stars: 4 },
+        { id: 1, name: 'Leanne D', comment: 'Quelle magnifique illustration !! Je vais l’accrochée et l’admirer chaque jour ! Merci pour le petit porte clé qui vas beaucoup me servir. Je suis dingue de cette illustration que j’ai montré à tout mes copains et ils en sont tous trop jaloux !!! 😍😍', stars: 5 },
+        { id: 2, name: 'Romain C', comment: 'L’affiche a beaucoup plu ! On a envie de voir la suite, et j’espère que ce sera bien ! ', stars: 4 },
         { id: 3, name: 'Chloé', comment: 'Des illustrations magnifiques !', stars: 5 },
         { id: 4, name: 'David', comment: 'Service client très réactif.', stars: 4 },
         { id: 5, name: 'Emma', comment: 'Site moderne et facile à utiliser.', stars: 5 },
         { id: 6, name: 'Farid', comment: 'Je suis ravi de mon achat.', stars: 5 }
       ],
-      startIdx: 0
+      cardsToShow: 4,
+      translateX: 0,
+      animationFrame: null,
+      cardWidth: 260, // px, doit correspondre au CSS max-width
+      gap: 20, // px, doit correspondre au CSS gap
+      isTransitioning: true
     }
   },
   computed: {
-    visibleReviews() {
-      // Always show 3 cards at a time, loop around
-      const arr = [];
-      for (let i = 0; i < 3; i++) {
-        arr.push(this.reviews[(this.startIdx + i) % this.reviews.length]);
-      }
-      return arr;
+    duplicatedReviews() {
+      // Duplique les reviews pour permettre un scroll infini
+      return [...this.reviews, ...this.reviews];
+    },
+    trackStyle() {
+      return {
+        transform: `translateX(-${this.translateX}px)`,
+        transition: this.isTransitioning ? 'transform 0.1s linear' : 'none',
+      };
     }
   },
   methods: {
-    nextSlide() {
-      this.startIdx = (this.startIdx + 1) % this.reviews.length;
+    setCardsToShow() {
+      if (window.innerWidth <= 700) {
+        this.cardsToShow = 2;
+        this.gap = 6;
+        this.cardWidth = 200;
+      } else if (window.innerWidth <= 900) {
+        this.cardsToShow = 3;
+        this.gap = 10;
+        this.cardWidth = 200;
+      } else {
+        this.cardsToShow = 4;
+        this.gap = 20;
+        this.cardWidth = 260;
+      }
     },
-    prevSlide() {
-      this.startIdx = (this.startIdx - 1 + this.reviews.length) % this.reviews.length;
+    animate() {
+      const step = 0.7; // px par frame
+      this.translateX += step;
+      const totalCards = this.reviews.length;
+      const totalWidth = totalCards * (this.cardWidth + this.gap);
+      // Quand on a scrollé la longueur d'une série, on prépare le reset sans transition
+      if (this.translateX >= totalWidth) {
+        this.isTransitioning = false;
+        this.translateX = 0;
+        // Force le repaint pour appliquer le style sans transition
+        this.$nextTick(() => {
+          this.isTransitioning = true;
+        });
+      }
+      this.animationFrame = requestAnimationFrame(this.animate);
+    },
+    onTransitionEnd() {
+      // Rien à faire ici, la logique est gérée dans animate
     }
+  },
+  mounted() {
+    this.setCardsToShow();
+    window.addEventListener('resize', this.setCardsToShow);
+    this.animationFrame = requestAnimationFrame(this.animate);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.setCardsToShow);
+    if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
   }
 }
 </script>
@@ -62,30 +103,13 @@ export default {
   align-items: center;
   justify-content: center;
   margin: 2.5rem 0 3.5rem 0;
-}
-.carousel-arrow {
-  background: rgba(80, 140, 255, 0.08);
-  border: 1px solid rgba(120, 170, 255, 0.25);
-  border-radius: 50%;
-  color: #a9c7ff;
-  font-size: 2rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin: 0 0.7rem;
-  transition: background 0.18s, color 0.18s, border-color 0.18s;
-}
-.carousel-arrow:hover {
-  color: #fff;
-  background: rgba(80, 140, 255, 0.18);
-  border-color: rgba(150, 190, 255, 0.6);
+  overflow: hidden;
+  padding: 2rem 0;
 }
 .carousel-track {
   display: flex;
-  gap: 1.2rem;
+  gap: 30px;
+  will-change: transform;
 }
 .feedback-card {
   background: rgba(80, 140, 255, 0.08);
@@ -93,33 +117,31 @@ export default {
   border-radius: 1.2rem;
   min-width: 220px;
   max-width: 260px;
-  padding: 1.2rem 1.1rem 1.1rem 1.1rem;
+  width: 260px;
+  padding: 2rem 1.1rem 5rem 1.1rem;
   color: #fff;
   box-shadow: 0 2px 16px rgba(0,0,0,0.10);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   transition: box-shadow 0.18s, border-color 0.18s, background 0.18s;
-}
-.feedback-card.active {
-  background: rgba(80, 140, 255, 0.18);
-  border-color: #a9c7ff;
-  box-shadow: 0 4px 24px rgba(80,140,255,0.13);
 }
 .feedback-card-title {
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: #a9c7ff;
+  text-align: left;
 }
 .feedback-card-comment {
   font-size: 1rem;
   margin-bottom: 0.7rem;
-  text-align: center;
+  text-align: left;
 }
 .feedback-card-stars {
   display: flex;
   gap: 0.1rem;
+  justify-content: flex-start;
 }
 .star {
   font-size: 1.2rem;
@@ -129,14 +151,22 @@ export default {
 .star.filled {
   color: #FFD700;
 }
+.feedback-card:hover {
+  background: rgba(80, 140, 255, 0.18);
+  border-color: #a9c7ff;
+  box-shadow: 0 6px 24px rgba(80,140,255,0.18);
+  transform: translateY(-4px) scale(1.03);
+  transition: background 0.18s, border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+}
 @media (max-width: 900px) {
   .carousel-track {
-    gap: 0.5rem;
+    gap: 20px;
   }
   .feedback-card {
     min-width: 170px;
     max-width: 200px;
-    padding: 0.8rem 0.7rem 0.7rem 0.7rem;
+    width: 200px;
+    padding: 2rem 1rem 4rem 1rem;
   }
 }
 @media (max-width: 700px) {
@@ -145,7 +175,7 @@ export default {
     gap: 0.7rem;
   }
   .carousel-track {
-    gap: 0.2rem;
+    gap: 6px;
   }
 }
 </style>

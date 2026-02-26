@@ -718,5 +718,20 @@ export default {
   max-width: 95vw;
 }
 
+/* --- Section Avis Clients --- */
+.feedback {
+  margin: 4rem auto 0 auto;
+  max-width: 1200px;
+  padding: 0 2rem 4rem 2rem;
+}
+.feedback-title {
+  color: #fff;
+  font-size: 1.5rem !important;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
 </style>
 
