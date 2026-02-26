@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 /* Header sticky et blur pour Chapters.vue */
 .story-info-header {
   position: sticky;
@@ -256,7 +257,7 @@ h1 {
 }
 
 h2, .shop-title, .stb-presentation-title, .chapter-list-title {
-  font-family: var(--font-title);
+  font-family: 'Tintin', Arial, sans-serif !important;
   font-size: 1.5rem !important;
 }
 

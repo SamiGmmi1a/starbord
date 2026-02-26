@@ -281,6 +281,7 @@ export default {
   margin-bottom: 0.7rem;
 }
 .shop-price {
+  font-family: 'Orbitron', sans-serif;
   color: #fff;
   font-size: 1.12rem;
   font-weight: 600;
@@ -573,12 +574,13 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   align-items: center;
-  padding: 0 2rem 0 2rem;
+  padding: 0 0.7rem;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   width: 100%;
   box-sizing: border-box;
   gap: 2rem;
 }
+
 
 @media screen and (max-width: 900px) {
   .stb-presentation-content {
@@ -587,12 +589,19 @@ export default {
     justify-content: center;
     align-items: flex-start;
   }
+
+  .stb-presentation-content h3 {
+    text-align: center;
+    font-size: 1rem;
+  }
+
 }
 
 .stb-presentation-title {
   font-size: 1.5rem !important;
   font-weight: 700;
   padding: 1.2rem;
+  padding-top: 3rem;
   text-align: center !important;
 }
 
