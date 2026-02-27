@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { getAllComics } from '../api/comicsData'
 
 export const useComicsStore = defineStore('comics', {
   state: () => ({
@@ -16,7 +17,9 @@ export const useComicsStore = defineStore('comics', {
         return this.comics
       } catch (error) {
         console.error('Error fetching comics:', error)
-        return []
+        // Fallback local
+        this.comics = getAllComics()
+        return this.comics
       }
     },
 

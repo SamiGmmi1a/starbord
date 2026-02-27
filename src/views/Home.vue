@@ -62,9 +62,16 @@
         </div>
         
          <!-- étoile en dehors du bloc principal -->
-  <div class="bd-card-fav-row">
-    <button class="fav-btn" :class="{ active: isFavorite(comic) }" @click.stop="toggleFav(comic)">
+  <div class="bd-card-fav-row" @click.stop>
+    <button class="fav-btn" :class="{ active: isFavorite(comic) }" @click.stop.prevent="toggleFav(comic)" tabindex="0" aria-label="Ajouter aux favoris">
+      <span>★</span> 
+
+<!--
+  <div class="bd-card-fav-row" @click.stop>
+    <button class="fav-btn" :class="{ active: isFavorite(comic) }" @click.stop.prevent="toggleFav(comic)" tabindex="0" aria-label="Ajouter aux favoris">
       <span>★</span>
+    </button>
+-->
     </button>
   </div>
       </router-link>
@@ -165,26 +172,39 @@ export default {
   methods: {
     toggleFav(comic) {
       const idx = this.favorites.indexOf(comic.id);
+      let updatedFavorites;
       if (idx === -1) {
-        this.favorites.push(comic.id);
+        updatedFavorites = [...this.favorites, comic.id];
       } else {
-        this.favorites.splice(idx, 1);
+        updatedFavorites = this.favorites.filter(id => id !== comic.id);
       }
+      this.favorites = updatedFavorites;
       localStorage.setItem('favorites', JSON.stringify(this.favorites));
     },
     isFavorite(comic) {
       return this.favorites.includes(comic.id);
     },
     hasComic(id) {
-      const comicsStore = useComicsStore();
-      return comicsStore.comics.some(comic => comic.id === id);
+      const comicsStore = useComicsStore()
+      return comicsStore.comics.some(comic => comic.id === id)
     },
     getImagePath(fileName) {
       // Special case for fige_dans_l_acier to use the apostrophe in filename
       if (fileName === 'fige_dans_l_acier') {
-        return `/assets/img/produits/fige_dans_l'acier.jpg`;
+        return `/assets/img/produits/fige_dans_l'acier.jpg`
       }
-      return `/assets/img/produits/${fileName}.jpg`;
+      return `/assets/img/produits/${fileName}.jpg`
+    },
+        hasComic(id) {
+      const comicsStore = useComicsStore()
+      return comicsStore.comics.some(comic => comic.id === id)
+    },
+    getImagePath(fileName) {
+      // Special case for fige_dans_l_acier to use the apostrophe in filename
+      if (fileName === 'fige_dans_l_acier') {
+        return `/assets/img/produits/fige_dans_l'acier.jpg`
+      }
+      return `/assets/img/produits/${fileName}.jpg`
     }
   },
   computed: {
@@ -200,28 +220,13 @@ export default {
       })
     }
   },
-  methods: {
-    hasComic(id) {
-      const comicsStore = useComicsStore()
-      return comicsStore.comics.some(comic => comic.id === id)
-    },
-
-    
-    getImagePath(fileName) {
-      // Special case for fige_dans_l_acier to use the apostrophe in filename
-      if (fileName === 'fige_dans_l_acier') {
-        return `/assets/img/produits/fige_dans_l'acier.jpg`
-      }
-      return `/assets/img/produits/${fileName}.jpg`
-    }
-  },
   mounted() {
-    const comicsStore = useComicsStore();
-    if (comicsStore.comics.length === 0) {
-      comicsStore.fetchComics();
-    }
-    // Charger les favoris au montage (sécurité)
+    // Charger les favoris au montage
     this.favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const comicsStore = useComicsStore()
+    if (comicsStore.comics.length === 0) {
+      comicsStore.fetchComics()
+    }
     // Animation parallax sur stb-presentation-img
     const imgWrapper = document.querySelector('.stb-presentation-img');
     const img = imgWrapper ? imgWrapper.querySelector('img') : null;
@@ -453,8 +458,14 @@ export default {
     }
   .fav-btn.active,
   .fav-btn:hover {
+      color: #FFD700;
+  }
+
+  /* Rendre l'étoile jaune quand favori */
+  .fav-btn.active span {
     color: #FFD700;
   }
+  
 
   @media (max-width: 1100px) {
     .bd-grid {
