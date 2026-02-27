@@ -63,8 +63,8 @@
         
          <!-- étoile en dehors du bloc principal -->
   <div class="bd-card-fav-row">
-    <button class="fav-btn" :class="{ active: comic.fav }" @click.stop="toggleFav(comic)">
-      <span v-if="comic.fav">★</span><span v-else>☆</span>
+    <button class="fav-btn" :class="{ active: isFavorite(comic) }" @click.stop="toggleFav(comic)">
+      <span>★</span>
     </button>
   </div>
       </router-link>
@@ -159,22 +159,32 @@ export default {
       ],
       searchQuery: '',
       selectedGenre: '',
+      favorites: JSON.parse(localStorage.getItem('favorites')) || []
     }
   },
   methods: {
     toggleFav(comic) {
-      comic.fav = !comic.fav;
+      const idx = this.favorites.indexOf(comic.id);
+      if (idx === -1) {
+        this.favorites.push(comic.id);
+      } else {
+        this.favorites.splice(idx, 1);
+      }
+      localStorage.setItem('favorites', JSON.stringify(this.favorites));
+    },
+    isFavorite(comic) {
+      return this.favorites.includes(comic.id);
     },
     hasComic(id) {
-      const comicsStore = useComicsStore()
-      return comicsStore.comics.some(comic => comic.id === id)
+      const comicsStore = useComicsStore();
+      return comicsStore.comics.some(comic => comic.id === id);
     },
     getImagePath(fileName) {
       // Special case for fige_dans_l_acier to use the apostrophe in filename
       if (fileName === 'fige_dans_l_acier') {
-        return `/assets/img/produits/fige_dans_l'acier.jpg`
+        return `/assets/img/produits/fige_dans_l'acier.jpg`;
       }
-      return `/assets/img/produits/${fileName}.jpg`
+      return `/assets/img/produits/${fileName}.jpg`;
     }
   },
   computed: {
@@ -206,10 +216,12 @@ export default {
     }
   },
   mounted() {
-    const comicsStore = useComicsStore()
+    const comicsStore = useComicsStore();
     if (comicsStore.comics.length === 0) {
-      comicsStore.fetchComics()
+      comicsStore.fetchComics();
     }
+    // Charger les favoris au montage (sécurité)
+    this.favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     // Animation parallax sur stb-presentation-img
     const imgWrapper = document.querySelector('.stb-presentation-img');
     const img = imgWrapper ? imgWrapper.querySelector('img') : null;
