@@ -22,9 +22,9 @@ export default {
   data() {
     return {
       reviews: [
-        { id: 1, name: 'Leanne D', comment: 'Quelle magnifique illustration !! Je vais l’accrochée et l’admirer chaque jour ! Merci pour le petit porte clé qui vas beaucoup me servir. Je suis dingue de cette illustration que j’ai montré à tout mes copains et ils en sont tous trop jaloux !!! 😍😍', stars: 5 },
-        { id: 2, name: 'Romain C', comment: 'L’affiche a beaucoup plu ! On a envie de voir la suite, et j’espère que ce sera bien ! ', stars: 4 },
-        { id: 3, name: 'Christophe M', comment: 'Beau projet les gars ! Ne lachez rien ! On a hate de voir la suite... 😉', stars: 5 },
+        { id: 1, name: 'Leanne D', comment: 'Quelle magnifique illustration !! Je vais l’accrochée et l’admirer chaque jour ! Je suis dingue de cette illustration que j’ai montré à tout mes copains et ils en sont tous trop jaloux !!! 😍😍', stars: 5 },
+        { id: 2, name: 'Romain C', comment: 'L’affiche a beaucoup plu ! On a envie de voir la suite, et j’espère que ce sera bien ! ', stars: 5 },
+        { id: 3, name: 'Christian A', comment: 'Beau projet les gars ! Ne lachez rien ! On a hate de voir la suite... 😉', stars: 5 },
         { id: 4, name: 'David', comment: 'Service client très réactif.', stars: 4 },
         { id: 5, name: 'Emma', comment: 'Site moderne et facile à utiliser.', stars: 5 },
         { id: 6, name: 'Farid', comment: 'Je suis ravi de mon achat.', stars: 5 }
@@ -118,7 +118,7 @@ export default {
   min-width: 220px;
   max-width: 260px;
   width: 260px;
-  padding: 2rem 1.1rem 5rem 1.1rem;
+  padding: 2rem 1.1rem;
   color: #fff;
   box-shadow: 0 2px 16px rgba(0,0,0,0.10);
   display: flex;
