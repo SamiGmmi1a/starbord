@@ -25,9 +25,9 @@ export default {
         { id: 1, name: 'Leanne D', comment: 'Quelle magnifique illustration !! Je vais l’accrochée et l’admirer chaque jour ! Je suis dingue de cette illustration que j’ai montré à tout mes copains et ils en sont tous trop jaloux !!! 😍😍', stars: 5 },
         { id: 2, name: 'Romain C', comment: 'L’affiche a beaucoup plu ! On a envie de voir la suite, et j’espère que ce sera bien ! ', stars: 5 },
         { id: 3, name: 'Christian A', comment: 'Beau projet les gars ! Ne lachez rien ! On a hate de voir la suite... 😉', stars: 5 },
-        { id: 4, name: 'David', comment: 'Service client très réactif.', stars: 4 },
-        { id: 5, name: 'Emma', comment: 'Site moderne et facile à utiliser.', stars: 5 },
-        { id: 6, name: 'Farid', comment: 'Je suis ravi de mon achat.', stars: 5 }
+        { id: 4, name: 'Anonyme', comment: 'Bonjour ! Ca fait plaisir de voir que le projet avance 😁 les dessins sont très réussis ! Je suis sûr que cela plaira à plus d’un !👍', stars: 5 },
+        { id: 5, name: 'Anonyme', comment: 'Franchement bravo la boutique est canon et la collec trop belle ! On sent que vous avez mis du cœur dans ce projet c’est grave inspirant, je vous souhaite plein de succès pour la suite à vous et toute l’équipe 🙂', stars: 5 },
+        { id: 6, name: 'Pauline H', comment: 'Je te souhaite que sa fonctionne et sa va le faire avec de belles illustrations comme j’ai vue sa peut que marcher', stars: 5 }
       ],
       cardsToShow: 4,
       translateX: 0,

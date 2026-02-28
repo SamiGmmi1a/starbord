@@ -99,6 +99,146 @@ export default {
 </script>
 
 <style scoped>
+/*===============header===============*/
+
+/* Header Chapters.vue */
+.site-header {
+  background: rgba(15, 17, 22, 0.95);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+.story-info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2.5vw 1.2rem 2.5vw;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: rgba(15, 17, 22, 0.95);
+  transition: background 0.3s, backdrop-filter 0.3s;
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  backdrop-filter: blur(10px);
+}
+.story-info-header.header-scrolled {
+  background: rgba(15, 17, 22, 0.2);
+  backdrop-filter: blur(16px);
+}
+.chapter-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.chapter-list-title {
+  color: #fff;
+  font-size: 1.5rem !important;
+  margin-bottom: 1rem;
+  margin-bottom: 0;
+}
+.close-btn {
+  font-size: 2rem !important;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 1rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.close-btn:hover {
+  color: #00bfff;
+}
+
+
+/*===============cover image===============*/
+.comic-cover-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/*===============liste chapitre===============*/
+.chapter-content-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0;
+}
+.chapter-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.chapter-list-author {
+  color: #bbb;
+  font-size: 1.5rem;
+  margin-bottom: 0.1rem;
+}
+.chapter-list-genre {
+  color: #7fd6ff;
+  font-size: 1.05rem;
+  margin-bottom: 0.1rem;
+}
+.chapter-list-description {
+  color: #e0e0e0;
+  font-size: 1.08rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+.chapter-list-section {
+  flex: 1;
+  background: rgba(20, 22, 30, 0.85);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: relative;
+}
+.chapter-list-row {
+  display: flex;
+  align-items: center;
+}
+.chapter-thumb {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 1rem;
+}
+.chapter-thumb-img {
+  width: 64px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  margin-bottom: 0;
+}
+.chapter-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.3rem;
+  padding: 0rem 0.5rem;
+  display: block;
+  transition: color 0.2s;
+}
+
+
+
+/*===============Bas de page - retour Home===============*/
 .chapter-back-row {
   width: 100%;
   display: flex;
@@ -139,195 +279,37 @@ export default {
   background: rgba(80, 140, 255, 0.22);
   border-color: rgba(150, 190, 255, 0.6);
 }
-.comic-cover-img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
 
-/* Header sticky et blur identique à Reader.vue */
-.story-info-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-  padding: 1.2rem 2.5vw 1.2rem 2.5vw;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-  background: rgba(15, 17, 22, 0.95);
-  transition: background 0.3s, backdrop-filter 0.3s;
-  font-family: var(--font-title);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  backdrop-filter: blur(10px);
-}
-.story-info-header.header-scrolled {
-  background: rgba(15, 17, 22, 0.2);
-  backdrop-filter: blur(16px);
-}
-.chapter-list-description {
-  color: #e0e0e0;
-  font-size: 1.08rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.2rem;
-}
-.chapters-page {
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(180deg, var(--bg-dark), var(--bg));
-  padding: 2.5rem 2rem 2rem 2rem;
-  min-height: 100vh;
-  box-sizing: border-box;
-  overflow: visible;
-}
-
-.chapter-layout {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  align-items: flex-start;
-}
-
-.chapter-content-col {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 0;
-}
-
-.chapter-list-section {
-  flex: 1;
-  background: rgba(20, 22, 30, 0.85);
-  border-radius: 8px;
-  padding: 2rem 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  position: relative;
-}
-.chapter-list-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-.chapter-list-title {
-  color: #fff;
-  font-size: 1.5rem !important;
-  margin-bottom: 1rem;
-  margin-bottom: 0;
+/*===============Global===============*/
+.chapter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 .chapter-list-meta {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
-.chapter-list-author {
-  color: #bbb;
-  font-size: 1.5rem;
-  margin-bottom: 0.1rem;
-}
-.chapter-list-genre {
-  color: #7fd6ff;
-  font-size: 1.05rem;
-  margin-bottom: 0.1rem;
-}
 
-
-.close-btn {
-  font-size: 2rem !important;
-  color: #fff;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-left: 1rem;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.close-btn:hover {
-  color: #00bfff;
-}
-
-.chapter-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.chapter-list-row {
-  display: flex;
-  align-items: center;
-}
-.chapter-thumb {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 1rem;
-}
-.chapter-thumb-img {
-  width: 64px;
-  height: 96px;
-  object-fit: cover;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-  margin-bottom: 0;
-}
-
-.chapter-thumb {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 0.5rem;
-}
-.chapter-thumb-img {
-  height: auto;
-  object-fit: cover;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-  margin-bottom: -8px;
-}
-.chapter-link {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.3rem;
-  padding: 0rem 0.5rem;
-  display: block;
-  transition: color 0.2s;
-}
-
-.site-header {
-  background: rgba(15, 17, 22, 0.95);
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-}
-
-.header-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-}
-
-.close-btn {
-  font-size: 1.5rem;
-  background: none;
-  border: none; 
-}
+/*===============Responsive===============*/
 
 @media (max-width: 900px) {
+
+    .chapter-list-title {
+    font-size: 1.5rem !important;
+    font-weight: 800 !important;
+    color: #fff !important;
+    margin: 0 !important;
+    letter-spacing: 0.01em !important;
+    text-align: center !important;
+  }
   .chapter-layout {
     flex-direction: column;
     gap: 1.2rem;
   }
-  .chapter-list-section {
-    padding: 1.2rem 0.5rem;
-  }
-}
-@media (max-width: 700px) {
+
+
     .chapter-back-text {
       font-size: 0.93rem !important;
     }
@@ -349,7 +331,7 @@ export default {
   }
   
   .story-info-header {
-    padding: 1rem !important;
+    padding: 1rem 1.5rem !important;
     font-size: 1.1rem;
     backdrop-filter: blur(10px);
   }
@@ -359,14 +341,7 @@ export default {
   }
 
 
-  .chapter-list-title {
-    font-size: 1.5rem !important;
-    font-weight: 800 !important;
-    color: #fff !important;
-    margin: 0 !important;
-    letter-spacing: 0.01em !important;
-    text-align: center !important;
-  }
+
   .close-btn {
     font-size: 2rem !important;
     color: #fff !important;
@@ -447,7 +422,6 @@ export default {
     display: flex !important;
     align-items: center !important;
     border-radius: 10px !important;
-    padding: 0.7rem 1rem !important;
   }
   .chapter-thumb {
     margin-right: 0.7rem !important;
@@ -468,11 +442,9 @@ export default {
     display: block !important;
     transition: color 0.2s !important;
   }
-}
 
-@media (max-width: 480px) {
   .chapter-list-section {
-    padding: 0.7rem 0.2rem;
+    padding: 1rem;
   }
   .chapter-list-title {
     font-size: 1.5rem !important;
@@ -483,4 +455,8 @@ export default {
     padding: 0.5rem 0.7rem;
   }
 }
+
+
+
+
 </style>

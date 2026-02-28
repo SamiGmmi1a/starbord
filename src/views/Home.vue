@@ -46,6 +46,7 @@
 
 
 
+    <h2 class="bd-exception-title">nos histoires d'exceptions</h2>
     <div class="bd-grid">
       <router-link
         class="bd-card"
@@ -66,12 +67,6 @@
     <button class="fav-btn" :class="{ active: isFavorite(comic) }" @click.stop.prevent="toggleFav(comic)" tabindex="0" aria-label="Ajouter aux favoris">
       <span>★</span> 
 
-<!--
-  <div class="bd-card-fav-row" @click.stop>
-    <button class="fav-btn" :class="{ active: isFavorite(comic) }" @click.stop.prevent="toggleFav(comic)" tabindex="0" aria-label="Ajouter aux favoris">
-      <span>★</span>
-    </button>
--->
     </button>
   </div>
       </router-link>
@@ -96,7 +91,8 @@
       </div>
         <div class="stb-presentation-text">
       <h3>des cadres uniques, pour des histoires uniques</h3>
-      <p>...</p>
+      <p>Vous voulez débloquer la suite de vos histoires ? </p>
+      <p>Chaque cadre cache une une histoire incroyable ! <br>Vous avez seulement besoin de votre téléphone pour transformer votre cadre STARBORD en un voyage fantastique !</br></p>
     </div>
   </div>
   </div>
@@ -104,7 +100,7 @@
 
     <!-- Section Boutique -->
     <section class="shop-section">
-      <h2 class="shop-title">choisissez l'illustration qui vous ressemble</h2>
+      <h2 class="shop-title">choisissez l'illustration qui vous inspire</h2>
       <div class="shop-grid">
         <div
           v-for="product in shopProducts"
@@ -134,6 +130,7 @@
     <div class="feedback">
       <h2 class="feedback-title">visez toujours plus haut</h2>
       <FeedbackCarousel />
+      <p class="feedback-desc">Vous aussi ! Partagez votre émotion sur vos réseaux ! <br> Aidez nous à faire rayonner le monde avec des illustrations d'exceptions</br></p>
     </div>
 
   </div>
@@ -255,9 +252,9 @@ export default {
 <style scopse>
 /* --- Boutique --- */
 .shop-section {
-  margin: 4rem auto 0 auto;
+  margin: 4rem auto 4rem auto;
   max-width: 1200px;
-  padding: 0 2rem 4rem 2rem;
+  padding: 0 2rem 8rem 2rem;
 }
 .shop-title {
   color: #fff;
@@ -742,11 +739,6 @@ export default {
 }
 
 /* --- Section Avis Clients --- */
-.feedback {
-  margin: 4rem auto 0 auto;
-  max-width: 1200px;
-  padding: 0 2rem 4rem 2rem;
-}
 .feedback-title {
   color: #fff;
   font-size: 1.5rem !important;
@@ -756,5 +748,20 @@ export default {
   letter-spacing: 0.01em;
 }
 
-</style>
+.feedback-desc {
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #eaeaea;
+}
 
+
+.bd-exception-title {
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1.5rem 0;
+  letter-spacing: 0.01em;
+}
+</style>
