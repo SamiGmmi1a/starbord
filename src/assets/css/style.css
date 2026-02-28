@@ -1,3 +1,8 @@
+h2 {
+  font-size: 2.1rem !important;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
 /* Header sticky et blur pour Chapters.vue */
 .story-info-header {
   position: sticky;
@@ -8,6 +13,9 @@
   transition: background 0.3s, backdrop-filter 0.3s;
 }
 @media (max-width: 700px) {
+  p {
+    text-align: left !important;
+  }
     .bd-filter-label {
       text-align: center !important;
       width: 100%;
@@ -255,9 +263,8 @@ h1 {
   font-size: 3rem;
 }
 
-h2, .shop-title, .stb-presentation-title, .chapter-list-title {
+h2, .bd-exception-title .shop-title, .stb-presentation-title, .chapter-list-title {
   font-family: 'Tintin', Arial, sans-serif !important;
-  font-size: 1.5rem !important;
 }
 
 h3 {
@@ -821,7 +828,6 @@ section {
   }
 
   h2, .shop-title, .stb-presentation-title, .chapter-list-title {
-    font-size: 1.5rem !important;
     text-align: center !important;
   }
 
@@ -840,7 +846,6 @@ section {
   }
 
   h2, .shop-title, .stb-presentation-title, .chapter-list-title {
-    font-size: 1.5rem !important;
     text-align: center !important;
   }
 

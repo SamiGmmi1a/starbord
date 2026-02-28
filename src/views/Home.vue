@@ -90,11 +90,11 @@
        <img src="/assets/img/stb-presentation.png" alt="Présentation de Starbord" width="400" height="300">
       </div>
         <div class="stb-presentation-text">
-      <h3>des cadres uniques, pour des histoires uniques</h3>
-      <p>Vous voulez débloquer la suite de vos histoires ? </p>
-      <p>Chaque cadre cache une une histoire incroyable ! <br>Vous avez seulement besoin de votre téléphone pour transformer votre cadre STARBORD en un voyage fantastique !</br></p>
+      <h3>des cadres uniques, pour des univers exceptionnels</h3>
+      <p>STARBORD ne fait pas que rayonner votre intérieur.<br>Il vous inrpire à travers des histoires incroyables !</p>
+      <p>Avoir un cadre STARBORD, c'est avoir un accès libre à des histoires originales, accessibles directement sur votre téléphone.</p>
     </div>
-  </div>
+  </div>  
   </div>
 
 
@@ -128,9 +128,9 @@
 
     <!--espace avis clients-->
     <div class="feedback">
-      <h2 class="feedback-title">visez toujours plus haut</h2>
+      <h2 class="feedback-title"></h2>
       <FeedbackCarousel />
-      <p class="feedback-desc">Vous aussi ! Partagez votre émotion sur vos réseaux ! <br> Aidez nous à faire rayonner le monde avec des illustrations d'exceptions</br></p>
+      <p class="feedback-desc">Donnez de la voix à des artistes en herbe en partageant vos émotions sur vos réseaux sociaux !</p>
     </div>
 
   </div>
@@ -258,7 +258,6 @@ export default {
 }
 .shop-title {
   color: #fff;
-  font-size: 1.5rem !important;
   font-weight: 700;
   margin-bottom: 2.5rem;
   text-align: center;
@@ -358,6 +357,7 @@ export default {
   .home-page {
     min-height: 100vh;
     background: #0F1116;
+    margin-bottom: 3rem;
   }
 
   .bd-grid {
@@ -581,11 +581,6 @@ export default {
 }
 
 
-/* Présentation STARBORD */
-.stb-presentation {
-    background: rgba(8, 9, 12, 0.503);
-}
-
 /* Décoration étoiles stb-presentation */
 .stb-presentation-stars {
   display: flex;
@@ -604,10 +599,10 @@ export default {
   grid-template-columns: 1fr 1.2fr;
   align-items: center;
   padding: 0 0.7rem;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   width: 100%;
   box-sizing: border-box;
   gap: 2rem;
+  margin-bottom: 7rem;
 }
 
 
@@ -616,18 +611,17 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .stb-presentation-content h3 {
-    text-align: center;
     font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 
 }
 
 .stb-presentation-title {
-  font-size: 1.5rem !important;
   font-weight: 700;
   padding: 1.2rem;
   padding-top: 3rem;
@@ -638,7 +632,6 @@ export default {
   width: 100%;
   max-width: 320px;
   margin: 0 auto;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.13);
   overflow: hidden;
 }
 .stb-presentation-img img {
@@ -728,6 +721,12 @@ export default {
     white-space: normal;
     text-align: center;
   }
+  .feedback-desc {
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 0 2vw;
+    box-sizing: border-box;
+  }
 }
 
 .separateur {
@@ -750,8 +749,6 @@ export default {
 
 .feedback-desc {
   text-align: center;
-  font-size: 1.15rem;
-  font-weight: 500;
   color: #eaeaea;
 }
 
@@ -759,9 +756,15 @@ export default {
 .bd-exception-title {
   text-align: center;
   color: #fff;
-  font-size: 2rem;
   font-weight: 700;
   margin: 2.5rem 0 1.5rem 0;
   letter-spacing: 0.01em;
 }
+.shop-price {
+  font-family: 'Orbitron', sans-serif;
+}
+
+
 </style>
+
+
