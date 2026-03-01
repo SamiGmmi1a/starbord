@@ -1,0 +1,12 @@
+A supprimer pour alléger le projet :
+- codes.json
+- database.sqbpro
+- fix_code_and_user.js
+- generate_code.js
+- init_db.js
+- list_users.js
+- test-login.ps1
+- .env.example (si non utilisé)
+- .env.development (si non utilisé)
+
+Ces fichiers sont des scripts utilitaires, des fichiers de test ou de configuration non essentiels pour le fonctionnement du site de lecture. Les fichiers du dossier src/, public/, server.js, package.json, vite.config.js, README.md, ARCHITECTURE.md, MIGRATION_GUIDE.md, database.sqlite doivent être conservés.

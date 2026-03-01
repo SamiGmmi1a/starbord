@@ -62,13 +62,6 @@
           <p class="bd-chapters">{{ comic.chapters }} chapitre(s)</p>
         </div>
         
-         <!-- étoile en dehors du bloc principal -->
-  <div class="bd-card-fav-row" @click.stop>
-    <button class="fav-btn" :class="{ active: isFavorite(comic) }" @click.stop.prevent="toggleFav(comic)" tabindex="0" aria-label="Ajouter aux favoris">
-      <span>★</span> 
-
-    </button>
-  </div>
       </router-link>
 
     </div>
@@ -163,24 +156,9 @@ export default {
       ],
       searchQuery: '',
       selectedGenre: '',
-      favorites: JSON.parse(localStorage.getItem('favorites')) || []
     }
   },
   methods: {
-    toggleFav(comic) {
-      const idx = this.favorites.indexOf(comic.id);
-      let updatedFavorites;
-      if (idx === -1) {
-        updatedFavorites = [...this.favorites, comic.id];
-      } else {
-        updatedFavorites = this.favorites.filter(id => id !== comic.id);
-      }
-      this.favorites = updatedFavorites;
-      localStorage.setItem('favorites', JSON.stringify(this.favorites));
-    },
-    isFavorite(comic) {
-      return this.favorites.includes(comic.id);
-    },
     hasComic(id) {
       const comicsStore = useComicsStore()
       return comicsStore.comics.some(comic => comic.id === id)
@@ -217,12 +195,23 @@ export default {
       })
     }
   },
-  mounted() {
-    // Charger les favoris au montage
-    this.favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    const comicsStore = useComicsStore()
+  async mounted() {
+    // Charger les favoris de l'utilisateur connecté
+    const authStore = useAuthStore();
+    if (authStore.email) {
+      try {
+        const response = await fetch(`/api/favorites/${authStore.email}`);
+        const data = await response.json();
+        if (data.success) {
+          this.favorites = data.favorites;
+        }
+      } catch (e) {
+        console.error('Erreur chargement favoris:', e);
+      }
+    }
+    const comicsStore = useComicsStore();
     if (comicsStore.comics.length === 0) {
-      comicsStore.fetchComics()
+      comicsStore.fetchComics();
     }
     // Animation parallax sur stb-presentation-img
     const imgWrapper = document.querySelector('.stb-presentation-img');
