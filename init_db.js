@@ -20,6 +20,7 @@ const main = async () => {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       email TEXT UNIQUE NOT NULL,
       code_associe TEXT,
+      prenom TEXT,
       date_inscription DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY(code_associe) REFERENCES codes(code)
     )`);
