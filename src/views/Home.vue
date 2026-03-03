@@ -75,7 +75,7 @@
           <h3 class="bd-title">{{ comic.title }}</h3>
           <p class="bd-genre" style="font-size:0.95em;color:#7fd6ff;margin-bottom:0.2em;">Genre : {{ comic.genre || 'Non défini' }}</p>
           <p class="bd-author">Par {{ comic.author }}</p>
-          <p class="bd-chapters">{{ comic.chapters }} chapitre(s)</p>
+          <p class="bd-chapters">{{ comic.chapters ? Object.keys(comic.chapters).length : 0 }} chapitre(s)</p>
         </div>
         
       </router-link>
