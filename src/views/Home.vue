@@ -22,22 +22,37 @@
      <div class="bd-filter-bar">
       <div class="bd-filter-label">Trier par genre :</div>
       <div class="bd-filter-links">
-      <div>
-        <a class="bd-filter-link" href="#">Tous</a>
-        <div class="">
-        <a class="bd-filter-link" href="#">Action</a>
-        </div>
-        <div>
-         <a class="bd-filter-link" href="#">Fantastique</a>
-        </div>
-        <div>
-        <a class="bd-filter-link" href="#">Aventure</a>
-        </div>
-        <div>
-        <a class="bd-filter-link" href="#">Science-fiction</a>
-        </div>
-       </div>
-
+        <a 
+          class="bd-filter-link" 
+          :class="{ active: selectedGenre === '' }"
+          href="#"
+          @click.prevent="selectedGenre = ''"
+        >Tous</a>
+        <a 
+          class="bd-filter-link" 
+          :class="{ active: selectedGenre === 'Action' }"
+          href="#"
+          @click.prevent="selectedGenre = 'Action'"
+        >Action</a>
+        <a 
+          class="bd-filter-link" 
+          :class="{ active: selectedGenre === 'Fantastique' }"
+          href="#"
+          @click.prevent="selectedGenre = 'Fantastique'"
+        >Fantastique</a>
+        <a 
+          class="bd-filter-link" 
+          :class="{ active: selectedGenre === 'Aventure' }"
+          href="#"
+          @click.prevent="selectedGenre = 'Aventure'"
+        >Aventure</a>
+        <a 
+          class="bd-filter-link" 
+          :class="{ active: selectedGenre === 'Science-fiction' }"
+          href="#"
+          @click.prevent="selectedGenre = 'Science-fiction'"
+        >Science-fiction</a>
+      </div>
       </div>
     </div>
     </div>
@@ -58,8 +73,9 @@
         <img :src="comic.cover" :alt="comic.title" class="bd-img" />
         <div class="bd-info">
           <h3 class="bd-title">{{ comic.title }}</h3>
+          <p class="bd-genre" style="font-size:0.95em;color:#7fd6ff;margin-bottom:0.2em;">Genre : {{ comic.genre || 'Non défini' }}</p>
           <p class="bd-author">Par {{ comic.author }}</p>
-          <p class="bd-chapters">{{ comic.chapters }} chapitre(s)</p>
+          <p class="bd-chapters">{{ comic.chapters ? Object.keys(comic.chapters).length : 0 }} chapitre(s)</p>
         </div>
         
       </router-link>
@@ -126,7 +142,6 @@
       <p class="feedback-desc">Donnez de la voix à des artistes en herbe en partageant vos émotions sur vos réseaux sociaux !</p>
     </div>
 
-  </div>
 </template>
 
 <script>
@@ -160,7 +175,7 @@ export default {
   },
   methods: {
     hasComic(id) {
-      const comicsStore = useComicsStore()
+      const comicsStore = useComicsStore()  
       return comicsStore.comics.some(comic => comic.id === id)
     },
     getImagePath(fileName) {
@@ -225,7 +240,9 @@ export default {
         const centerY = rect.height / 2;
         const rotateX = ((y - centerY) / centerY) * 10; // max 10deg
         const rotateY = ((x - centerX) / centerX) * 10;
-        img.style.transform = `scale(1.04) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+        const transformValue = `scale(1.04) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+        img.style.transform = transformValue;
+        console.log('Transform appliqué sur l\'image :', transformValue);
       });
       imgWrapper.addEventListener('mouseleave', () => {
         img.style.transform = 'none';
@@ -238,12 +255,12 @@ export default {
 }
 </script>
 
-<style scopse>
+<style scoped>
 /* --- Boutique --- */
 .shop-section {
   margin: 4rem auto 4rem auto;
   max-width: 1200px;
-  padding: 0 2rem 8rem 2rem;
+  padding: 0 2rem 8rem 2rem;  
 }
 .shop-title {
   color: #fff;
@@ -622,19 +639,16 @@ export default {
   max-width: 320px;
   margin: 0 auto;
   overflow: hidden;
+  perspective: 600px;
 }
+
 .stb-presentation-img img {
   width: 100%;
   display: block;
   transition: transform 0.18s cubic-bezier(.25,.8,.25,1);
   will-change: transform;
-}
-
-.stb-presentation-content p {
-  font-size: 1.15rem;
-  color: var(--text);
-  line-height: 1.6;
-  margin-bottom: 0;
+  transform: scale(1.04) rotateX(10deg) rotateY(10deg);
+  perspective: 600px;
 }
 
 @media (max-width: 900px) {
