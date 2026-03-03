@@ -7,7 +7,7 @@ export const comicsData = {
     id: 'bd1',
     title: 'Détenu 278',
     author: 'FÉNIX',
-    genre: 'Action',
+    genre: 'Action', 
     cover: '/assets/img/cover/detenu278-cover.jpg',
     description: '',
     chapters: {
@@ -42,7 +42,7 @@ export const comicsData = {
     id: 'bd2',
     title: 'Figé dans l\'acier',
     author: 'FÉNIX',
-    genre: 'Science-fiction',
+    genre: 'Science-fiction', // Doit correspondre exactement à un des liens du filtre
     cover: '/assets/img/cover/fige_dans_lacier-cover.jpg',
     description: '',
     chapters: {
@@ -157,5 +157,9 @@ export function getComic(comicId) {
  * Retourne toutes les BDs
  */
 export function getAllComics() {
-  return Object.values(comicsData);
+  // On s'assure que chaque comic a bien un champ genre
+  return Object.values(comicsData).map(comic => ({
+    ...comic,
+    genre: comic.genre || 'Non défini'
+  }));
 }

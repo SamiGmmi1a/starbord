@@ -10,17 +10,9 @@ export const useComicsStore = defineStore('comics', {
 
   actions: {
     async fetchComics() {
-      try {
-        const response = await fetch('/api/comics')
-        if (!response.ok) throw new Error('Failed to fetch comics')
-        this.comics = await response.json()
-        return this.comics
-      } catch (error) {
-        console.error('Error fetching comics:', error)
-        // Fallback local
-        this.comics = getAllComics()
-        return this.comics
-      }
+      // Utilise toujours les données locales avec le champ genre
+      this.comics = getAllComics();
+      return this.comics;
     },
 
     async fetchComicById(id) {
